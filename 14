@@ -1,0 +1,38 @@
+
+## 14. Free account plan / Complete your account setup の表示が出た
+## 状況
+
+toki-admin でBillingを開くと、以下の表示が出た。
+
+Complete your account setup
+
+内容としては、
+
+登録が完了していない
+または
+現在アカウントがFree account planになっている
+
+という案内だった。
+
+## 原因
+
+AWSアカウントの有効化反映待ち、またはFree account planの制限が関係している可能性がある。
+
+## 対応
+
+ルートユーザーではBillingとEC2の両方が見られることを確認した。
+
+そのため、アカウント自体は有効化されている可能性が高い。
+
+一方で、toki-admin でBillingが見られない原因は、Free account planの制限やIAMアクセス設定の反映待ちの可能性があると判断した。
+
+## 学び
+
+AWSでは、ユーザーや権限だけでなく、アカウントの状態やプランによっても表示される画面が変わることがある。
+
+不明な場合でも、すぐにUpgrade planを押すのではなく、以下を確認する。
+
+- ルートユーザーでBillingが見られるか
+- IAMユーザーでEC2が見られるか
+- IAM請求アクセスが有効になっているか
+- 登録後24時間程度経過しているか
