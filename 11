@@ -1,6 +1,6 @@
 
 ## 11. AdministratorAccessを付けてもBillingが見えなかった
-状況
+## 状況
 
 toki-admin に AdministratorAccess を付けたが、Billingを開くと以下の画面が表示された。
 
