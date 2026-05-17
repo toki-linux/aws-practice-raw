@@ -1,5 +1,5 @@
 
-## 10. AdministratorAccessとsudoの関係がわからなかった
+# 10. AdministratorAccessとsudoの関係がわからなかった
 ## 状況
 
 toki-admin に AdministratorAccess を付与した。
@@ -13,12 +13,14 @@ AWSの権限管理とLinuxのsudoの違いを理解できていなかった。
 ## 対応
 
 以下のように整理した。
-
+```txt
 toki-admin
 = sudoできる一般ユーザーに近い
-
+```
+```txt
 AdministratorAccess
 = AWSサービスやリソースをほぼ操作できる強い権限
+```
 ## 学び
 
 AdministratorAccessは、sudoコマンドそのものではない。
