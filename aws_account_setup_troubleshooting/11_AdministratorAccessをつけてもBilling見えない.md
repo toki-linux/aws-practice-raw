@@ -1,11 +1,11 @@
 
-## 11. AdministratorAccessを付けてもBillingが見えなかった
+# 11. AdministratorAccessを付けてもBillingが見えなかった
 ## 状況
 
 toki-admin に AdministratorAccess を付けたが、Billingを開くと以下の画面が表示された。
-
+```txt
 Complete your account setup
-
+```
 一方で、ルートユーザーではEC2もBillingも閲覧できた。
 
 ## 原因
@@ -17,14 +17,14 @@ IAMユーザーが請求情報を見るには、ルートユーザー側で「IA
 ## 対応
 
 ルートユーザーで以下の設定を確認した。
-
+```txt
 アカウント
 ↓
 IAM ユーザーおよびロールによる請求情報へのアクセス
 ↓
 IAM アクセスをアクティブ化
-学び
-
+```
+## 学び
 AWSでは、AdministratorAccess を付与しても、請求情報へのアクセスは別枠で制御されることがある。
 
 普段使いのIAMユーザーで請求確認をしたい場合は、ルートユーザー側でIAMアクセスを有効化する必要がある。
