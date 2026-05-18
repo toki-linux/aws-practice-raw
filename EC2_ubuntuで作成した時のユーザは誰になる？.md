@@ -1,4 +1,5 @@
-起きたこと
+## 起きたこと
+```txt
 toki-adminでAWSにログインした
 ↓
 EC2でUbuntu Serverのインスタンスを作った
@@ -6,7 +7,7 @@ EC2でUbuntu Serverのインスタンスを作った
 そのUbuntu Serverには初期ユーザー ubuntu が用意されていた
 ↓
 秘密鍵を使って ubuntu ユーザーとしてSSH接続した
-
+```
 イメージ
 toki-admin
 ＝ AWSの管理者カード
