@@ -6,3 +6,26 @@ EC2でUbuntu Serverのインスタンスを作った
 そのUbuntu Serverには初期ユーザー ubuntu が用意されていた
 ↓
 秘密鍵を使って ubuntu ユーザーとしてSSH接続した
+
+イメージ
+toki-admin
+＝ AWSの管理者カード
+
+Ubuntu Server
+＝ 借りた部屋
+
+ubuntu
+＝ その部屋に最初から用意されている初期ユーザー
+
+秘密鍵.pem
+＝ その部屋に入るための鍵
+
+だから、
+
+AWSで使う名前
+
+と
+
+サーバの中で使う名前
+
+は別。
