@@ -1,1 +1,8 @@
-
+起きたこと
+toki-adminでAWSにログインした
+↓
+EC2でUbuntu Serverのインスタンスを作った
+↓
+そのUbuntu Serverには初期ユーザー ubuntu が用意されていた
+↓
+秘密鍵を使って ubuntu ユーザーとしてSSH接続した
