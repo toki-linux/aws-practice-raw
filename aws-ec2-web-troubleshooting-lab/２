@@ -27,3 +27,38 @@ nginxを停止した。
 
 ```bash
 sudo systemctl stop nginx
+
+外部ブラウザからEC2のパブリックIPへアクセスし、
+Webページが表示されないことを確認した。
+
+確認コマンド
+
+nginxの状態を確認した。
+
+systemctl status nginx
+
+80番ポートで待ち受けているプロセスを確認した。
+
+ss -tulnp | grep :80
+
+EC2内部からlocalhostへアクセスできるか確認した。
+
+curl http://localhost
+解決
+
+nginxを起動し直した。
+
+sudo systemctl start nginx
+
+その後、外部ブラウザからEC2のパブリックIPへアクセスし、
+Webページが表示されることを確認した。
+
+学び
+
+Webページが表示されない場合でも、原因はAWS側だけとは限らない。
+
+セキュリティグループでHTTP 80番を許可していても、
+EC2内部のnginxが停止していればWebページは表示されない。
+
+そのため、外部からアクセスできない場合は、
+AWS側の通信許可とEC2内部のサービス状態を分けて確認することが重要だと学んだ。
