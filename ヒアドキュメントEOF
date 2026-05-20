@@ -57,3 +57,48 @@ EOF
 複数行のHTMLをそのまま index.html に書く
 
 ための書き方です。
+
+なぜ 'EOF' とクォートしている？
+
+ここも大事です。
+
+<<'EOF'
+
+このように 'EOF' とシングルクォートで囲むと、中の文字をそのまま書き込む という意味になります。
+
+たとえば中に $USER があっても、変数展開されません。
+
+cat > test.txt <<'EOF'
+Hello $USER
+EOF
+
+結果はそのまま、
+
+Hello $USER
+
+になります。
+
+一方で、クォートなしだと、
+
+cat > test.txt <<EOF
+Hello $USER
+EOF
+
+$USER が展開されて、
+
+Hello toki
+
+みたいになります。
+
+今回のHTMLでは変数展開は必要ないので、'EOF' にしておくと安全です。
+
+一言で言うと
+cat > /var/www/html/index.html <<'EOF'
+...
+EOF
+
+これは、
+
+EOFまでの複数行テキストを、index.html にそのまま書き込む
+
+という意味です。
