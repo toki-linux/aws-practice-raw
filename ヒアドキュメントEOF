@@ -1,0 +1,59 @@
+echoではなくcatを使う理由
+
+echo は、基本的に 1行の文字を出す のが得意です。
+
+たとえば、
+
+echo "hello" > index.html
+
+これはOKです。
+
+でもHTMLみたいに複数行あると、echo だけでは書きづらいです。
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1>Hello</h1>
+</body>
+</html>
+
+これを echo でやろうとすると、こうなって面倒です。
+
+echo "<!DOCTYPE html>" > /var/www/html/index.html
+echo "<html>" >> /var/www/html/index.html
+echo "<head>" >> /var/www/html/index.html
+echo "  <meta charset=\"UTF-8\">" >> /var/www/html/index.html
+echo "</head>" >> /var/www/html/index.html
+echo "<body>" >> /var/www/html/index.html
+echo "  <h1>Hello</h1>" >> /var/www/html/index.html
+echo "</body>" >> /var/www/html/index.html
+echo "</html>" >> /var/www/html/index.html
+
+長いし、> と >> の使い分けも必要になります。
+
+catなら複数行を一気に書ける
+
+だからこうします。
+
+cat > /var/www/html/index.html <<'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>EC2 User Data Lab</title>
+</head>
+<body>
+  <h1>Hello from EC2 User Data</h1>
+  <p>This web page was created automatically when the EC2 instance launched.</p>
+</body>
+</html>
+EOF
+
+これは、
+
+複数行のHTMLをそのまま index.html に書く
+
+ための書き方です。
