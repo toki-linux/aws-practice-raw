@@ -1,3 +1,16 @@
+Instance Metadata / IMDS
+= EC2が自分自身の情報を取得するための仕組み・機能
+
+IMDSv2
+= その仕組みをより安全に使うための方式
+
+169.254.169.254
+= EC2内からメタデータを取りに行くための特別なアクセス先
+
+
+Instance Metadata / IMDSv2 は機能の名前
+
+
 今回の理解としてはこれでOK
 Instance Metadata
 = EC2自身に関する情報
