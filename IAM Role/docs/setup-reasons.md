@@ -1,6 +1,5 @@
 ## 2ファイル目：`docs/setup-reasons.md`
 
-```markdown
 # EC2 + IAM Role + S3 実践：設定理由まとめ
 
 ## 目的
