@@ -23,4 +23,21 @@ AWS上でEC2を使ったWebサーバ構成の学習記録です。
 ---
 
 ## 構成
-
+```txt
+AWS
+├── EC2
+│ ├── Ubuntu
+│ ├── nginx
+│ ├── /var/www/html/index.html
+│ └── /data
+│ └── test.txt
+├── Security Group
+│ ├── SSH: 22
+│ └── HTTP: 80
+├── IAM Role
+│ └── S3読み取り権限
+├── S3
+│ └── test.txt
+└── EBS
+└── 追加ボリュームを /data にマウント
+```
