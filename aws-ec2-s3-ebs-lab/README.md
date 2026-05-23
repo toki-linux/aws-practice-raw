@@ -41,3 +41,37 @@ AWS
 └── EBS
 └── 追加ボリュームを /data にマウント
 ```
+
+---
+
+## 使用サービス
+
+- EC2
+- Security Group
+- IAM Role
+- S3
+- EBS
+- AMI / Snapshot確認
+
+---
+
+## 学び
+
+- S3のファイルはEC2に自動で表示されず、`aws s3 cp`で取得
+- EBSはEC2にアタッチしてOSから利用するストレージ
+- IAM Roleによりアクセスキー不要でS3アクセス可能
+- `/etc/fstab`設定ミスは起動停止やemergency modeにつながる
+- `mount -a`でfstabを再読み込みしテストする
+
+---
+
+## 削除チェック
+
+- EC2インスタンス終了
+- 追加EBS削除
+- 不要スナップショット確認
+- S3オブジェクト削除
+- S3バケット削除
+- 不要Security Group削除
+- Key Pair確認
+- IAM Role確認
