@@ -49,7 +49,9 @@ sudo blkid /dev/nvme1n1
 sudo cp /etc/fstab /etc/fstab.bak
 sudo nano /etc/fstab
 # 追記例
+```txt
 # UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx /data ext4 defaults,nofail 0 2
+```
 sudo systemctl daemon-reload
 sudo mount -a
 sudo reboot
