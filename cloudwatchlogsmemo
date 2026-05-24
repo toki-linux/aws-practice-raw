@@ -1,0 +1,19 @@
+ログをAWSコンソールに送る権限
+
+より正確には、
+
+EC2上のCloudWatch Agentが、CloudWatch Logsへログを送信するための権限
+
+です。
+
+AWSコンソールに直接送るというより、送信先は CloudWatch Logs。
+そのCloudWatch LogsをAWSコンソールで見る、という流れ。
+
+まず、IAM Roleを作成する。
+
+作成するのは、EC2上のCloudWatch AgentがCloudWatch Logsへログを送信するための権限を持ったRole。
+
+EC2インスタンス作成時にこのRoleを付与したいので、先にRoleを作成しておく。
+
+許可ポリシーでは CloudWatchAgentServerPolicy を選ぶ。
+検索欄では CloudWatchAgent または CloudWatchAgentServerPolicy と入力して探す。
