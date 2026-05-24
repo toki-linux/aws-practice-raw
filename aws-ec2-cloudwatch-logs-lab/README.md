@@ -197,9 +197,7 @@ sudo nano /opt/aws/amazon-cloudwatch-agent/bin/config.json
 
 設定ファイルの内容は以下に保存しています。
 
-```text
-configs/cloudwatch-agent-config.json
-```
+[configs/cloudwatch-agent-config.json](configs/cloudwatch-agent-config.json)
 
 ---
 
@@ -366,9 +364,8 @@ wget https://amazoncloudwatch-agent.s3.amazonaws.com/ubuntu/amd64/latest/amazon-
 
 詳細は以下にまとめています。
 
-```text
-docs/troubleshooting.md
-```
+[docs/troubleshooting.md](docs/troubleshooting.md)
+
 
 ---
 
