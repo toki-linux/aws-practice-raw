@@ -69,9 +69,7 @@ AWS
 
 詳細は以下にまとめています。
 
-```text
 [docs/commands.md](docs/commands.md)
-```
 
 ---
 
