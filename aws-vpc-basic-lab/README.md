@@ -371,7 +371,7 @@ Default VPC
 
 詳しい削除手順は以下にまとめています。
 
-- [cleanup.md](docs/cleanup.md)
+[cleanup.md](docs/cleanup.md)
 
 ---
 
