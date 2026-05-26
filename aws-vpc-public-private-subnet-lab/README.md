@@ -633,7 +633,7 @@ private-ec2
 
 ---
 
- 30秒説明
+ ## 30秒説明
 
 AWSで自作VPCを作成し、Public SubnetとPrivate Subnetを分けてEC2を配置しました。
 
