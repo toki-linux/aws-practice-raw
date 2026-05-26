@@ -3,7 +3,7 @@
 ## 概要
 
 このドキュメントは、Public Subnet + Private Subnet 構成の実践中に詰まった点と、その解決方法をまとめたものです。
-
+---
 
 ## 1. private-ec2-sgでSecurity GroupをSourceに指定できなかった
 
