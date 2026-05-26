@@ -1,1 +1,379 @@
+1. Security GroupのSource指定でエラーになった件
 
+出たエラーはこれだったね。
+
+既存の IPv4 CIDR ルールに 1 つの 参照先のグループ ID を指定することはできません。
+
+これは、かなり噛み砕くとこういう意味。
+
+このルールは「IPアドレス範囲を書くためのルール」です。
+そこに「セキュリティグループID」は入れられません。
+Sourceには種類がある
+
+Security Groupのインバウンドルールの Source には、ざっくり2種類ある。
+
+IPv4 CIDR指定
+Security Group指定
+IPv4 CIDR指定
+
+これはIPアドレスやIP範囲で許可する方法。
+
+自分のPCだけ許可
+→ xxx.xxx.xxx.xxx/32
+
+VPC内の一部を許可
+→ 10.0.1.0/24
+
+全部許可
+→ 0.0.0.0/0
+
+たとえばpublic-ec2はこれだった。
+
+public-ec2-sg
+
+Inbound:
+SSH / TCP 22 / My IP
+
+これはつまり、
+
+自分のグローバルIP/32 からのSSHだけ許可
+
+という意味。
+
+Security Group指定
+
+これはIPではなく、
+
+このSecurity Groupが付いているEC2からの通信を許可する
+
+という指定。
+
+今回のprivate-ec2はこれ。
+
+private-ec2-sg
+
+Inbound:
+SSH / TCP 22 / Source: public-ec2-sg
+
+意味は、
+
+public-ec2-sg が付いているEC2から来たSSHだけ許可
+
+になる。
+
+なんでエラーになったのか
+
+たぶん、最初はprivate-ec2-sgにすでにこういうルールがあった。
+
+SSH / TCP 22 / Source: My IP
+
+これは IPv4 CIDRルール。
+
+そこに後から、
+
+Source: sg-xxxxxxxx
+
+みたいにSecurity Group IDを入れようとした。
+
+でもAWSから見ると、
+
+この行はIPアドレスを書くタイプの行です。
+そこにSecurity Group IDは入れられません。
+
+となってエラーになった。
+
+解決方法
+
+今回の正解はこれだった。
+
+既存のIPv4 CIDRルールを書き換えようとしない
+↓
+Add ruleで新しいSSHルールを追加する
+↓
+Sourceにpublic-ec2-sgを指定する
+
+完成形はこれ。
+
+private-ec2-sg
+
+Inbound:
+SSH / TCP 22 / Source: public-ec2-sg
+ここでの大事な理解
+
+Security GroupでSourceにSecurity Groupを指定するときは、
+
+特定のIPアドレスを許可する
+
+ではなく、
+
+そのSecurity Groupを持っているリソースからの通信を許可する
+
+という考え方になる。
+
+つまり、
+
+public-ec2のIPを許可
+
+ではなく、
+
+public-ec2-sgを付けているEC2を許可
+
+ということ。
+
+なぜSecurity Group指定の方がよいのか
+
+IP指定でもできる。
+
+たとえば、
+
+private-ec2-sg
+
+Inbound:
+SSH / TCP 22 / Source: public-ec2のPrivate IP/32
+
+でもOK。
+
+ただ、public-ec2のPrivate IPが変わると、ルールも直す必要がある。
+
+一方でSecurity Group指定なら、
+
+public-ec2-sg が付いているEC2
+
+という条件になるので、IPが変わっても考え方が保たれる。
+
+だから実務寄りには、
+
+private-ec2-sg の Source は public-ec2-sg
+
+がきれい。
+
+2. 秘密鍵をpublic-ec2に置くのは危なくないのか問題
+
+結論から言うと、
+
+学習用に一時的に置くのはOK
+でも置きっぱなしは危ない
+実務では基本避けたい
+
+という感じ。
+
+今回やった構成
+
+今回の接続はこうだった。
+
+自分のPC
+↓
+public-ec2
+↓
+private-ec2
+
+自分のPCからpublic-ec2へSSHするには、自分のPCに秘密鍵が必要。
+
+自分のPC
+秘密鍵あり
+↓
+public-ec2
+
+そして、public-ec2からprivate-ec2へSSHするなら、今度は public-ec2が接続元 になる。
+
+public-ec2
+秘密鍵が必要
+↓
+private-ec2
+
+だから、public-ec2上にprivate-ec2用の秘密鍵が必要になった。
+
+known_hostsではなく秘密鍵が必要
+
+ここで混乱しやすいのが、
+
+known_hosts
+authorized_keys
+秘密鍵
+
+の違い。
+
+known_hosts
+
+これは、
+
+接続先サーバが前と同じ相手か確認するための記録
+
+たとえばpublic-ec2からprivate-ec2へ初めてSSHすると、
+
+Are you sure you want to continue connecting?
+
+と聞かれる。
+
+ここで yes すると、private-ec2の情報がpublic-ec2のknown_hostsに保存される。
+
+でもこれは ログイン許可のためのものではない。
+
+authorized_keys
+
+これは接続先サーバ側にある。
+
+この公開鍵に対応する秘密鍵を持っている人はログインしてOK
+
+というリスト。
+
+private-ec2には、EC2作成時に選んだキーペアの公開鍵が登録されている。
+
+秘密鍵
+
+これは接続元が持つ。
+
+この秘密鍵を持っているから、私はログインできる権利があります
+
+と証明するためのもの。
+
+だから、public-ec2からprivate-ec2へSSHするには、
+
+public-ec2上で private-ec2用の秘密鍵を使える状態
+
+が必要だった。
+
+なぜpublic-ec2に秘密鍵を置きっぱなしは危ないのか
+
+public-ec2はインターネットからSSHできる入口だった。
+
+つまり、private-ec2より外に近い。
+
+もしpublic-ec2が何らかの理由で侵害された場合、
+
+public-ec2に秘密鍵が置いてある
+↓
+攻撃者がその秘密鍵を使う
+↓
+private-ec2にも入れてしまう
+
+という危険がある。
+
+だから、踏み台サーバに秘密鍵を置きっぱなしにするのは危ない。
+
+今回ちゃんと、
+
+rm /home/ubuntu/private-key.pem
+
+で消したのは正解。
+
+自分のPCに秘密鍵が複数あるのは危ないのか
+
+これも感覚としては正しい。
+
+ただし、自分のPCに秘密鍵を保管すること自体は普通。
+
+AWSのキーペアは、作成時に秘密鍵を一度だけダウンロードする。
+基本的には、自分のPCで安全に保管する前提。
+
+危ないのは、管理が雑な場合。
+
+GitHubに上げる
+誰かに送る
+チャットに貼る
+権限がゆるい
+どの鍵が何用かわからない
+不要な鍵を残し続ける
+
+これが危ない。
+
+最低限の管理ルール
+
+学習用なら、まずこれでOK。
+
+秘密鍵は ~/.ssh/ に置く
+chmod 400 にする
+ファイル名をわかりやすくする
+GitHubに絶対上げない
+不要な鍵は削除する
+踏み台EC2に置いた鍵は確認後すぐ消す
+
+例。
+
+chmod 400 ~/.ssh/aws-study-key.pem
+
+GitHubに誤って上げないために、.gitignoreにもこう書いておくと安心。
+
+*.pem
+*.key
+id_rsa
+id_ed25519
+3. 実務寄りではどうするのか
+
+今回のように、
+
+public-ec2に秘密鍵をコピーする
+
+は、学習ではわかりやすい。
+
+でも実務では、なるべく避ける。
+
+代表的な代替方法がこれ。
+
+SSH Agent Forwarding
+SSM Session Manager
+SSH Agent Forwarding
+
+これは、
+
+秘密鍵は自分のPCに置いたまま
+public-ec2には秘密鍵をコピーしない
+でもpublic-ec2経由でprivate-ec2へSSHできる
+
+という方法。
+
+イメージはこう。
+
+自分のPC
+秘密鍵あり
+↓
+public-ec2
+秘密鍵なし
+↓
+private-ec2
+
+public-ec2には秘密鍵を置かない。
+認証が必要なときだけ、自分のPC側のSSHエージェントが助ける。
+
+ただし、Agent Forwardingも設定を間違えるとリスクがあるので、また別で丁寧にやるのがいい。
+
+SSM Session Manager
+
+これはAWS Systems Managerを使ってEC2に入る方法。
+
+特徴はこれ。
+
+SSH鍵を使わない
+ポート22を開けなくてもよい
+踏み台サーバなしでも接続できる
+IAM Roleで制御できる
+
+実務ではかなり強い。
+
+ただし、使うには以下の理解が必要になる。
+
+IAM Role
+SSM Agent
+Systems Manager
+VPCエンドポイント or NAT Gateway
+
+だから、今すぐではなく、AWSの次の段階で学ぶとちょうどいい。
+
+今回の理解を一言でまとめる
+
+今回の2つのポイントはこれ。
+
+Security GroupのSourceには、
+IPアドレスを指定する方法と、
+Security Groupを指定する方法がある。
+
+private-ec2へSSHする場合は、
+private-ec2-sgのSourceにpublic-ec2-sgを指定するとよい。
+
+もう1つ。
+
+public-ec2からprivate-ec2へSSHするには、
+public-ec2側でprivate-ec2用の秘密鍵を使える必要がある。
+
+ただし、秘密鍵を踏み台に置きっぱなしにするのは危険。
+学習用なら一時的に置いて、確認後すぐ削除する。
