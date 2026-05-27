@@ -544,6 +544,53 @@ All ICMP - IPv4 / Source: private-ec2-sg
 
 今回はSSH接続の確認を目的としていたため、ICMP設定は次回以降の課題としました。
 
+
+## ICMP / ping / Security Group 検証
+
+Public EC2とPrivate EC2間で、SSHは通るのにpingが通らない理由を検証しました。
+
+最初に、`public-ec2` から `private-ec2` へSSHできることを確認しました。
+
+```text
+public-ec2
+↓ SSH / TCP 22
+private-ec2
+```
+
+次に、`private-ec2` から `public-ec2` のPrivate IPへpingを実行しました。
+
+```bash
+ping public-ec2のPrivateIP
+```
+
+最初はpingが通りませんでした。
+
+原因は、pingがSSHとは異なりICMPを使う通信であり、`public-ec2-sg` 側でICMPを許可していなかったためです。
+
+```text
+SSH  = TCP 22
+ping = ICMP
+```
+
+その後、`public-ec2-sg` のInbound ruleに以下を追加しました。
+
+```text
+All ICMP - IPv4 / Source: private-ec2-sg
+```
+
+これにより、`private-ec2` から `public-ec2` へのpingが通るようになりました。
+
+この検証を通して、通信できない原因を確認するときは、以下の3点を見る必要があると学びました。
+
+```text
+1. どこからどこへ通信しているか
+2. 何の通信か
+3. 受け取る側のSecurity Groupで許可されているか
+```
+
+詳しくは以下にまとめています。
+
+- [ICMP / ping / Security Group 検証](docs/icmp-ping-security-group.md)
 ---
 
 ## 削除手順
