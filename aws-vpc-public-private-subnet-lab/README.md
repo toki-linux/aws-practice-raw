@@ -591,6 +591,81 @@ All ICMP - IPv4 / Source: private-ec2-sg
 詳しくは以下にまとめています。
 
 - [ICMP / ping / Security Group 検証](docs/icmp-ping-security-group.md)
+
+
+## Private Subnetの外部通信失敗確認
+
+Private EC2からインターネットへ通信できるか確認しました。
+
+```bash
+curl -I https://aws.amazon.com
+```
+
+結果として、通信は失敗しました。
+
+Private Subnetのルートテーブルには以下のlocalルートのみがあります。
+
+```text
+10.0.0.0/16 → local
+```
+
+一方で、インターネットへ出るための以下のルートは設定していません。
+
+```text
+0.0.0.0/0 → Internet Gateway
+```
+
+そのため、Private EC2はインターネットへ直接出られません。
+
+今回の確認で、Private Subnetは「外から直接入れない」だけでなく、「そのままだと外へも直接出られない」ことを確認しました。
+
+---
+
+## Security Groupと通信方向の整理
+
+同じVPC内であれば、Public EC2とPrivate EC2の間にはlocalルートにより通信経路があります。
+
+ただし、実際に通信できるかどうかは、受け取る側のSecurity Groupで許可されているかによって決まります。
+
+```text
+Route Table
+→ 通信経路があるか
+
+Security Group
+→ EC2の入口で通信を許可するか
+```
+
+今回の設定では、public-ec2からprivate-ec2へのSSHは許可されています。
+
+```text
+private-ec2-sg
+
+Inbound:
+SSH / TCP 22 / Source: public-ec2-sg
+```
+
+一方で、private-ec2からpublic-ec2へSSHしたい場合は、public-ec2-sg側に以下の許可が必要です。
+
+```text
+public-ec2-sg
+
+Inbound:
+SSH / TCP 22 / Source: private-ec2-sg
+```
+
+通信できない原因を調べるときは、以下を確認します。
+
+```text
+1. どこからどこへ通信しているか
+2. 何の通信か
+3. ルートテーブル上、通信経路はあるか
+4. 受け取る側のSecurity Groupで許可されているか
+5. SSHの場合、正しい秘密鍵を使っているか
+```
+
+詳しくは以下にまとめています。
+
+- [Private Subnetの外部通信失敗確認とSecurity Groupの理解](docs/private-subnet-internet-and-security-group.md)
 ---
 
 ## 削除手順
