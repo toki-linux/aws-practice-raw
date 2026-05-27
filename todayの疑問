@@ -69,3 +69,46 @@ ls -l ~/*.pem
 ls -l     権限などの詳細表示
 ~         ホームディレクトリ
 *.pem     .pemで終わるファイル
+My IPは誰のIPか
+
+AWSコンソールで My IP を選ぶと、AWSが今アクセスしているあなたの回線のグローバルIPを自動で入れる。
+
+たとえばこう。
+
+203.xxx.xxx.xxx/32
+
+この /32 は、
+
+このIPアドレス1個だけ
+
+という意味。
+
+じゃあpublic-ec2のPublic IPはいつ使う？
+
+public-ec2のPublic IPは、自分のPCからSSHするときの接続先 として使う。
+
+ssh -i key.pem ubuntu@public-ec2のPublicIP
+
+整理するとこう。
+
+自分のPCのグローバルIP
+→ Security GroupのSourceに使う
+
+public-ec2のPublic IP
+→ SSHコマンドの接続先に使う
+今回の構成でいうと
+自分のPC
+  送信元IP: My IP
+        ↓
+public-ec2
+  宛先IP: public-ec2のPublic IP
+
+だから public-ec2-sg のルールは、
+
+Source: My IP
+Port: 22
+
+になる。
+
+一言でいうと、
+My IPは「接続してくる側」、public-ec2のPublic IPは「接続される側の宛先」。
