@@ -76,4 +76,28 @@ Private EC2はインターネットへ出ない。
 
 今の理解なら、「SSM用の内線電話をVPC内に置く」 が一番しっくりくると思います。
 SSM Agentを働かせるのにIAM roleで権限が必要ってこと？
+SSM Agentを起動するためにIAM Roleが必要
 
+というより、
+
+SSM AgentがAWS Systems Managerとやり取りするためにIAM Roleが必要
+
+です。
+
+役割を分けるとこう
+SSM Agent
+= EC2の中で動く連絡係
+
+IAM Role
+= その連絡係に「AWSのSSMサービスと通信していいよ」と許可を与えるもの
+
+SSM Agent自体はEC2の中で動けます。
+でも、AWS側に対して、
+
+このEC2はSystems Managerに登録されていいですか？
+Session Managerで接続されていいですか？
+SSMの命令を受け取っていいですか？
+
+とやり取りするには、権限が必要です。
+
+その権限をEC2に渡すのが IAM Role です。
