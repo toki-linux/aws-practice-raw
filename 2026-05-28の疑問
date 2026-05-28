@@ -1,124 +1,573 @@
-Systems Managerというサービスの中にSession Managerという機能があって、それを使うためにSSM AgentがEC2の中で動いていなければいけない。という感じ？エンドポイントはサービスとかではないよね？エンドポイントのイメージがわかない
+# SSM Agent / IAM Role / VPC Endpoint 理解メモ
 
-そう、その理解で合ってる。
+## 概要
 
-AWS Systems Manager というサービスがある
-└── その中に Session Manager という接続機能がある
-    └── それを使うには、EC2の中で SSM Agent が動いている必要がある
+このドキュメントは、AWS Systems Manager の Session Manager を使って、Private EC2へSSHなしで接続する仕組みを整理した理解メモです。
 
-かなりいい整理です。
+今回のポイントは、以下の関係を理解することです。
 
-エンドポイントはサービスではない
-
-ここもその通り。
-
-VPC Endpoint自体は、SSMみたいな「何かを管理するサービス」ではないです。
-
-役割はこれ。
-
-VPC Endpoint
-= VPCの中から、AWSサービスへプライベートに接続するための入口
-
-もっと雑に言うと、
-
-AWSサービス行きの専用の通路
-
-です。
-
-たとえで考える
-
-今までのNAT Gatewayは、こんなイメージ。
-
-Private EC2
-↓
-NAT Gateway
-↓
-インターネット道路
-↓
+```text
 AWS Systems Manager
+└── Session Manager
+    └── EC2へSSHなしで接続する機能
+```
 
-一度インターネット側の道に出てから、AWSサービスに行く感じ。
+Session Managerを使うには、EC2の中で `SSM Agent` が動いている必要があります。
 
-一方、VPC Endpointはこう。
+ただし、SSM Agentがあるだけでは接続できません。
 
-Private EC2
-↓
-SSM行き専用ドア
-↓
-AWS Systems Manager
+必要なものは主に以下の3つです。
 
-つまり、インターネットに出ずに、AWSサービスへ行くための専用ドア。
-
-エンドポイントの正体
-
-今回作るのは、正確には Interface VPC Endpoint です。
-
-これを作ると、VPCのサブネット内に ENI というネットワークインターフェースが作られます。
-ENIは、EC2に付いているネットワークカードみたいなものです。
-
-Private Subnet
-├── Private EC2
-│   └── 10.0.2.10
-│
-└── VPC Endpoint用ENI
-    └── 10.0.2.50 みたいなPrivate IP
-
-つまり、Private EC2から見ると、
-
-同じVPC内に、AWSサービスへつながる入口ができた
-
-という感じです。
-VPC Endpointはトンネルというより、
-VPC内に作る「AWSサービス専用の受付窓口」や「内線電話」。
-
-Private EC2はインターネットへ出ない。
-でも、その窓口に話しかけることでAWSサービスと通信できる。
-
-今の理解なら、「SSM用の内線電話をVPC内に置く」 が一番しっくりくると思います。
-SSM Agentを働かせるのにIAM roleで権限が必要ってこと？
-SSM Agentを起動するためにIAM Roleが必要
-
-というより、
-
-SSM AgentがAWS Systems Managerとやり取りするためにIAM Roleが必要
-
-です。
-
-役割を分けるとこう
-SSM Agent
-= EC2の中で動く連絡係
-
-IAM Role
-= その連絡係に「AWSのSSMサービスと通信していいよ」と許可を与えるもの
-
-SSM Agent自体はEC2の中で動けます。
-でも、AWS側に対して、
-
-このEC2はSystems Managerに登録されていいですか？
-Session Managerで接続されていいですか？
-SSMの命令を受け取っていいですか？
-
-とやり取りするには、権限が必要です。
-
-その権限をEC2に渡すのが IAM Role です。
-「働かせる」というより、AWSとやり取りする許可を与えるという感じです。
-通信経路と権限は別物
-
-ここが大事です。
-
-SSM接続には、最低でもこの3つが必要です。
-
+```text
 1. SSM Agent
    → EC2内の連絡係
 
 2. IAM Role
-   → AWS Systems Managerとやり取りしてよい権限
+   → SSM AgentがAWS Systems Managerと通信するための許可証
 
 3. VPC Endpoint
-   → AWS Systems Managerへ届く通信経路
+   → Private EC2からAWS Systems Managerへ届く通信経路
+```
 
-この3つは役割が違います。
+## 全体像
 
+SSM Session Managerは、EC2へ直接SSHする仕組みではありません。
+
+SSHの場合は、自分のPCからEC2へ直接接続します。
+
+```text
+自分のPC
+↓ SSH / TCP 22
+EC2
+```
+
+一方、Session Managerでは、AWS Systems Managerを経由してEC2を操作します。
+
+```text
+自分のブラウザ
+↓
+AWS Systems Manager
+↓
+SSM Agent
+↓
+EC2
+```
+
+つまり、Session Managerでは以下が不要になります。
+
+```text
+Public IP
+SSHポート開放
+秘密鍵
+踏み台サーバ
+```
+
+## Systems Managerとは
+
+Systems Managerは、EC2などのAWSリソースを管理するためのAWSサービスです。
+
+正式名称は以下です。
+
+```text
+AWS Systems Manager
+```
+
+このSystems Managerの中に、Session Managerという機能があります。
+
+```text
+AWS Systems Manager
+└── Session Manager
+    └── EC2へ接続する機能
+```
+
+## Session Managerとは
+
+Session Managerは、AWS Systems Managerの中にある接続機能です。
+
+SSHを使わずに、AWSコンソールやAWS CLIからEC2へ接続できます。
+
+通常のSSH接続では、EC2側でSSHポート22番を開ける必要があります。
+
+```text
+SSH接続で必要なもの
+
+Public IP
+SSHポート22番の許可
+秘密鍵
+sshd
+```
+
+Session Managerでは、EC2へ直接SSHしません。
+
+EC2内のSSM AgentがAWS Systems Managerと通信し、そのセッションを使ってブラウザからEC2を操作します。
+
+```text
+Session Manager接続で必要なもの
+
+SSM Agent
+IAM Role
+AWS Systems Managerへ届く通信経路
+人間側のIAM権限
+```
+
+## SSM Agentとは
+
+SSM Agentは、EC2の中で動く連絡係です。
+
+```text
+SSM Agent
+= EC2内で動く、AWS Systems Managerとの連絡係
+```
+
+SSM AgentがAWS Systems Managerと通信することで、Session Manager接続が成立します。
+
+ただし、SSM AgentがEC2の中で動いているだけでは足りません。
+
+AWS Systems Managerとやり取りするには、権限が必要です。
+
+その権限をEC2に渡すのがIAM Roleです。
+
+## IAM Roleの役割
+
+IAM Roleは、SSM Agentを起動するためのものではありません。
+
+正確には、SSM AgentがAWS Systems Managerと通信してよい権限を、EC2に渡すためのものです。
+
+```text
+SSM Agent
+= EC2内の連絡係
+
+IAM Role
+= 連絡係がAWS Systems Managerと通信するための許可証
+```
+
+たとえるなら、SSM Agentは担当者で、IAM Roleは社員証のようなものです。
+
+```text
+SSM Agent
+= 作業する担当者
+
+IAM Role
+= AWS Systems Managerとやり取りするための社員証・許可証
+
+AWS Systems Manager
+= AWS側の管理センター
+```
+
+SSM AgentはEC2内で動くことはできます。
+
+しかし、AWS Systems Managerに対して以下のようなやり取りをするには、権限が必要です。
+
+```text
+このEC2をSystems Managerの管理対象として登録してよいか
+Session Managerで接続されてよいか
+SSMの命令を受け取ってよいか
+```
+
+その許可を与えるのがIAM Roleです。
+
+今回使った管理ポリシーは以下です。
+
+```text
+AmazonSSMManagedInstanceCore
+```
+
+このポリシーを付けたIAM RoleをEC2にアタッチすることで、EC2上のSSM AgentがSystems Managerと通信できるようになります。
+
+## 人間側の権限とEC2側の権限
+
+Session Manager接続には、2種類の権限が関係します。
+
+```text
+人間側の権限
+→ 自分のIAMユーザーがSession Managerを使ってよい
+
+EC2側の権限
+→ EC2上のSSM AgentがSystems Managerと通信してよい
+```
+
+つまり、EC2側のIAM Roleだけで全てが成立するわけではありません。
+
+AWSでは、人間もEC2などのサービスも、AWSサービスを利用するには権限が必要です。
+
+```text
+人間がAWSを操作する
+→ 人間側のIAM権限が必要
+
+EC2がAWSサービスを使う
+→ EC2に付けたIAM Roleの権限が必要
+
+AWSサービス同士が連携する
+→ そのサービスに渡すRoleや権限が必要
+```
+
+IAMは、以下を決める仕組みです。
+
+```text
+誰が
+何が
+どのAWSサービスに
+何をしてよいか
+```
+
+## VPC Endpointとは
+
+VPC Endpointは、VPC内からAWSサービスへプライベートに接続するための入口です。
+
+```text
+VPC Endpoint
+= VPCの中からAWSサービスへ接続するための専用窓口
+```
+
+VPC Endpoint自体は、Systems Managerのように何かを管理するサービスではありません。
+
+役割は、Private Subnet内のリソースから、特定のAWSサービスへ通信できるようにすることです。
+
+## VPC Endpointのイメージ
+
+NAT Gatewayを使う場合、Private EC2は一度インターネット側の道へ出てAWSサービスへ向かいます。
+
+```text
+Private EC2
+↓
+NAT Gateway
+↓
+Internet Gateway
+↓
+AWS Systems Manager
+```
+
+一方、VPC Endpointを使う場合は、インターネットへ出ません。
+
+```text
+Private EC2
+↓
+VPC Endpoint
+↓
+AWS Systems Manager
+```
+
+イメージとしては、VPC内にAWSサービス専用の受付窓口を作る感じです。
+
+```text
+Private EC2
+↓
+VPC内のSSM用受付窓口
+↓
+AWS Systems Manager
+```
+
+または、内線電話のようなイメージでも理解できます。
+
+```text
+SSM Agent
+↓
+SSM専用の内線電話
+↓
+AWS Systems Manager
+```
+
+Private EC2はインターネットへ出ません。
+
+しかし、VPC Endpointという専用窓口に話しかけることで、AWS Systems Managerと通信できます。
+
+## Interface VPC Endpointとは
+
+今回使うのは、Interface VPC Endpointです。
+
+Interface VPC Endpointを作成すると、指定したSubnet内にENIが作られます。
+
+ENIは、EC2に付いているネットワークカードのようなものです。
+
+```text
+Private Subnet
+├── Private EC2
+│   └── 10.0.1.10
+│
+└── VPC Endpoint用ENI
+    └── 10.0.1.50 のようなPrivate IP
+```
+
+Private EC2から見ると、同じVPC内にAWSサービスへつながる入口ができたような状態になります。
+
+```text
+Private EC2
+↓
+同じVPC内のEndpoint用ENI
+↓
+AWS Systems Manager
+```
+
+## NAT GatewayとVPC Endpointの違い
+
+### NAT Gateway
+
+NAT Gatewayは、Private EC2からインターネット全体へ出るための出口です。
+
+```text
+Private EC2
+↓
+NAT Gateway
+↓
+Internet Gateway
+↓
+Internet / AWSサービス
+```
+
+特徴。
+
+```text
+Private EC2から外へ出られる
+インターネット上のサービスにも接続できる
+AWSサービスにも接続できる
+ただし、NAT Gatewayは課金に注意が必要
+```
+
+### VPC Endpoint
+
+VPC Endpointは、Private EC2から特定のAWSサービスへ接続するための専用窓口です。
+
+```text
+Private EC2
+↓
+VPC Endpoint
+↓
+特定のAWSサービス
+```
+
+特徴。
+
+```text
+インターネットへ出ない
+指定したAWSサービスへ接続できる
+AWS PrivateLinkを使ったプライベート接続
+NAT GatewayなしでもAWSサービスへ到達できる
+```
+
+## 今回必要だったVPC Endpoint
+
+Session ManagerでPrivate EC2に接続するために、以下3つのVPC Endpointを作成しました。
+
+```text
+com.amazonaws.ap-northeast-1.ssm
+com.amazonaws.ap-northeast-1.ssmmessages
+com.amazonaws.ap-northeast-1.ec2messages
+```
+
+それぞれの役割は以下です。
+
+```text
+ssm
+→ Systems Manager本体への入口
+
+ssmmessages
+→ Session Managerのセッション通信用
+
+ec2messages
+→ SSM Agentがメッセージを受け取るため
+```
+
+## 症状
+
+Private Subnet内のEC2に対して、Public IPやSSHを使わずに接続したい。
+
+ただし、以下は使わない構成にした。
+
+```text
+Public IP
+SSH
+踏み台サーバ
+Internet Gateway
+NAT Gateway
+```
+
+この状態では、通常のSSHではPrivate EC2へ接続できない。
+
+```text
+自分のPC
+↓ SSH
+Private EC2
+
+→ Public IPなし
+→ SSHポート開放なし
+→ 接続できない
+```
+
+## 原因
+
+Private EC2はPublic IPを持っていないため、自分のPCから直接SSH接続できません。
+
+また、SSHポート22番も開けていないため、SSHの入口もありません。
+
+さらに、NAT GatewayやInternet Gatewayも作成していないため、Private EC2は通常のインターネットには出られません。
+
+```text
+Private EC2
+↓
+Internet
+
+→ 通常の外部通信はできない
+```
+
+しかし、Session Manager接続では、EC2へ直接SSHする必要はありません。
+
+EC2内のSSM AgentがAWS Systems Managerと通信できれば、AWSコンソールからEC2を操作できます。
+
+## 解決
+
+以下の3つをそろえることで、NAT Gatewayなし・SSHなしでPrivate EC2に接続できました。
+
+```text
+1. SSM Agent
+   → EC2内の連絡係
+
+2. IAM Role
+   → SSM AgentがAWS Systems Managerと通信するための許可証
+
+3. VPC Endpoint
+   → Private EC2からAWS Systems Managerへ届く通信経路
+```
+
+今回の通信イメージ。
+
+```text
+Private EC2内のSSM Agent
+↓ HTTPS / TCP 443
+VPC Endpoint
+↓
+AWS Systems Manager
+↓
+Session Manager
+↓
+ブラウザからEC2を操作
+```
+
+## 切り分け
+
+Session Managerで接続できない場合は、以下を確認します。
+
+### 1. SSM Agentがあるか
+
+SSM AgentがEC2内にないと、AWS Systems Managerと連絡できません。
+
+```text
+SSM Agentなし
+→ EC2内に連絡係がいない
+→ Session Manager接続できない
+```
+
+UbuntuのAWS公式AMIでは、SSM Agentが入っていることが多いです。
+
+### 2. IAM RoleがEC2に付いているか
+
+EC2にSSM用IAM Roleが付いているか確認します。
+
+```text
+IAM Role:
+ec2-ssm-role
+```
+
+IAM Roleがない場合。
+
+```text
+SSM Agentあり
+IAM Roleなし
+
+→ 連絡係はいる
+→ でもAWS Systems Managerと通信する許可証がない
+→ Session Manager接続できない
+```
+
+### 3. IAM Roleに必要なポリシーがあるか
+
+IAM Roleに以下のポリシーが付いているか確認します。
+
+```text
+AmazonSSMManagedInstanceCore
+```
+
+このポリシーがないと、EC2がSystems Managerの管理対象として動けません。
+
+### 4. VPC Endpointがあるか
+
+NAT GatewayなしのPrivate EC2では、AWS Systems Managerへ届く通信経路が必要です。
+
+今回必要なEndpoint。
+
+```text
+ssm
+ssmmessages
+ec2messages
+```
+
+Endpointがない場合。
+
+```text
+IAM Roleあり
+VPC Endpointなし
+
+→ 許可証はある
+→ でもAWS Systems Managerへ連絡する道がない
+→ Session Manager接続できない
+```
+
+### 5. VPC EndpointのSecurity Groupで443を許可しているか
+
+SSM AgentはHTTPSでAWS Systems Managerと通信します。
+
+そのため、VPC Endpoint側のSecurity Groupで、Private EC2からの443番通信を許可する必要があります。
+
+```text
+Inbound:
+HTTPS / TCP 443 / Source: private-ec2-sg
+```
+
+### 6. Private DNSが有効か
+
+VPC Endpoint作成時に、Private DNSを有効にします。
+
+```text
+Private DNS:
+有効
+```
+
+Private DNSを有効にすることで、通常のAWSサービス名がVPC Endpoint側へ向くようになります。
+
+例。
+
+```text
+ssm.ap-northeast-1.amazonaws.com
+```
+
+### 7. VPC側のDNS設定が有効か
+
+Private DNSを使うには、VPC側で以下が有効になっている必要があります。
+
+```text
+DNS resolution:
+有効
+
+DNS hostnames:
+有効
+```
+
+独自ドメインを持っているかどうかは関係ありません。
+
+ここでいうDNSは、VPC内でAWSサービス名を名前解決するための設定です。
+
+## SSM接続に必要な3要素
+
+SSM接続には、最低でも以下の3つが必要です。
+
+```text
+1. SSM Agent
+2. IAM Role
+3. VPC Endpoint または NAT Gatewayなどの通信経路
+```
+
+それぞれが欠けた場合の状態。
+
+```text
 SSM Agentあり、IAM Roleなし
 → 連絡係はいるが、許可証がない
 
@@ -127,14 +576,136 @@ IAM Roleあり、VPC Endpointなし
 
 VPC Endpointあり、SSM Agentなし
 → 道はあるが、連絡係がいない
-今回の理解はこれでOK
-SSM AgentがAWS Systems Managerと連絡を取る。
-そのときAWSサービスを利用するので、IAM Roleによる許可が必要。
-NATなしのPrivate EC2では、連絡する道としてVPC Endpointも必要。
+```
 
+## IAMとSecurity Groupの違い
 
-IAM RoleはSSM Agentを動かすためではなく、
-SSM AgentがAWS Systems Managerと安全にやり取りできるように、
-EC2へ権限を渡すもの。
-AWSでは、人間もEC2などのサービスも、AWSサービスを利用するには権限が必要。
-IAMは「誰が・何が・どのAWSサービスに・何をしてよいか」を決める仕組み。
+IAMとSecurity Groupは、どちらも「許可」に関係します。
+
+ただし、見ている対象が違います。
+
+### IAM
+
+IAMは、AWSサービスを操作・利用してよいかを決めます。
+
+```text
+IAM
+= 誰が・何が・どのAWSサービスに・何をしてよいか
+```
+
+例。
+
+```text
+EC2がSystems Managerと通信してよい
+EC2がS3を読み取ってよい
+人間がEC2を作成してよい
+```
+
+### Security Group
+
+Security Groupは、ネットワーク通信を通してよいかを決めます。
+
+```text
+Security Group
+= どの通信を通してよいか
+```
+
+例。
+
+```text
+SSH / TCP 22 を許可する
+HTTP / TCP 80 を許可する
+HTTPS / TCP 443 を許可する
+```
+
+### 比較
+
+```text
+IAM RoleでSSMを使う権限がある
+でも通信経路がない
+→ Systems Managerに届かない
+
+Security Groupで443を許可している
+でもIAM Roleがない
+→ Systems Managerに受け付けてもらえない
+```
+
+つまり、権限と通信経路は別物です。
+
+## Route Table / Security Group / IAM Role / VPC Endpoint の整理
+
+```text
+Route Table
+= 通信をどこへ向けるかを決める地図
+
+Security Group
+= 通信を通してよいか判断する門番
+
+IAM Role
+= AWSサービスを利用してよいかの許可証
+
+VPC Endpoint
+= Private SubnetからAWSサービスへ行く専用窓口
+
+SSM Agent
+= EC2内でAWS Systems Managerと連絡する担当者
+```
+
+## 学び
+
+今回の学びは、SSM Session Manager接続はSSHとはまったく違う考え方で成立しているということです。
+
+SSH接続は、自分のPCからEC2へ直接入ります。
+
+```text
+自分のPC
+↓ SSH
+EC2
+```
+
+Session Manager接続は、EC2内のSSM AgentがAWS Systems Managerと通信し、そのセッションを使ってブラウザからEC2を操作します。
+
+```text
+自分のブラウザ
+↓
+AWS Systems Manager
+↓
+SSM Agent
+↓
+EC2
+```
+
+また、AWSでは人間もEC2などのサービスも、AWSサービスを利用するには権限が必要です。
+
+```text
+人間がAWSを操作する
+→ 人間側のIAM権限が必要
+
+EC2がAWSサービスを使う
+→ EC2に付けたIAM Roleの権限が必要
+```
+
+今回の構成では、Private EC2がインターネットへ出られない代わりに、VPC Endpointを使ってAWS Systems Managerへ到達できるようにしました。
+
+```text
+Private EC2
+↓
+VPC Endpoint
+↓
+AWS Systems Manager
+```
+
+その結果、以下を使わずにPrivate EC2へ接続できました。
+
+```text
+Public IP
+SSH
+秘密鍵
+踏み台サーバ
+NAT Gateway
+Internet Gateway
+```
+
+## 一文まとめ
+
+SSM Session Managerは、EC2へ直接SSHする仕組みではなく、EC2内のSSM AgentがAWS Systems Managerと通信し、そのセッションをAWSコンソールから利用する仕組みです。NAT GatewayなしのPrivate Subnetでは、AWS Systems Managerへ届く通信経路をVPC Endpointで作ります。
