@@ -102,3 +102,37 @@ SSMの命令を受け取っていいですか？
 
 その権限をEC2に渡すのが IAM Role です。
 「働かせる」というより、AWSとやり取りする許可を与えるという感じです。
+通信経路と権限は別物
+
+ここが大事です。
+
+SSM接続には、最低でもこの3つが必要です。
+
+1. SSM Agent
+   → EC2内の連絡係
+
+2. IAM Role
+   → AWS Systems Managerとやり取りしてよい権限
+
+3. VPC Endpoint
+   → AWS Systems Managerへ届く通信経路
+
+この3つは役割が違います。
+
+SSM Agentあり、IAM Roleなし
+→ 連絡係はいるが、許可証がない
+
+IAM Roleあり、VPC Endpointなし
+→ 許可証はあるが、連絡する道がない
+
+VPC Endpointあり、SSM Agentなし
+→ 道はあるが、連絡係がいない
+今回の理解はこれでOK
+SSM AgentがAWS Systems Managerと連絡を取る。
+そのときAWSサービスを利用するので、IAM Roleによる許可が必要。
+NATなしのPrivate EC2では、連絡する道としてVPC Endpointも必要。
+
+
+IAM RoleはSSM Agentを動かすためではなく、
+SSM AgentがAWS Systems Managerと安全にやり取りできるように、
+EC2へ権限を渡すもの。
