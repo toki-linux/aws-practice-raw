@@ -1,1 +1,71 @@
 Systems Managerというサービスの中にSession Managerという機能があって、それを使うためにSSM AgentがEC2の中で動いていなければいけない。という感じ？エンドポイントはサービスとかではないよね？エンドポイントのイメージがわかない
+
+そう、その理解で合ってる。
+
+AWS Systems Manager というサービスがある
+└── その中に Session Manager という接続機能がある
+    └── それを使うには、EC2の中で SSM Agent が動いている必要がある
+
+かなりいい整理です。
+
+エンドポイントはサービスではない
+
+ここもその通り。
+
+VPC Endpoint自体は、SSMみたいな「何かを管理するサービス」ではないです。
+
+役割はこれ。
+
+VPC Endpoint
+= VPCの中から、AWSサービスへプライベートに接続するための入口
+
+もっと雑に言うと、
+
+AWSサービス行きの専用の通路
+
+です。
+
+たとえで考える
+
+今までのNAT Gatewayは、こんなイメージ。
+
+Private EC2
+↓
+NAT Gateway
+↓
+インターネット道路
+↓
+AWS Systems Manager
+
+一度インターネット側の道に出てから、AWSサービスに行く感じ。
+
+一方、VPC Endpointはこう。
+
+Private EC2
+↓
+SSM行き専用ドア
+↓
+AWS Systems Manager
+
+つまり、インターネットに出ずに、AWSサービスへ行くための専用ドア。
+
+エンドポイントの正体
+
+今回作るのは、正確には Interface VPC Endpoint です。
+
+これを作ると、VPCのサブネット内に ENI というネットワークインターフェースが作られます。
+ENIは、EC2に付いているネットワークカードみたいなものです。
+
+Private Subnet
+├── Private EC2
+│   └── 10.0.2.10
+│
+└── VPC Endpoint用ENI
+    └── 10.0.2.50 みたいなPrivate IP
+
+つまり、Private EC2から見ると、
+
+同じVPC内に、AWSサービスへつながる入口ができた
+
+という感じです。
+
