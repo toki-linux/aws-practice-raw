@@ -136,3 +136,5 @@ NATなしのPrivate EC2では、連絡する道としてVPC Endpointも必要。
 IAM RoleはSSM Agentを動かすためではなく、
 SSM AgentがAWS Systems Managerと安全にやり取りできるように、
 EC2へ権限を渡すもの。
+AWSでは、人間もEC2などのサービスも、AWSサービスを利用するには権限が必要。
+IAMは「誰が・何が・どのAWSサービスに・何をしてよいか」を決める仕組み。
