@@ -145,3 +145,7 @@ DNS resolution
 
 DNS hostnames
 = EC2などにDNS名を付けるか
+
+注意点
+
+ロールを2つ作っても、EC2に同時に付けられるIAMロールは基本1つと考えておくといい。
