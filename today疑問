@@ -101,3 +101,47 @@ Security Groupはステートフルなので、
 ↓
 自動で許可される
 Security Groupはステートフルなので、許可された通信に対する戻り通信は自動で許可される。ただし、相手側から新しく始まる通信は別扱いなので、Inbound許可が必要。
+
+DNSはなぜ有効にする必要がある？
+必要な理由は、SSM AgentがAWSサービス名をVPC Endpointに向けるためです。
+
+今回、EC2の中のSSM Agentは裏側でこういう宛先に通信しようとします。
+
+ssm.ap-northeast-1.amazonaws.com
+ssmmessages.ap-northeast-1.amazonaws.com
+ec2messages.ap-northeast-1.amazonaws.com
+
+これはAWSサービスの名前です。
+
+でもPrivate EC2はインターネットに出られません。
+なので、この名前が通常の外向き宛先に解決されると届きません。
+
+そこでDNSを有効にすると、
+
+ssm.ap-northeast-1.amazonaws.com
+↓ 名前解決
+VPC EndpointのPrivate IP
+
+という向きにできます。
+
+つまり、
+
+SSM Agent
+↓
+「ssm.ap-northeast-1.amazonaws.com に行きたい」
+↓ DNS
+「それならVPC内のEndpointへ行って」
+↓
+VPC Endpoint
+↓
+AWS Systems Manager
+
+という流れになります。
+
+一文でいうと
+DNSを有効にするのは、SSM Agentが使うAWSサービス名を、インターネット側ではなくVPC EndpointのPrivate IPへ向けるため。
+DNS resolution
+= AWSが用意したDNSで名前解決していいか
+
+DNS hostnames
+= EC2などにDNS名を付けるか
