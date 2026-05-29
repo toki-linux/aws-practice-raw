@@ -179,3 +179,13 @@ AWSコンソールからEC2に命令を送って、
 EC2内でコマンドを実行させる機能
 
 Run CommandはEC2に命令して、命令した内容をやらせることができる
+イメージ
+AWSコンソール
+↓
+Systems Manager Run Command
+↓
+SSM Agent
+↓
+EC2の中で処理が実行される
+
+大事なのは、Run Command自体がEC2の中で直接動くわけじゃなくて、EC2内のSSM Agentが命令を受け取って実行する ということ。
