@@ -24,3 +24,61 @@ EC2
 EC2はENIというネットワーク口を使って通信している
 
 という感じです。
+なぜVPC Endpointなのにサブネットに存在するのか
+
+ここが本題です。
+
+VPC Endpointは名前に VPC とついているので、
+
+VPC全体にふわっと存在するもの
+
+に見えます。
+
+でも、今回使った Interface VPC Endpoint は少し違います。
+
+Interface VPC Endpointは、
+
+VPCに作るリソースだけど、
+実体としては選んだサブネットの中にENIが作られる
+
+です。
+
+つまり、
+
+管理上は VPC Endpoint
+実体の接続口は Subnet内のENI
+
+という関係です。
+
+図にするとこう
+VPC
+└── Private Subnet
+    ├── EC2
+    │   └── ENI
+    │       └── 10.0.1.10
+    │
+    └── VPC Endpoint
+        └── Endpoint用ENI
+            └── 10.0.1.50
+
+EC2から見ると、
+
+同じPrivate Subnet内に
+AWS Systems Managerへつながる接続口ができた
+
+という感じです。
+
+だから「VPC Endpoint」と「Subnet内ENI」は矛盾しない
+
+こう考えるといいです。
+
+VPC Endpoint
+= AWSサービスへ接続するための仕組み全体の名前
+
+Endpoint用ENI
+= その仕組みがVPC内に作る実際の接続口
+
+たとえるなら、
+
+VPC Endpoint = 会社に設置した内線電話サービス
+Endpoint用ENI = 各部屋に置かれた電話機
