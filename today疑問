@@ -1,1 +1,26 @@
+ENIとは何か
 
+ENIは Elastic Network Interface の略です。
+
+ざっくり言うと、
+
+ENI = AWS上の仮想ネットワークカード
+
+です。
+
+EC2にもネットワークカードがありますよね。
+そのAWS版がENIです。
+
+EC2インスタンスは、ENIを通してVPC内のネットワークに参加しています。
+
+EC2
+└── ENI
+    ├── Private IP
+    ├── Security Group
+    └── Subnetに所属
+
+つまり、EC2本体が直接ネットワークにつながっているというより、
+
+EC2はENIというネットワーク口を使って通信している
+
+という感じです。
