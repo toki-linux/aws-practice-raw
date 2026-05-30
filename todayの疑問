@@ -2,3 +2,5 @@
 Internet GatewayはVPC全体の外部出入口としてVPCに付ける。
 Public SubnetかPrivate Subnetかは、
 Subnetが使うRoute TableにIGW向けルートがあるかどうかで決まる。
+
+エンドポイントのどこの道を作ればいいのかわからない
