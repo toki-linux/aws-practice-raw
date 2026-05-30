@@ -4,3 +4,4 @@ Public SubnetかPrivate Subnetかは、
 Subnetが使うRoute TableにIGW向けルートがあるかどうかで決まる。
 
 エンドポイントのどこの道を作ればいいのかわからない
+エンドポイントのサービスのインターフェースとかゲートウェイとかは何？
