@@ -21,3 +21,27 @@ Interface Endpoint
 2. EC2がステートレスなのではなく、Security Groupがステートフル
 3. SSM Agentは「接続してよいかお願いする」というより、
    AWS側とHTTPS通信して命令やセッションをやり取りする
+
+現時点で残っている理解ポイント
+
+書いてくれた内容から判断すると、次の4点を確認すればかなり固まる。
+
+① DNS設定の場所
+Subnetではなく、
+VPCのDNS属性
++
+Interface EndpointのPrivate DNS設定
+② EC2とSGの違い
+EC2がステートレス
+ではなく
+SGがステートフル
+③ Route Tableの役割
+S3 Gateway Endpointは、
+Private Subnet用Route Tableに
+S3向けルートを追加する
+④ Interface EndpointとGateway Endpointの違い
+Interface Endpoint
+→ ENI・Private IP・SG・DNS
+
+Gateway Endpoint
+→ Route Table・Prefix List
