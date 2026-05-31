@@ -7,3 +7,13 @@
 3. 通信元は同じVPC内だけか
 4. オンプレミスや別VPCからも使うか
 5. 料金・SG・Route Tableの管理方法を比較する
+
+目的はどちらも、
+Private EC2からAWSサービスへ
+Internet GatewayやNAT Gatewayを使わずに接続すること。
+
+Gateway Endpoint
+→ S3・DynamoDB向けのシンプルな専用ルート
+
+Interface Endpoint
+→ Private IP付きの入口を作る汎用的な方式
