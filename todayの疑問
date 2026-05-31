@@ -17,3 +17,7 @@ Gateway Endpoint
 
 Interface Endpoint
 → Private IP付きの入口を作る汎用的な方式
+1. DNSはSubnetの設定ではなく、主にVPCとInterface Endpointの設定
+2. EC2がステートレスなのではなく、Security Groupがステートフル
+3. SSM Agentは「接続してよいかお願いする」というより、
+   AWS側とHTTPS通信して命令やセッションをやり取りする
