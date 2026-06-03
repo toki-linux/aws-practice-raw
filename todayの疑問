@@ -28,3 +28,18 @@ Client VPN
 
 Direct Connect
 = 専用線
+
+仮想プライベートゲートウェイとは？
+仮想プライベートゲートウェイは、一言でいうと、
+
+AWS側に置くVPNの入口です。
+
+会社ネットワーク
+↓
+VPNトンネル
+↓
+仮想プライベートゲートウェイ
+↓
+VPC
+
+正式には Virtual Private Gateway / VGW。
