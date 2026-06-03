@@ -43,3 +43,20 @@ VPNトンネル
 VPC
 
 正式には Virtual Private Gateway / VGW。
+
+Virtual Private Gateway
+= AWS側のVPN接続口
+
+Site-to-Site VPNで使う
+
+VPCにアタッチする
+
+オンプレミス環境とVPCを安全につなぐ
+
+セットで覚えるなら、
+
+Customer Gateway
+= 自社側のVPN装置
+
+Virtual Private Gateway
+= AWS側のVPN装置
