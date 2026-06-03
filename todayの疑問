@@ -15,3 +15,16 @@ VPC Flow Logs
 保存先はCloudWatch LogsやS3
 
 トラブルシューティングや監査に使う
+
+VPNとは？
+VPN
+= インターネット上に安全な通信経路を作る技術
+
+Site-to-Site VPN
+= 会社ネットワーク ↔ AWS
+
+Client VPN
+= 個人PC ↔ AWS
+
+Direct Connect
+= 専用線
