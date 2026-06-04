@@ -264,3 +264,15 @@ WAF
 
 ネットワークを通っていても、ネットワーク層だけでは「中身の悪さ」までは判断できない。
 
+レイヤ別各サービス
+DDoS → Shield
+SQL Injection / XSS → WAF
+通信許可 → Security Group / NACL
+操作履歴 → CloudTrail
+監視 → CloudWatch
+脅威検知 → GuardDuty
+脆弱性診断 → Inspector
+暗号鍵 → KMS
+秘密情報 → Secrets Manager
+証明書 → ACM
+複数アカウント制御 → Organizations / SCP
