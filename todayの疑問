@@ -9,3 +9,8 @@ SQL Injection
 XSS
 
 みたいな攻撃をWAFが防ぐ。
+Shield
+→ 大量アクセス攻撃を防ぐ
+
+WAF
+→ 不正なリクエストを防ぐ
