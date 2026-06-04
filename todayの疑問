@@ -150,3 +150,9 @@ Cloud〜
 → 保存する
 
 ただし、全部がきれいに当てはまるわけではない
+
+
+AWS Global Accelerator とは？
+Global Acceleratorは、世界中のユーザーを最適なAWS入口まで高速に運ぶサービス
+
+です。
