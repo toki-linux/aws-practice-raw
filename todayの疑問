@@ -66,3 +66,87 @@ CloudFormation
 
 CloudFront
 → クラウドの前面・入口
+
+〜Gateway
+→ 出入口
+
+例：
+
+Internet Gateway
+→ インターネットへの出入口
+
+NAT Gateway
+→ Private Subnetから外へ出る出入口
+
+Virtual Private Gateway
+→ VPN用の出入口
+
+Transit Gateway
+→ 複数VPCや拠点をつなぐ中継出入口
+
+〜Manager
+→ 管理する
+
+例：
+
+Secrets Manager
+→ パスワードや秘密情報を管理
+
+Systems Manager
+→ EC2などのシステム管理
+
+Certificate Manager
+→ SSL/TLS証明書を管理
+
+〜Shield / Guard / Firewall
+→ 守る・防ぐ
+
+例：
+
+Shield
+→ DDoS攻撃から守る盾
+
+GuardDuty
+→ 怪しい動きを見張る警備員
+
+WAF
+→ Webアプリ用ファイアウォール
+
+〜Store / Storage / S3
+→ 保存する
+
+例：
+
+S3
+→ オブジェクト保存
+
+EBS
+→ EC2用のブロックストレージ
+
+EFS
+→ 複数EC2から使えるファイルストレージ
+
+Instance Store
+→ EC2に一時的についている保存領域
+
+かなり使える覚え方はこれ。
+
+Cloud〜
+→ AWS上で何かする広めのサービス
+
+〜Gateway
+→ 通信の出入口
+
+〜Manager
+→ 管理係
+
+〜Watch / Trail
+→ 見る・記録する
+
+〜Shield / Guard / Firewall
+→ 守る
+
+〜Store / Storage
+→ 保存する
+
+ただし、全部がきれいに当てはまるわけではない
