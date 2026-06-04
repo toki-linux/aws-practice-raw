@@ -1,1 +1,11 @@
 AWS Shield AWS WAF といったセキュリティはなぜ存在し、どのように使われる？
+大量アクセス
+
+をShieldが防ぐ。
+
+次に
+
+SQL Injection
+XSS
+
+みたいな攻撃をWAFが防ぐ。
