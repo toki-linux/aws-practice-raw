@@ -145,3 +145,19 @@ DynamoDB
 
 その人の情報を
 1冊にまとめて保管
+
+SQLって何？何の略？
+SQL は Structured Query Language の略です。
+
+日本語だと、
+
+構造化問い合わせ言語
+
+です。
+
+一言でいうと、
+
+データベースに命令するための言語。
+SQL = リレーショナルデータベースを操作する言語
+RDS / Aurora で使う
+DynamoDBは基本NoSQL
