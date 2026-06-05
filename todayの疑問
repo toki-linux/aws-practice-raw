@@ -383,3 +383,26 @@ YAML
 → インデントで表す設定形式
 
 どちらも設定・構成情報を書くためのデータ形式
+
+Elastic BeanstalkはCloudFormationtと何が違う？どちらも環境構築を何かを元に行っている。CloudFormationtはテンプレート、Elastic Beanstalkは設定パラメータ。この違いだけ？
+かなり近いです。
+でも違いは 「自由度」と「目的」 です。
+
+CloudFormation
+→ AWSリソース全般を、設計図どおりに作るサービス
+
+Elastic Beanstalk
+→ Webアプリ実行環境を、いい感じに作ってくれるサービス
+たとえると
+CloudFormation
+= 家の設計図を書くサービス
+  部屋、配線、玄関、窓まで細かく指定できる
+
+Elastic Beanstalk
+= 住宅メーカーの標準プラン
+  「Webアプリ用の家」を簡単に建ててくれる
+CloudFormation
+→ 何をどう作るか細かく書く
+
+Elastic Beanstalk
+→ Webアプリを動かしたい、細かい裏側は任せる
