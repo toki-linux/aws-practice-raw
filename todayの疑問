@@ -209,3 +209,20 @@ EC2
 RDS ← 犯人
 
 みたいに見つけられる。
+CloudWatch
+= 状態監視
+
+CloudTrail
+= 操作履歴
+
+X-Ray
+= アプリ処理の追跡
+一言で覚える
+CloudWatch
+→ 何が起きた？
+
+CloudTrail
+→ 誰がやった？
+
+X-Ray
+→ どこで遅くなった？
