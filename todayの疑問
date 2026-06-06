@@ -21,3 +21,109 @@ CPU使用率
 ネットワーク通信量
 
 CloudWatchで確認できる
+
+nginxを入れたあと/var/www/htmlディレクトリがあるか確認したところ、なかった。/var/www/もなかった。なぜ？
+今回は Amazon Linux 2023 を使っているため、Ubuntuで見慣れていた配置と違います。
+
+結論
+
+Ubuntu系では、よく使われるドキュメントルートが、
+
+/var/www/html
+
+でした。
+
+一方、Amazon Linux 2023で入れたnginxでは、通常こちらを使います。
+
+/usr/share/nginx/html
+
+なので、
+
+/var/www/
+
+自体がなくてもおかしくありません。
+
+なぜ違うのか
+
+nginxは、
+
+必ず /var/www/html を使う
+
+という決まりではありません。
+
+どのディレクトリのファイルをWebページとして返すかは、nginxの設定ファイルにある root で決まります。
+
+nginx公式でも、root ディレクティブの値にURLのパスを加えて、返すファイルの場所を決めると説明されています。
+
+つまり、
+
+Ubuntuでよく見る設定
+root /var/www/html;
+
+Amazon Linuxでよく見る設定
+root /usr/share/nginx/html;
+
+という違いです。
+
+今回確認するコマンド
+
+Private EC2の中で実行してください。
+
+sudo grep -R "root " /etc/nginx
+
+おそらく、次のような表示が出ます。
+
+root         /usr/share/nginx/html;
+
+実際にディレクトリがあるか確認。
+
+ls -l /usr/share/nginx/html
+
+初期ページのファイルが入っているはずです。
+
+テスト用HTMLを置く
+
+今回は、ここへ置けばOKです。
+
+echo "hello from private ec2" | sudo tee /usr/share/nginx/html/index.html
+
+nginxを起動。
+
+sudo systemctl enable --now nginx
+
+EC2内部から確認。
+
+curl http://localhost
+
+期待する結果。
+
+hello from private ec2
+今までとの違いを整理
+Ubuntu
+└── /var/www/html
+
+Amazon Linux 2023
+└── /usr/share/nginx/html
+
+どちらも正しいです。
+
+違うのは、
+
+OS
+ディストリビューション
+パッケージの初期設定
+
+です。
+
+今回の学び
+Webページの保存場所
+→ OSごとに固定ではない
+
+nginxの設定ファイル
+→ rootディレクティブで決まる
+
+なので、今後はパスを暗記するより、
+
+sudo grep -R "root " /etc/nginx
+
+で確認する方が実務的です。
