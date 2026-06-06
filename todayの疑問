@@ -226,3 +226,44 @@ CloudTrail
 
 X-Ray
 → どこで遅くなった？
+
+Amazon EventBridgeとは？
+Amazon EventBridge は、一言でいうと、
+
+AWS内の出来事をきっかけに、別の処理を自動実行するサービスです。
+
+何かが起きた
+↓
+EventBridge
+↓
+指定した処理を動かす
+例
+S3にファイルが置かれた
+↓
+EventBridge
+↓
+Lambdaを実行
+毎日9時になった
+↓
+EventBridge
+↓
+Lambdaを実行
+EC2の状態が変わった
+↓
+EventBridge
+↓
+SNSで通知
+Amazon EventBridge
+= イベント駆動のサービス
+= AWSサービスやアプリのイベントを受け取り、別サービスへルーティングする
+= スケジュール実行にも使える
+= Lambda / SNS / SQS / Step Functions などと連携する
+
+覚え方は、
+
+Event
+= 出来事
+
+Bridge
+= 橋渡し
+出来事を別サービスへ橋渡しできるサービス
