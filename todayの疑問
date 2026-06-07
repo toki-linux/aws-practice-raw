@@ -513,3 +513,13 @@ Interface Endpoint
 ↑
 SSM Agent
 └── Private EC2
+
+Private EC2
+└── SSM Agent
+↓
+Interface Endpoint
+↓
+Session Manager
+↓
+自分
+これだとSSM AgentからAWS側へ通信する向きしか書けていない
