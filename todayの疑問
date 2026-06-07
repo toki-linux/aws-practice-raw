@@ -409,3 +409,31 @@ AWS Transfer Family
 = 保存先は S3 や EFS
 = 既存のファイル転送運用をAWSへ移行しやすい
 
+SFTP/FTPS/FTPってどういうプロトコルだっけ？
+まず全部、
+
+ファイル転送プロトコル
+
+です。
+
+つまり、
+
+PC
+↓
+ファイルを送る
+↓
+サーバ
+
+のためのルール。
+FTP
+→ 暗号化なし
+一番古い
+FTPS
+→ FTP + SSL/TLS
+最後のSがセキュアのやつ
+SFTP
+→ SSHベース
+SSHを使ったやつ
+Transfer Family
+→ FTP/FTPS/SFTPで
+S3やEFSへ転送
