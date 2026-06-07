@@ -501,3 +501,15 @@ Public Subnetからインターネットへの道がなくなる
 行きと帰りを含めた通信全体が成立しない
 ↓
 ブラウザではタイムアウト
+
+Private EC2とAWS側がやり取りする流れ。満点回答
+自分
+↓
+Session Manager
+↓
+AWS側でセッションを仲介
+↑
+Interface Endpoint
+↑
+SSM Agent
+└── Private EC2
