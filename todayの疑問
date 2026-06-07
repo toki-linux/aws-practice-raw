@@ -239,3 +239,60 @@ DynamoDBは柔軟
 
 スキーマ
 = その表の設計図
+
+AWS Migration Hubとは？
+AWS Migration Hubは、一言でいうと、
+
+移行作業全体の進捗をまとめて見る管理画面です。
+
+オンプレミス / 既存環境
+↓
+AWSへ移行
+↓
+Migration Hubで進捗を見える化
+何をするサービス？
+
+サーバやアプリをAWSへ移すとき、移行作業は複数に分かれます。
+
+サーバ調査
+移行対象の整理
+移行ツールの実行
+進捗確認
+移行後の状態確認
+
+Migration Hubは、それらをまとめて追跡します。
+
+例えると
+Migration Hub
+= 引っ越し全体の進捗表
+
+実際に荷物を運ぶトラックではありません。
+
+荷物を運ぶ係
+→ Application Migration Service など
+
+進捗をまとめて見る係
+→ Migration Hub
+試験ではここまででOK
+AWS Migration Hub
+= AWS移行作業を一元管理・追跡するサービス
+
+複数の移行ツールの進捗をまとめて確認できる
+
+実際に移行する本体というより、移行状況の管理役
+
+移行系サービスの分け方。
+Migration Hub
+→ 移行全体の管理画面
+
+Application Migration Service
+→ サーバ移行
+
+Database Migration Service
+→ データベース移行
+
+DataSync
+→ ファイル転送
+
+Snowball
+→ 大量データを物理デバイスで移行
