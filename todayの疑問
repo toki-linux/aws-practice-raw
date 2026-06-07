@@ -2,3 +2,38 @@ AWS API gatewayとは？
 AWS API Gateway は、一言でいうと、
 
 APIの入口を作るサービスです。
+ユーザー / アプリ
+↓
+API Gateway
+↓
+Lambda / EC2 / ECS / DynamoDB など
+API Gatewayがすること
+リクエストを受け取る
+認証する
+どこへ流すか決める
+アクセス制限する
+ログを残す
+レスポンスを返す
+例
+
+たとえばアプリで、
+
+ユーザー情報を取得したい
+
+とき、
+
+GET /users/1
+
+というAPIリクエストを送る。
+
+流れはこう。
+
+スマホアプリ
+↓
+API Gateway
+↓
+Lambda
+↓
+DynamoDB
+↓
+結果を返す
