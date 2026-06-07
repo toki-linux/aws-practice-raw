@@ -354,4 +354,58 @@ Gateway = 出入口・橋渡し
 
 なので、オンプレとAWSストレージの橋です。
 
+AWS Transfer Familyとは？
+AWS Transfer Family は、一言でいうと、
+
+SFTP / FTPS / FTPで、S3やEFSにファイル転送できるサービスです。
+
+外部の取引先・社内システム
+↓
+SFTP / FTPS / FTP
+↓
+AWS Transfer Family
+↓
+S3 / EFS
+何に使う？
+
+昔からあるシステムでは、
+
+FTPでファイルを送る
+SFTPで請求データを送る
+毎日CSVをアップロードする
+
+みたいな運用がよくあります。
+
+AWS Transfer Familyを使うと、その仕組みを大きく変えずに、保存先をAWSにできます。
+
+例えると
+Transfer Family
+= ファイル受け取り窓口
+
+S3
+= 保管倉庫
+
+取引先は今まで通り、
+
+SFTPでファイル送信
+
+するだけ。
+
+裏側ではAWSが、
+
+S3に保存
+
+してくれる。
+
+Storage Gatewayとの違い
+Storage Gateway
+→ オンプレのファイルサーバやバックアップをAWSにつなぐ
+
+Transfer Family
+→ SFTP/FTPS/FTPでファイルを送受信する入口
+
+AWS Transfer Family
+= SFTP / FTPS / FTP を使ったファイル転送サービス
+= 保存先は S3 や EFS
+= 既存のファイル転送運用をAWSへ移行しやすい
 
