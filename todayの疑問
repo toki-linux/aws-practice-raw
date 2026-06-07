@@ -98,3 +98,46 @@ S3へ保存して
 削除する
 
 全部APIです。
+API Gatewayは何をする？
+
+ここが大事。
+
+API Gatewayは、
+
+注文処理
+ログイン処理
+商品検索
+
+を実行するわけではありません。
+
+API Gatewayは
+
+受付
+
+です。
+
+例
+
+スマホ
+↓
+API Gateway
+↓
+Lambda
+↓
+DynamoDB
+
+注文を実際に処理するのは、
+
+Lambda
+EC2
+ECS
+
+など。
+
+API Gatewayは、
+
+リクエストを受け取る
+↓
+適切な担当へ流す
+
+だけ。
