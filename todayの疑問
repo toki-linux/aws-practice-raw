@@ -523,3 +523,32 @@ Session Manager
 ↓
 自分
 これだとSSM AgentからAWS側へ通信する向きしか書けていない
+
+インターフェースエンドポイントはルートテーブルに関連づけない。
+Interface Endpoint
+Private Subnet
+└── ENI
+    ├── Private IP
+    └── Security Group
+
+EC2は、Subnet内に作られたENIのPrivate IPへ通信します。
+
+Private EC2
+↓ HTTPS : 443
+Interface EndpointのENI
+↓
+AWSサービス
+
+そのため、Gateway Endpointとは違い、Route Tableへ専用ルートを追加する方式ではありません。
+
+Gateway Endpoint
+Private Subnet
+↓
+Route Table
+├── 10.0.0.0/16 → local
+└── pl-xxxxxxxx  → vpce-xxxxxxxx
+
+S3へ向かう通信は、Route Tableに追加された専用ルートを通ります。
+
+以前確認したとおり、pl-xxxxxxxxはS3が利用するIPアドレス範囲をまとめたPrefix Listです。
+ローカルで通信しているから
