@@ -164,3 +164,10 @@ API
 
 API Gateway
 = そのAPIの入口をAWS上に作って管理するサービス
+例えると、
+
+API
+= 注文メニュー・注文方法
+
+API Gateway
+= 受付カウンター
