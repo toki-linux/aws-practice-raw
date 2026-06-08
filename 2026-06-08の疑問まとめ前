@@ -84,3 +84,130 @@ SSM Agent
 → AWS連携ソフト
 
 全部EC2の中にインストールできるプログラムです。
+Dedicated Hostsとは？
+Dedicated Hosts は、一言でいうと
+
+自分専用の物理サーバをAWS上で借りる仕組みです。
+
+通常のEC2は、
+
+AWSの物理サーバ
+├─ A社のEC2
+├─ B社のEC2
+└─ 自分のEC2
+
+みたいに、裏側では複数ユーザーで物理サーバを共有していることがあります。
+
+Dedicated Hosts はこう。
+
+AWSの物理サーバ
+└─ 自分のEC2だけ
+なぜ使う？
+
+主に理由はこのあたり。
+
+ライセンス要件
+コンプライアンス要件
+物理サーバ単位で管理したい
+Dedicated Instanceとの違い
+
+ざっくりでOK。
+
+Dedicated Instance
+→ 他社と物理ホストを共有しないEC2
+
+Dedicated Host
+→ 物理サーバそのものを自分専用で確保し、配置も管理しやすい
+
+試験ではこれで十分。
+
+Dedicated Hosts
+= 自分専用の物理サーバ
+= ライセンス持ち込みやコンプライアンス向け
+= 通常EC2より特殊用途
+
+Dedicated Instance
+→ 他社と物理ホストを共有しないEC2
+
+Dedicated Host
+→ 物理サーバそのものを自分専用で確保し、配置も管理しやすい
+これって言っていること同じではないの？
+Dedicated Instance
+= 「他社と同じ物理サーバには乗らないEC2」
+
+Dedicated Host
+= 「この物理サーバ1台を自分専用で借りる」
+例えると
+Dedicated Instance
+個室ホテルに泊まる
+
+他人とは同じ部屋にならない。
+でも、どの建物のどの部屋かはホテル側が決める。
+
+Dedicated Host
+ホテル1棟を貸し切る
+
+建物そのものが自分専用。
+どの部屋に誰を入れるかも管理しやすい。
+
+Dedicated Instance
+→ 分離したEC2がほしい
+
+Dedicated Host
+→ 物理サーバ単位で管理したい
+→ ライセンス持ち込み要件がある
+→ ソケット数・コア数を意識したい
+
+なので、
+
+「専用EC2」なら Dedicated Instance
+「専用の物理サーバそのもの」なら Dedicated Host
+
+で覚えればOKです。
+Compute Saving Plansとは？
+Compute Savings Plans は、
+
+EC2 / Fargate / Lambda などのコンピューティング料金を安くするための割引プランです。
+
+ざっくり言うと、
+
+毎月・毎時間これくらい使います
+と約束する代わりに
+料金を割引してもらう
+
+仕組みです。
+例えると
+
+通常のEC2料金は、
+
+使った分だけ払う通常料金
+
+です。
+
+Compute Savings Plansは、
+
+ジムの都度払いではなく
+月額会員になる代わりに安くなる
+
+感じ。
+
+EC2 Reserved Instancesとの違い
+Reserved Instances
+→ EC2中心。条件がやや固定される
+
+Compute Savings Plans
+→ EC2 / Fargate / Lambda にまたがって柔軟に割引
+
+Compute Savings Plans
+= 1年または3年の利用コミットでコンピューティング料金を割引
+
+対象
+= EC2 / Fargate / Lambda
+
+特徴
+= RIより柔軟
+= 長期利用が見込めるワークロード向け
+
+覚え方は、
+
+Computeを長く使う約束をして安くするプラン
