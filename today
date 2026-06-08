@@ -13,3 +13,5 @@ CloudWatch Agent
 
 CPUは「EC2へどれくらい処理時間を貸したか」をAWS側で数えられる。
 メモリは「貸した部屋の中をOSがどう使っているか」を確認しないと分からない。
+
+cloudwatchagent やssmagentなど、agentというのは何？EC2インスタンスの中に存在しているイメージだけど
