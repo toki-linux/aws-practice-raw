@@ -20,3 +20,28 @@ Agent（エージェント）は一言でいうと、
 「AWSサービスと通信するためにEC2の中で動いている小さなプログラム」
 
 です
+イメージ
+
+Agentは、
+
+EC2の中にいるAWSの連絡員
+
+みたいなもの。
+
+SSM Agent
+
+AWS本部
+↓
+「コマンド実行して」
+↓
+SSM Agent
+↓
+EC2で実行
+
+CloudWatch Agent
+
+EC2のログ
+↓
+CloudWatch Agent
+↓
+CloudWatchへ送信
