@@ -45,3 +45,30 @@ EC2のログ
 CloudWatch Agent
 ↓
 CloudWatchへ送信
+
+mysqlはデータベースサービスだよね？EC2の中にあるの？データベースの中ではなく？
+結論から言うと、
+
+MySQLは「データベースサービス」ではなく「データベースソフトウェア（データベースエンジン）」です。
+EC2
+= サーバ
+
+RDS
+= DBサービス
+
+MySQL
+= DBソフトウェア（DBエンジン）
+
+Database
+= 実際のデータの入れ物
+図にすると、
+
+RDS
+↓
+MySQL
+↓
+Database
+↓
+Table
+↓
+Row
