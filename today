@@ -72,3 +72,15 @@ Database
 Table
 ↓
 Row
+nginxとMySQLは同じ「ソフトウェア」の仲間だと思うと理解しやすいですよ。
+
+nginx
+→ Webサーバソフト
+
+MySQL
+→ DBサーバソフト
+
+SSM Agent
+→ AWS連携ソフト
+
+全部EC2の中にインストールできるプログラムです。
