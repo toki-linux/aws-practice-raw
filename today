@@ -162,4 +162,67 @@ backup.zip
 
 重要なのは、
 誰が鍵を管理するの？です。
+SSE
 
+Server Side Encryption
+
+AWS側で暗号化
+AWS側で復号
+CSE
+
+Client Side Encryption
+
+アップロード前に自分で暗号化
+SSE-S3
+
+一番簡単。
+
+AWSに任せる
+SSE-KMS＝鍵管理サービス
+メリット
+
+誰が使ったか監査
+
+権限管理
+
+鍵ローテーション
+
+ができる。
+暗号化はS3
+
+鍵管理はKMS
+
+SSE-C
+
+Customer Provided Keys
+
+鍵はお客様が持つ
+CSE
+
+Client Side Encryption
+
+これは根本的に違う。
+
+暗号化する場所が違う。
+
+SSE
+
+PC
+↓
+平文
+↓
+S3
+↓
+暗号化
+
+CSE
+
+PC
+↓
+暗号化
+↓
+S3
+
+つまり、
+
+AWSですら中身を見られない
