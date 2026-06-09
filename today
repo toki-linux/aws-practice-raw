@@ -1,1 +1,6 @@
 Compute Savings PlansとEC2 Reserved Instancesとの違い
+Reserved Instance (RI)
+→ 特定のEC2を安くする
+
+Compute Savings Plans
+→ コンピューティング全体を安くする
