@@ -4,3 +4,37 @@ Reserved Instance (RI)
 
 Compute Savings Plans
 → コンピューティング全体を安くする
+
+RIは主に 2種類 で覚えてOKです。
+
+Standard RI
+Convertible RI
+Standard RI
+割引率が高い
+でも変更の自由度は低い
+
+例えると、
+
+この路線・この区間の定期券
+
+です。
+
+決まった使い方を長く続けるならお得。
+
+Convertible RI
+Standardより割引率は少し低め
+でも変更しやすい
+
+例えると、
+
+条件変更できる定期券
+
+です。
+
+あとからインスタンスファミリーなどを変えたい可能性があるならこっち。
+
+Standard RI
+= 割引大・柔軟性低い
+
+Convertible RI
+= 割引やや低め・柔軟性高い
