@@ -40,3 +40,78 @@ Convertible RI
 = 割引やや低め・柔軟性高い
 
 Convetible RIとSavings Plansの違いは？
+Convertible RI
+↓
+柔軟
+
+Savings Plans
+↓
+柔軟
+
+なので似ています。
+
+まず結論。
+
+Convertible RI
+→ EC2の世界の中で柔軟
+
+Compute Savings Plans
+→ EC2以外も含めて柔軟
+
+です。
+
+Convertible RI
+
+例えば、
+
+今は
+
+t3.micro
+
+を使っている。
+
+将来、
+
+m7i.large
+
+に変わるかもしれない。
+
+その場合、
+
+Convertible RIなら、
+
+RIを交換
+
+できる。
+
+でも基本的には、
+
+EC2の割引
+
+です。
+
+Compute Savings Plans
+
+こちらはもっと広い。
+
+例えば、
+
+今日
+
+EC2
+
+を使っている。
+
+来年、
+
+Lambda
+
+へ移行した。
+
+さらに、
+
+Fargate
+
+も使う。
+
+それでも割引対象。
