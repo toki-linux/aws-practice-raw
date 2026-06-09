@@ -261,3 +261,4 @@ S3 Glacier Deep Archive
 S3 Intelligent-Tiering
 → アクセス頻度に応じて自動で階層移動
 オブジェクトをS3にアップデートするときに選べる
+バケット単位ではなくオブジェクト単位
