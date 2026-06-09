@@ -122,3 +122,15 @@ Fargate
 | 柔軟性   | 高い             | さらに高い              |
 | AWS推し | △              | ◎                  |
 | 試験頻度  | 中              | 高                  |
+
+だから実務でも試験でも、
+
+Standard RI
+↓
+Convertible RI
+↓
+Compute Savings Plans
+
+の順で柔軟性が上がる
+
+と覚えておくと整理しやすいですよ。
