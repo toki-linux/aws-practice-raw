@@ -59,3 +59,17 @@ AWS Network Firewallとは？
 VPC内におく本格的な検問所
 NACLはサブネットSGはサービスごとなので、通信はNetwork Firewallを通ってNACLを通ってSGを通るみたいな順番になる
 意識しておくのは Network Firewallは本格的な検問所でしっかりしていて、NACLは簡易的な検問所だということ
+
+PrivateLinkとエンドポイントって何が違う？
+AWS PrivateLink
+→ インターネットを通らずに、VPCからAWSサービスや他社サービスへプライベート接続する仕組み
+
+VPC Endpoint
+→ VPC内に作る接続口
+
+Interface Endpoint
+→ PrivateLinkを使う。ENIとPrivate IPを作る
+
+Gateway Endpoint
+→ S3/DynamoDB用。PrivateLinkとは別系統
+道を作る仕組みか道の入り口かの違い
