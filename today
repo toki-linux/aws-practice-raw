@@ -6,3 +6,12 @@ FSx for Windows File Server
 Windows用の共有フォルダサービス
 
 です。
+なぜEFSじゃダメなの？
+
+Windowsには、
+
+SMB
+Active Directory
+Windowsアクセス権
+
+などの独自文化があります。
