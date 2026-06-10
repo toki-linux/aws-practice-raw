@@ -15,3 +15,11 @@ Active Directory
 Windowsアクセス権
 
 などの独自文化があります。
+EBS
+→ 1台向けディスク
+
+EFS
+→ Linux共有フォルダ
+
+FSx for Windows
+→ Windows共有フォルダ
