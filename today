@@ -95,3 +95,20 @@ AWSが用意してくれているポリシー
 SCP
 → Organizationsでアカウント全体に制限をかける
 権限を付与するのではなく制限する
+
+ポリシー設定のAction と Resourceがわかっていない
+Actionは何をしていいか。Resourceは何に対してしていいか。
+例
+{
+  "Effect": "Allow",
+  "Action": "s3:GetObject",
+  "Resource": "arn:aws:s3:::my-bucket/test.txt"
+}
+許可
+S3からとるオブジェクトを
+my-bucketのtest.txtから
+
+正確に訳すと
+my-bucket の test.txt を取得することを許可する
+
+
