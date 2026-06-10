@@ -54,3 +54,8 @@ Transit Gateway
 =
 VPCの集線装置
 一対一しかできないのがVPCピアリング、複数のVPCをつなげるのがTransit Gateway
+
+AWS Network Firewallとは？
+VPC内におく本格的な検問所
+NACLはサブネットSGはサービスごとなので、通信はNetwork Firewallを通ってNACLを通ってSGを通るみたいな順番になる
+意識しておくのは Network Firewallは本格的な検問所でしっかりしていて、NACLは簡易的な検問所だということ
