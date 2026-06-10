@@ -23,3 +23,24 @@ EFS
 
 FSx for Windows
 → Windows共有フォルダ
+
+Active Directory連携、SMB共有とは？
+Active Directory連携
+→ Windowsのユーザー・権限管理とつながること
+
+SMB共有
+→ Windowsで使う共有フォルダの仕組み
+Active Directory連携
+
+Active Directory、略してADは、
+
+会社のWindowsユーザー名簿・権限管理システムです。
+SMB共有
+
+SMBは、Windowsで共有フォルダにアクセスするときの通信ルールです。
+
+会社PCでよくある、
+
+\\fileserver\share
+
+みたいな共有フォルダ。
