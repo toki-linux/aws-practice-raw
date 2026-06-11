@@ -1,3 +1,5 @@
 WorkSpacesサービスとは？
 WorkSpaces Personal
 = 原則として、社員1人につき専用の仮想デスクトップを1つ提供する
+
+WorkSpacesサービスへはAWSコンソールを使わずに到達可能
