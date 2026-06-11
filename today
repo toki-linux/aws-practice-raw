@@ -5,3 +5,79 @@ WorkSpaces Personal
 WorkSpacesサービスへはAWSコンソールを使わずに到達可能
 
 WorkSpacesサービスは仮想サーバを遠隔操作するというよりも自分専用の仮想PCを操作するサービス。つまりPCを操作
+
+Amazon WorkSpacesとは
+
+AWS上に、社員や利用者向けの仮想PCを用意するサービスです。
+
+Amazon WorkSpaces
+= AWS管理型の仮想デスクトップサービス
+どう使うか
+
+管理者はAWSコンソールからWorkSpaceを作成します。
+
+管理者
+↓
+AWSコンソール
+↓
+WorkSpacesを作成
+
+利用者は、AWSコンソールを経由せずに接続します。
+
+利用者
+↓
+WorkSpacesクライアント
+または対応ブラウザ
+↓
+自分専用の仮想デスクトップ
+仮想PCの中でできること
+
+通常のPCに近い作業ができます。
+
+ブラウザを使う
+業務アプリを使う
+ファイルを保存する
+資料を作る
+開発ツールを使う
+
+権限があれば、WorkSpace内のブラウザやAWS CLIからEC2などのAWSサービスを操作することもできます。
+
+EC2との違い
+EC2
+= 汎用的な仮想サーバー
+
+WorkSpaces
+= 人が直接操作する仮想PC
+
+WorkSpacesは、自分で以前作ったEC2へ入るサービスではありません。
+
+AWSアカウント
+├── EC2
+│   └── Webサーバーなど
+│
+└── WorkSpaces
+    └── 社員用の仮想PC
+VirtualBoxとの違い
+VirtualBox
+= 手元のPCのCPU・メモリを使う仮想PC
+
+WorkSpaces
+= AWS側のCPU・メモリ・ストレージを使う仮想PC
+
+ただし、WorkSpacesはVirtualBoxほど自由ではありません。
+
+VirtualBox
+= 好きなOSを自由に入れやすい
+
+WorkSpaces
+= AWSが用意したOS・スペックの候補から選ぶ
+WorkSpaces Personal
+
+基本は、1人につき1台の専用仮想PCです。
+
+WorkSpaces Personal
+├── alice専用WorkSpace
+├── bob専用WorkSpace
+└── carol専用WorkSpace
+
+ファイルや設定を保持できます。
