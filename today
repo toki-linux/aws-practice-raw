@@ -158,3 +158,20 @@ AWS
 必要に応じてメタデータを取得して利用する
 
 と考えるのが正確です。
+
+Amazon Inspector
+Amazon Inspector
+= EC2インスタンスなどを継続的にスキャンし、
+  ソフトウェアの脆弱性や意図しないネットワーク公開を検出するサービス
+Patch Managerとの違い
+
+似たサービスとして、AWS Systems Manager Patch Manager があります。
+
+Amazon Inspector
+= 脆弱性を見つける
+
+Patch Manager
+= パッチを適用する
+サービス	役割
+Amazon Inspector	脆弱性やネットワーク公開を継続的に検出する
+Systems Manager Patch Manager	OSやアプリへセキュリティ更新などのパッチを適用する
