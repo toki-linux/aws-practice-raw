@@ -77,4 +77,10 @@ AD
 └── 営業用共有フォルダへアクセス可能
 
 のように管理できます。
+これのAWS版がAWS Directory Serviceというサービス
+主に３種類ある
+1.AWS Managed Microsoft AD＝AWS内に本格的なADを作る。高可用性でマネージドなサービス
+2.AD Connector=すでに存在するオンプレミス環境のADとAWS内にあるADを繋ぐ中継役
+3.Simple AD=簡易的なADなサービス
+
 
