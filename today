@@ -1,2 +1,13 @@
 AWS SDKとは？
 AWS SDKとはSoftware Development Kitの略で、ソフトウェアの開発の組み立てセット
+一言でまとめる
+AWS SDK
+= 自作アプリの中からAWSサービスを操作するためのライブラリ集
+
+たとえば、
+
+PythonアプリからS3へ保存する
+JavaScriptアプリからDynamoDBへ書き込む
+JavaアプリからSQSへメッセージを送る
+
+といった処理を実装しやすくする道具です
