@@ -83,4 +83,32 @@ AD
 2.AD Connector=すでに存在するオンプレミス環境のADとAWS内にあるADを繋ぐ中継役
 3.Simple AD=簡易的なADなサービス
 
+WorkSpacesへログインするときの流れ
+
+たとえば、aliceが自分のWorkSpaceへログインするとします。
+
+alice
+↓
+WorkSpacesクライアントで
+ユーザー名・パスワードを入力
+↓
+Amazon WorkSpaces
+↓
+Directory Service経由でADへ問い合わせ
+↓
+ADが認証情報を確認
+↓
+正しければログイン許可
+↓
+alice専用WorkSpaceへ接続
+
+つまり、
+
+WorkSpaces
+= ログイン画面や仮想デスクトップ接続を担当する
+
+AD
+= 入力されたユーザーが本当にaliceか確認する
+
+という役割分担です。
 
