@@ -118,4 +118,22 @@ WorkSpacesがADの情報を見て、自力でログイン認証する
 WorkSpacesがADへ認証を依頼し、ADが本人確認を行う
 
 と考えるのが近いです。
-
+イメージ図
+AWS
+└── AWSアカウント
+    │
+    ├── IAM
+    │   └── IAMユーザー：toki-admin
+    │       └── AWSサービスを設定する管理者
+    │
+    └── VPC
+        │
+        ├── AWS Directory Serviceで作成した
+        │   AWS Managed Microsoft AD
+        │   ├── ADユーザー：alice
+        │   ├── ADユーザー：bob
+        │   └── ADグループ：開発部
+        │
+        └── Amazon WorkSpaces Personal
+            ├── alice専用WorkSpace
+            └── bob専用WorkSpace
