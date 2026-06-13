@@ -40,3 +40,89 @@ AWS Glue
 
 です。
 データ加工をしてくれる
+AWS Glueの代表的な3つの要素
+
+クラウドプラクティショナー試験では、まず次の3つを押さえるとよいです。
+
+AWS Glue
+├── Crawler
+├── Data Catalog
+└── ETL Job
+1. Crawler
+
+データを調べる係です。
+
+Crawler
+= データの保存場所を巡回し、
+  どんなデータがあるか確認する
+
+たとえば、S3にあるCSVをCrawlerに調べさせます。
+
+S3
+└── sales.csv
+
+Crawler
+↓
+ファイルを調べる
+↓
+列名、データ型、保存場所を把握する
+
+AWS Glue Crawlerは、データストアを調べて、Data Catalogへテーブル情報を作成・更新できます。
+
+2. Data Catalog
+
+データの目録です。
+
+Data Catalog
+= どこに、どんなデータがあるか記録する台帳
+
+たとえば、
+
+Data Catalog
+└── 売上データ
+    ├── 保存場所：s3://example-bucket/sales/
+    ├── 形式：CSV
+    ├── 列：product_name
+    ├── 列：price
+    └── 列：date
+
+という情報を記録します。
+
+AWS Glue Data Catalogは、データセットの場所やスキーマなどのメタデータを保存する中央リポジトリです。
+
+3. ETL Job
+
+実際にデータを加工する処理です。
+
+ETL Job
+= データを読み込み、
+  整形・変換し、
+  別の場所へ保存する
+
+たとえば、
+
+S3のCSV
+↓
+ETL Job
+↓
+不要な列を削除
+日付形式を統一
+合計金額を計算
+↓
+加工後のデータを別のS3へ保存
+図でまとめる
+S3、RDSなど
+↓
+Crawler
+↓
+データの形式や保存場所を調査
+↓
+Data Catalog
+↓
+データの目録を作る
+↓
+ETL Job
+↓
+データを加工する
+↓
+S3、Redshiftなどへ保存
