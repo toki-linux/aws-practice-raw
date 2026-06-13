@@ -144,3 +144,5 @@ ETL Job
 AWS Glue
 = バラバラなデータを見つけて、
   分析しやすい形に整えるサーバーレスサービス
+
+Amazon Redshiftとは？
