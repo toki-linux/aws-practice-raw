@@ -1,1 +1,5 @@
 AWS KMSとは？
+AWS KMS（Key Management Service）
+= 暗号鍵を安全に作成・保管し、
+  誰が使えるかを制御し、
+  AWSサービスから利用できるようにするサービス
