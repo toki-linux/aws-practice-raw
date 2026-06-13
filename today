@@ -162,4 +162,12 @@ Athenaとの違い
 Athenaは手軽にSQLで分析したいとき
 Redshiftは本格的にやりたいとき
 
+よくある比較
+| サービス              | 一言でいうと          |
+| ----------------- | --------------- |
+| Amazon RDS        | 日々の業務処理向けDB     |
+| Amazon Redshift   | 大量データ分析向けDB     |
+| Amazon Athena     | S3のデータを手軽にSQL検索 |
+| AWS Glue          | データを整理・加工する     |
+| Amazon QuickSight | 分析結果をグラフで見せる    |
 
