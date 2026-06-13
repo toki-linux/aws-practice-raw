@@ -1,2 +1,37 @@
 AWS ServiceCatalogとは？
+AWS構成のメニュー表
 AWSコンソールから自由に作るのではなく、あらかじめルールが定められている、サービスを選んで使う
+レストランで考える
+
+Service Catalogは、AWSの自由注文ではなく、会社が作ったメニュー表です。
+
+Service Catalogなし
+開発者
+「EC2を好きなサイズで作る」
+「SGも自分で決める」
+「暗号化も自分で判断する」
+
+自由ですが、ミスが起きやすいです。
+
+Service Catalogあり
+メニュー
+├── 小規模Webサーバー
+├── 開発用RDS
+├── 暗号化済みS3バケット
+└── 標準VPC構成
+
+開発者はメニューから選ぶだけです。
+
+開発者
+↓
+小規模Webサーバーを選択
+↓
+会社標準の設定でEC2が作成される
+
+中身はCloudFormationテンプレート
+
+Service Catalogで提供する構成は、多くの場合 CloudFormationテンプレート をもとにします。
+
+CloudFormationテンプレート
+= AWS構成をコードで書いた設計図
+IaCともいう
