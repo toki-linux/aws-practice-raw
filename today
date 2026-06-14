@@ -156,3 +156,89 @@ AWS Device Farm とは？
 AWS AppSyncとは？
 
 アプリケーションからデータを取りに行ったり、更新したり、リアルタイム通知を受け取ったりするためのAPIを作るサービスです。
+
+
+
+
+REST APIとは
+
+REST API は、URLごとに「何をしたいか」を分けるAPIの作り方です。
+
+たとえばECサイトなら、
+
+商品一覧を取得したい
+→ GET /products
+
+商品ID 100 の詳細を取得したい
+→ GET /products/100
+
+商品を追加したい
+→ POST /products
+
+商品を更新したい
+→ PUT /products/100
+
+商品を削除したい
+→ DELETE /products/100
+
+という感じです。
+
+つまり、
+
+REST API
+= URLとHTTPメソッドで操作を分けるAPI
+
+です。
+
+
+
+GraphQL APIとは
+
+GraphQL API は、アプリ側が「欲しいデータの形」を指定して取りに行けるAPIです。
+
+REST APIでは、用途ごとに複数のURLを作ることが多いです。
+
+GET /users/123
+GET /users/123/orders
+GET /orders/999/shipping
+
+GraphQLでは、基本的に1つの入口に対して、
+
+ユーザー名と注文履歴と配送状況だけください
+
+のように問い合わせます。
+
+例：
+
+query {
+  user(id: "123") {
+    name
+    orders {
+      id
+      total
+      shippingStatus
+    }
+  }
+}
+
+返ってくるデータも、指定した形に近くなります。
+
+{
+  "user": {
+    "name": "Taro",
+    "orders": [
+      {
+        "id": "999",
+        "total": 3000,
+        "shippingStatus": "shipped"
+      }
+    ]
+  }
+}
+
+つまり、
+
+GraphQL API
+= 欲しいデータをアプリ側が指定できるAPI
+
+です。
