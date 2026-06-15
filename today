@@ -124,4 +124,37 @@ MigrationのMGNと考えれば良い
 AMSではダメなのか？
 AMSはすでにAWS Managed Servicesが使っており、混ざるのでAWS MGNになったと考えられる
 
+AWS Transfer Familyとは？
+AWS Transfer Family は、一言でいうと、
+
+SFTP / FTPS / FTP を使って、
+外部の人やシステムとAWSストレージ間でファイル転送するサービス
+
+です。
+まず何をするサービス？
+
+たとえば会社で、
+
+取引先が毎日CSVファイルをSFTPで送ってくる
+
+という運用があるとします。
+
+昔なら、自社でSFTPサーバを立てて管理します。
+
+取引先
+↓ SFTP
+自社SFTPサーバ
+↓
+ファイル保存
+
+AWS Transfer Familyを使うと、AWS側でSFTP/FTPS/FTPの受け口を用意できます。
+
+取引先
+↓ SFTP / FTPS / FTP
+AWS Transfer Family
+↓
+S3 または EFS
+
+つまり、SFTPサーバっぽい入口をAWSがマネージドで用意してくれるサービス
+
 
