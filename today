@@ -21,3 +21,13 @@ Trail＝足跡
 CloudWatch
 = メトリクス・ログ監視
 Warch＝みる
+
+AWS CAFとは？
+AWS CAFはAWS Cloud Adoption Framework
+（AWS クラウド導入フレームワーク）の略
+一言でいうと、
+
+会社がAWSを導入するときに、何を考えればよいかを整理したガイド
+
+です。
+クラウド導入する時に使うチェックリストがAWSCAF
