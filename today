@@ -78,3 +78,12 @@ AWS CAF
 
 AWS Well-Architected Framework
 → AWS上に作ったシステムを良い設計にするための指針
+
+AWS Storage Gatewayとは？
+AWS Storage Gateway
+= オンプレミス環境からAWSのストレージを使うための橋渡しサービス
+
+です。
+
+会社の中にあるサーバやアプリから見ると、
+いつものファイルサーバ・ディスク・テープ装置のように見えるけど、裏側ではAWSのストレージに保存できる、というサービスです。
