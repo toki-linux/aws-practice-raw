@@ -71,3 +71,10 @@ AWSにすると本当にコスト削減になるの？
 と考えます。
 
 このように、AWS導入を 技術だけでなく会社全体で整理する枠組み が AWS CAF です。
+
+AWSCAFと、AWS Well-Architected Frameworkの違い
+AWS CAF
+→ 会社がクラウドを導入するための全体方針
+
+AWS Well-Architected Framework
+→ AWS上に作ったシステムを良い設計にするための指針
