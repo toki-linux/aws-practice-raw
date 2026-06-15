@@ -119,3 +119,9 @@ Tape Gateway
 | S3               | オブジェクトストレージ本体        |
 | FSx              | ファイルサーバ本体            |
 
+AWS Application Migration Serviceって何で略がMGNなの？
+MigrationのMGNと考えれば良い
+AMSではダメなのか？
+AMSはすでにAWS Managed Servicesが使っており、混ざるのでAWS MGNになったと考えられる
+
+
