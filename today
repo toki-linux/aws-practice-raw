@@ -1,1 +1,23 @@
 検出サービス系のサービス名と働きの覚え方
+GuardDuty
+= 不審な動き検出
+Guard＝守護、警備員
+Inspector
+= 脆弱性検出
+Inspector＝検査官
+Macie
+= S3内の機密データ検出
+名前から連想は無理
+Macie＝S3バケット内の機密データ
+IAM Access Analyzer
+= 外部公開・過剰権限検出
+Access Analyzer=アクセス分析官
+AWS Config
+= 設定違反検出
+Config=設定
+CloudTrail
+= 操作履歴の記録
+Trail＝足跡
+CloudWatch
+= メトリクス・ログ監視
+Warch＝みる
