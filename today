@@ -121,3 +121,35 @@ AWS Compute Optimizer
 Optimizer=最適化
 使用状況モニタリングして機械学習ベースの分析により適切なサイズを推奨する
 EC2インスタンス、EBSボリューム、Fargateコンテナ、Lambda関数が対象
+
+サポートプランの見分け方
+一番大事な見分け
+技術サポートが必要？
+No → Basic
+
+開発・検証？
+Yes → Developer
+
+本番環境？
+Yes → Business
+
+TAMが必要？
+Yes → Enterprise
+最短暗記
+Basic
+= 無料。請求・アカウント中心。
+
+Developer
+= 開発者向け。技術質問できる。
+
+Business
+= 本番向け。24/7サポート、Trusted Advisor全チェック。
+
+Enterprise
+= 大企業向け。TAMが付く。
+
+TAMは、ざっくり言うと、
+
+AWS側の担当者・相談役
+
+です。
