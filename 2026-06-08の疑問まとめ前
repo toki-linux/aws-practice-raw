@@ -1,5 +1,861 @@
-CloudWatchのAWS側から見える見えないの判断と考え方
-一言で覚える
+
+# AWS Agent・データベースソフト・専有EC2・割引プランの整理
+
+## 概要
+
+このファイルでは、以下の内容を整理する。
+
+```text
+CloudWatchの標準メトリクスとカスタムメトリクス
+AWS側から見える情報・見えない情報
+Agentとは何か
+SSM Agent
+CloudWatch Agent
+
+MySQLとは何か
+RDS・MySQL・Database・Tableの関係
+
+Dedicated Hosts
+Dedicated Instances
+Compute Savings Plans
+Reserved Instances
+```
+
+---
+
+# CloudWatchで「AWS側から見えるもの」とは？
+
+## 概要
+
+CloudWatchの標準メトリクスを理解するときは、次のように考えると整理しやすい。
+
+```text
+AWS側から見えるもの
+→ EC2の外側から観測できるもの
+
+AWS側から標準では見えないもの
+→ EC2内部のOSを確認しないと分からないもの
+```
+
+---
+
+## AWS側から見えるもの
+
+AWS側から見えるものは、EC2の外側から観測できる情報。
+
+代表例は以下。
+
+```text
+CPU使用時間
+ネットワーク通信量
+EC2の起動状態
+EC2のステータスチェック
+```
+
+---
+
+## AWS側から標準では見えないもの
+
+EC2内部のOSを確認しないと分からない情報は、標準メトリクスには含まれないことがある。
+
+代表例は以下。
+
+```text
+メモリ使用率
+ディスク空き容量
+プロセスの稼働状態
+nginxのログ
+アプリケーション独自のエラー数
+```
+
+---
+
+# CPU使用率はなぜ標準で見えるのか？
+
+## 考え方
+
+CPUは、AWS側の仮想化基盤がEC2へ処理時間を割り当てている。
+
+```text
+AWS基盤
+↓
+EC2へCPU処理時間を割り当てる
+↓
+どれくらい使われたか観測できる
+```
+
+そのため、CPU使用率はEC2の外側からでも観測しやすい。
+
+---
+
+## 例え
+
+CPUは、レンタル会議室の利用時間に近い。
+
+```text
+AWS
+→ 会議室を貸す側
+
+EC2
+→ 会議室を使う側
+```
+
+AWS側は、会議室を何時間使ったかを数えられる。
+
+---
+
+# ネットワーク通信量はなぜ標準で見えるのか？
+
+## 考え方
+
+EC2の通信は、AWS側のネットワークやENIを通る。
+
+```text
+インターネット
+↓
+AWSネットワーク
+↓
+ENI
+↓
+EC2
+```
+
+EC2から出る通信も同じ。
+
+```text
+EC2
+↓
+ENI
+↓
+AWSネットワーク
+↓
+接続先
+```
+
+通信がAWS側のネットワークを通るため、通信量を観測できる。
+
+---
+
+## 例え
+
+ネットワーク通信量は、高速道路の料金所に近い。
+
+```text
+料金所
+→ 車が何台通ったか数えられる
+```
+
+車の中で何を話しているかまでは分からなくても、通過した量は分かる。
+
+---
+
+# メモリ使用率はなぜ標準では見えないのか？
+
+## 考え方
+
+AWS側は、EC2へメモリ容量を割り当てたことは分かる。
+
+しかし、そのメモリをOS内部でどのように使っているかは、EC2の中へ入らないと分からない。
+
+```text
+AWS側
+→ EC2へ何GBのメモリを渡したか分かる
+
+EC2内部のOS
+→ そのメモリを何に使っているか管理する
+```
+
+---
+
+## OS内部で管理しているもの
+
+メモリは、EC2内部のOSによってさまざまな用途に使われる。
+
+```text
+nginxが使用中
+Pythonアプリが使用中
+MySQLが使用中
+OSが使用中
+キャッシュとして使用中
+空き領域
+```
+
+この内訳は、OS内部を確認しないと分からない。
+
+---
+
+## 例え
+
+メモリは、貸した部屋の中の使い方に近い。
+
+```text
+AWS
+→ 10畳の部屋を貸した
+
+EC2内部のOS
+→ 机を置いた
+→ 本棚を置いた
+→ 荷物を置いた
+→ 空きスペースを管理した
+```
+
+大家であるAWSは、10畳の部屋を貸したことは分かる。
+
+しかし、部屋の中に何を置き、どれくらい空いているかは、外側から見ただけでは分からない。
+
+---
+
+# CloudWatch Agentとは？
+
+## 概要
+
+CloudWatch Agentは、EC2内部の情報を集めてCloudWatchへ送るためのソフトウェア。
+
+```text
+CloudWatch Agent
+=
+EC2内部を確認し、
+追加情報をCloudWatchへ報告するプログラム
+```
+
+---
+
+## 何を送れるのか？
+
+CloudWatch Agentを使うと、標準メトリクスだけでは見えない情報をCloudWatchへ送れる。
+
+```text
+メモリ使用率
+ディスク使用率
+ログファイル
+追加のシステムメトリクス
+```
+
+---
+
+## イメージ
+
+```text
+EC2内部
+├── メモリ使用率
+├── ディスク使用率
+└── ログファイル
+    ↓
+CloudWatch Agent
+    ↓
+CloudWatch
+```
+
+---
+
+# 標準メトリクスとカスタムメトリクス
+
+## 標準メトリクス
+
+AWSサービスが最初から提供している監視データ。
+
+```text
+標準メトリクス
+=
+AWS側が自動で収集・提供する基本的な監視データ
+```
+
+EC2の例。
+
+```text
+CPU使用率
+ネットワーク通信量
+ステータスチェック
+```
+
+---
+
+## カスタムメトリクス
+
+利用者が追加でCloudWatchへ送る監視データ。
+
+```text
+カスタムメトリクス
+=
+利用者が自分で追加する監視データ
+```
+
+例。
+
+```text
+メモリ使用率
+ディスク使用率
+アプリの注文数
+ログイン回数
+独自エラー数
+```
+
+---
+
+## 比較
+
+| 種類 | 誰が用意するか | 例 |
+|---|---|---|
+| 標準メトリクス | AWSサービス側 | CPU使用率、ネットワーク通信量 |
+| カスタムメトリクス | 利用者側 | メモリ使用率、注文数、独自エラー数 |
+
+---
+
+# Agentとは？
+
+## 概要
+
+Agentは、一言でいうと、EC2などの中で動く小さな連絡用プログラム。
+
+```text
+Agent
+=
+AWSサービスと通信するために
+EC2の中で動いている小さなプログラム
+```
+
+---
+
+## イメージ
+
+```text
+Agent
+=
+EC2の中にいるAWSの連絡員
+```
+
+AWS側のサービスとEC2内部をつなぐ役割を持つ。
+
+---
+
+## なぜAgentが必要なのか？
+
+AWS側からEC2の外側を見ただけでは、EC2内部の細かな状態までは分からない。
+
+そこで、EC2内にAgentを入れて、内部情報を取得したり、AWSからの指示を処理したりする。
+
+```text
+AWSサービス
+↓
+Agent
+↓
+EC2内部の情報を確認・処理
+```
+
+---
+
+# SSM Agentとは？
+
+## 概要
+
+SSM Agentは、AWS Systems Managerと連携するためにEC2内で動くソフトウェア。
+
+```text
+SSM Agent
+=
+Systems ManagerとEC2をつなぐ連絡員
+```
+
+---
+
+## 何をするのか？
+
+SSM Agentは、AWS Systems Managerからのリクエストを処理し、EC2内で指定された処理を実行する。
+
+```text
+AWS Systems Manager
+↓
+「コマンドを実行して」
+↓
+SSM Agent
+↓
+EC2内部でコマンドを実行
+```
+
+---
+
+## Session Managerとの関係
+
+Session ManagerでPrivate EC2へ接続するときにも、SSM Agentが重要になる。
+
+```text
+自分
+↓
+Session Manager
+↓
+AWS Systems Manager
+↓
+SSM Agent
+↓
+Private EC2
+```
+
+SSM AgentがEC2内で動いているから、SSHなしでEC2を操作できる。
+
+---
+
+# CloudWatch Agentとは？
+
+## 概要
+
+CloudWatch Agentは、CloudWatchへメトリクスやログを送るためのAgent。
+
+```text
+CloudWatch Agent
+=
+EC2内部のメトリクスやログを
+CloudWatchへ送る連絡員
+```
+
+---
+
+## 例
+
+```text
+EC2内部のログ
+↓
+CloudWatch Agent
+↓
+CloudWatch Logsへ送信
+```
+
+```text
+EC2内部のメモリ使用率
+↓
+CloudWatch Agent
+↓
+CloudWatch Metricsへ送信
+```
+
+---
+
+# SSM AgentとCloudWatch Agentの違い
+
+| Agent | 主な役割 |
+|---|---|
+| SSM Agent | Systems Managerからの指示をEC2内で実行する |
+| CloudWatch Agent | EC2内部のメトリクスやログをCloudWatchへ送る |
+
+---
+
+## 例え
+
+```text
+SSM Agent
+→ AWS本部からの作業指示を受けて、EC2内で実行する作業員
+
+CloudWatch Agent
+→ EC2内の状態を確認して、CloudWatchへ報告する観測員
+```
+
+---
+
+# MySQLとは？
+
+## 概要
+
+MySQLは、データベースサービスではなく、データベースソフトウェア。
+
+より正確には、リレーショナルデータベースエンジン。
+
+```text
+MySQL
+=
+データベースソフトウェア
+=
+データベースエンジン
+```
+
+---
+
+## EC2・RDS・MySQLの違い
+
+```text
+EC2
+→ サーバ
+
+RDS
+→ データベースを簡単に運用するためのAWSサービス
+
+MySQL
+→ データベースソフトウェア・データベースエンジン
+
+Database
+→ 実際のデータの入れ物
+```
+
+---
+
+# MySQLはどこにあるのか？
+
+## EC2にインストールする場合
+
+EC2へMySQLをインストールすれば、EC2の中でMySQLが動く。
+
+```text
+EC2
+├── Linux
+├── nginx
+└── MySQL
+```
+
+この場合、自分でMySQLのインストールや運用を行う。
+
+```text
+EC2
+→ 自分で管理するサーバ
+
+MySQL
+→ EC2内で動くDBソフトウェア
+```
+
+---
+
+## RDSでMySQLを使う場合
+
+RDS for MySQLを作成すると、AWSが管理する環境でMySQLが動く。
+
+```text
+Amazon RDS
+↓
+MySQLエンジン
+↓
+Database
+↓
+Table
+```
+
+この場合、自分でOSへMySQLをインストールするわけではない。
+
+AWSがRDSサービスとして、MySQLの実行環境を管理してくれる。
+
+---
+
+# RDS・MySQL・Database・Tableの階層
+
+## イメージ
+
+```text
+Amazon RDS
+↓
+MySQL
+↓
+Database
+↓
+Table
+↓
+Row
+```
+
+---
+
+## それぞれの意味
+
+```text
+Amazon RDS
+→ データベースを作成・運用するためのAWSサービス
+
+MySQL
+→ RDSの中で選べるデータベースエンジン
+
+Database
+→ データの入れ物
+
+Table
+→ データを入れる表
+
+Row
+→ 表の中の1件分のデータ
+```
+
+---
+
+# nginxとMySQLは同じソフトウェアの仲間
+
+## 考え方
+
+nginxとMySQLは、どちらもソフトウェア。
+
+```text
+nginx
+→ Webサーバソフトウェア
+
+MySQL
+→ データベースサーバソフトウェア
+
+SSM Agent
+→ AWS連携用ソフトウェア
+
+CloudWatch Agent
+→ 監視データ送信用ソフトウェア
+```
+
+---
+
+## EC2にインストールできる
+
+EC2はサーバなので、さまざまなソフトウェアをインストールできる。
+
+```text
+EC2
+├── nginx
+├── MySQL
+├── SSM Agent
+└── CloudWatch Agent
+```
+
+---
+
+# Dedicated Hostsとは？
+
+## 概要
+
+Dedicated Hostsは、自分専用の物理サーバーをAWS上で借りる仕組み。
+
+```text
+Dedicated Hosts
+=
+自分専用の物理サーバーをAWS上で確保する仕組み
+```
+
+---
+
+## 通常のEC2
+
+通常のEC2では、裏側の物理サーバーを複数ユーザーで共有している場合がある。
+
+```text
+AWSの物理サーバー
+├── A社のEC2
+├── B社のEC2
+└── 自分のEC2
+```
+
+---
+
+## Dedicated Hosts
+
+Dedicated Hostsでは、物理サーバーそのものを自分専用として確保する。
+
+```text
+AWSの物理サーバー
+└── 自分のEC2だけ
+```
+
+---
+
+## なぜ使うのか？
+
+主な理由は以下。
+
+```text
+ライセンス要件
+コンプライアンス要件
+物理サーバー単位で管理したい
+ソケット数・コア数を意識したい
+BYOLを使いたい
+```
+
+BYOLは、`Bring Your Own License` の略。
+
+既に持っているソフトウェアライセンスをAWS上で利用する考え方。
+
+---
+
+# Dedicated Instancesとは？
+
+## 概要
+
+Dedicated Instancesは、他社のインスタンスと同じ物理ホストを共有しないEC2。
+
+```text
+Dedicated Instances
+=
+他社と同じ物理サーバーには乗らないEC2
+```
+
+---
+
+## 重要なポイント
+
+Dedicated Instancesは、他社のEC2とは物理的に分離される。
+
+ただし、Dedicated Hostsほど物理サーバー単位の細かい管理や配置制御はしない。
+
+```text
+Dedicated Instances
+→ 他社と物理ホストを共有しない
+
+Dedicated Hosts
+→ 物理ホストそのものを自分で確保・管理しやすい
+```
+
+---
+
+# Dedicated HostsとDedicated Instancesの違い
+
+## 似ている点
+
+どちらも、他社と同じ物理ホストを共有しないための選択肢。
+
+```text
+共通点
+→ 他社と物理ホストを共有しない
+```
+
+---
+
+## 違う点
+
+違いは、物理サーバーそのものをどれだけ意識して管理するか。
+
+| 項目 | Dedicated Instances | Dedicated Hosts |
+|---|---|---|
+| 何を専有するイメージか | EC2インスタンスの実行環境 | 物理サーバーそのもの |
+| 物理ホストの配置制御 | 限定的 | しやすい |
+| ライセンス管理 | Dedicated Hostsより限定的 | BYOLやソケット・コア単位管理に向く |
+| 覚え方 | 専用環境で動くEC2 | 物理サーバーを貸し切る |
+
+---
+
+## ホテルで例える
+
+### Dedicated Instances
+
+```text
+Dedicated Instances
+=
+個室ホテルに泊まる
+```
+
+他人と同じ部屋にはならない。
+
+ただし、どの建物のどの部屋になるかは、ホテル側が決める部分が大きい。
+
+---
+
+### Dedicated Hosts
+
+```text
+Dedicated Hosts
+=
+ホテル1棟を貸し切る
+```
+
+建物そのものが自分専用。
+
+どの部屋に誰を入れるかも管理しやすい。
+
+---
+
+## 一言で覚える
+
+```text
+Dedicated Instances
+→ 専用EC2がほしい
+
+Dedicated Hosts
+→ 専用の物理サーバーそのものがほしい
+```
+
+---
+
+# Compute Savings Plansとは？
+
+## 概要
+
+Compute Savings Plansは、EC2、Fargate、Lambdaなどのコンピューティング料金を安くするための割引プラン。
+
+```text
+Compute Savings Plans
+=
+Computeを長く使う約束をして安くするプラン
+```
+
+---
+
+## 基本の考え方
+
+一定期間、一定額のコンピューティング使用を約束する代わりに、料金が割引される。
+
+```text
+1年または3年
+↓
+毎時間これくらい使いますと約束
+↓
+対象のCompute料金が割引される
+```
+
+---
+
+## 例え
+
+通常のオンデマンド料金は、ジムの都度払いに近い。
+
+```text
+使った分だけ払う
+```
+
+Compute Savings Plansは、ジムの月額会員に近い。
+
+```text
+継続利用を約束する
+↓
+その代わり単価が安くなる
+```
+
+---
+
+## 対象サービス
+
+Compute Savings Plansは、主に以下に適用される。
+
+```text
+Amazon EC2
+AWS Fargate
+AWS Lambda
+```
+
+---
+
+# Reserved Instancesとは？
+
+## 概要
+
+Reserved Instancesは、主にEC2の利用を長期的に予約して割引を受ける仕組み。
+
+```text
+Reserved Instances
+=
+EC2を長期利用する前提で割引を受ける仕組み
+```
+
+---
+
+## Savings Plansとの違い
+
+| 項目 | Reserved Instances | Compute Savings Plans |
+|---|---|---|
+| 主な対象 | EC2中心 | EC2、Fargate、Lambda |
+| 柔軟性 | 条件が比較的固定される | より柔軟 |
+| 考え方 | 特定条件のEC2利用を予約 | Compute利用額をコミット |
+| 覚え方 | EC2を予約して安くする | Computeを長く使う約束で安くする |
+
+---
+
+## Compute Savings Plansが向く場面
+
+```text
+EC2だけでなくFargateやLambdaも使う
+リージョンやインスタンスファミリーをまたいで柔軟に割引を受けたい
+長期的にCompute利用が見込める
+```
+
+---
+
+# 全体のまとめ
+
+```text
 AWS側から見えるもの
 → EC2の外側から観測できるもの
 → CPU使用時間、ネットワーク通信量、EC2の状態など
@@ -11,203 +867,41 @@ AWS側から標準では見えないもの
 CloudWatch Agent
 → EC2内部を確認し、追加情報をCloudWatchへ報告する
 
-CPUは「EC2へどれくらい処理時間を貸したか」をAWS側で数えられる。
-メモリは「貸した部屋の中をOSがどう使っているか」を確認しないと分からない。
-
-cloudwatchagent やssmagentなど、agentというのは何？EC2インスタンスの中に存在しているイメージだけど
-Agent（エージェント）は一言でいうと、
-
-「AWSサービスと通信するためにEC2の中で動いている小さなプログラム」
-
-です
-イメージ
-
-Agentは、
-
-EC2の中にいるAWSの連絡員
-
-みたいなもの。
+Agent
+→ EC2の中で動くAWSサービスとの連絡員
 
 SSM Agent
-
-AWS本部
-↓
-「コマンド実行して」
-↓
-SSM Agent
-↓
-EC2で実行
+→ Systems Managerからの指示をEC2内で実行する
 
 CloudWatch Agent
+→ EC2内部のメトリクスやログをCloudWatchへ送る
 
-EC2のログ
-↓
-CloudWatch Agent
-↓
-CloudWatchへ送信
+MySQL
+→ データベースサービスではなくデータベースソフトウェア・エンジン
 
-mysqlはデータベースサービスだよね？EC2の中にあるの？データベースの中ではなく？
-結論から言うと、
-
-MySQLは「データベースサービス」ではなく「データベースソフトウェア（データベースエンジン）」です。
 EC2
-= サーバ
+→ サーバ
 
 RDS
-= DBサービス
-
-MySQL
-= DBソフトウェア（DBエンジン）
+→ データベースを簡単に運用するAWSサービス
 
 Database
-= 実際のデータの入れ物
-図にすると、
+→ 実際のデータの入れ物
 
-RDS
-↓
-MySQL
-↓
-Database
-↓
 Table
-↓
-Row
-nginxとMySQLは同じ「ソフトウェア」の仲間だと思うと理解しやすいですよ。
+→ データを入れる表
 
-nginx
-→ Webサーバソフト
-
-MySQL
-→ DBサーバソフト
-
-SSM Agent
-→ AWS連携ソフト
-
-全部EC2の中にインストールできるプログラムです。
-Dedicated Hostsとは？
-Dedicated Hosts は、一言でいうと
-
-自分専用の物理サーバをAWS上で借りる仕組みです。
-
-通常のEC2は、
-
-AWSの物理サーバ
-├─ A社のEC2
-├─ B社のEC2
-└─ 自分のEC2
-
-みたいに、裏側では複数ユーザーで物理サーバを共有していることがあります。
-
-Dedicated Hosts はこう。
-
-AWSの物理サーバ
-└─ 自分のEC2だけ
-なぜ使う？
-
-主に理由はこのあたり。
-
-ライセンス要件
-コンプライアンス要件
-物理サーバ単位で管理したい
-Dedicated Instanceとの違い
-
-ざっくりでOK。
-
-Dedicated Instance
-→ 他社と物理ホストを共有しないEC2
-
-Dedicated Host
-→ 物理サーバそのものを自分専用で確保し、配置も管理しやすい
-
-試験ではこれで十分。
+Dedicated Instances
+→ 他社と同じ物理サーバーには乗らないEC2
 
 Dedicated Hosts
-= 自分専用の物理サーバ
-= ライセンス持ち込みやコンプライアンス向け
-= 通常EC2より特殊用途
+→ 物理サーバーそのものを自分専用で確保する
 
-Dedicated Instance
-→ 他社と物理ホストを共有しないEC2
+Compute Savings Plans
+→ EC2・Fargate・LambdaなどのCompute利用を長く使う約束で安くする
 
-Dedicated Host
-→ 物理サーバそのものを自分専用で確保し、配置も管理しやすい
-これって言っていること同じではないの？
-Dedicated Instance
-= 「他社と同じ物理サーバには乗らないEC2」
-
-Dedicated Host
-= 「この物理サーバ1台を自分専用で借りる」
-例えると
-Dedicated Instance
-個室ホテルに泊まる
-
-他人とは同じ部屋にならない。
-でも、どの建物のどの部屋かはホテル側が決める。
-
-Dedicated Host
-ホテル1棟を貸し切る
-
-建物そのものが自分専用。
-どの部屋に誰を入れるかも管理しやすい。
-
-Dedicated Instance
-→ 分離したEC2がほしい
-
-Dedicated Host
-→ 物理サーバ単位で管理したい
-→ ライセンス持ち込み要件がある
-→ ソケット数・コア数を意識したい
-
-なので、
-
-「専用EC2」なら Dedicated Instance
-「専用の物理サーバそのもの」なら Dedicated Host
-
-で覚えればOKです。
-Compute Saving Plansとは？
-Compute Savings Plans は、
-
-EC2 / Fargate / Lambda などのコンピューティング料金を安くするための割引プランです。
-
-ざっくり言うと、
-
-毎月・毎時間これくらい使います
-と約束する代わりに
-料金を割引してもらう
-
-仕組みです。
-例えると
-
-通常のEC2料金は、
-
-使った分だけ払う通常料金
-
-です。
-
-Compute Savings Plansは、
-
-ジムの都度払いではなく
-月額会員になる代わりに安くなる
-
-感じ。
-
-EC2 Reserved Instancesとの違い
 Reserved Instances
-→ EC2中心。条件がやや固定される
+→ EC2を長期利用する前提で割引を受ける
+```
 
-Compute Savings Plans
-→ EC2 / Fargate / Lambda にまたがって柔軟に割引
 
-Compute Savings Plans
-= 1年または3年の利用コミットでコンピューティング料金を割引
-
-対象
-= EC2 / Fargate / Lambda
-
-特徴
-= RIより柔軟
-= 長期利用が見込めるワークロード向け
-
-覚え方は、
-
-Computeを長く使う約束をして安くするプラン
