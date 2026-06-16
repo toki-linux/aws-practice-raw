@@ -116,3 +116,8 @@ S3 Glacier Flexible Retrieval
 
 S3 Glacier Deep Archive
 → 超長期保管・ほぼ取り出さない
+
+AWS Compute Optimizer
+Optimizer=最適化
+使用状況モニタリングして機械学習ベースの分析により適切なサイズを推奨する
+EC2インスタンス、EBSボリューム、Fargateコンテナ、Lambda関数が対象
