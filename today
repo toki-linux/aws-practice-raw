@@ -93,3 +93,26 @@ S3の料金が発生する場面ざっくりこの5つ
 5. 追加機能を使ったとき
 
 
+S3のストレージクラス
+ストレージクラスとは？
+データをどういう条件で保管するかのルール、タイプ
+S3 Standard
+→ よく使う
+
+S3 Intelligent-Tiering
+→ 使う頻度が読めない・変わる
+
+S3 Standard-IA
+→ あまり使わないが、すぐ取り出したい
+
+S3 One Zone-IA
+→ あまり使わない・すぐ取り出したい・AZ 1つでよい
+
+S3 Glacier Instant Retrieval
+→ 長期保管寄りだが、すぐ取り出したい
+
+S3 Glacier Flexible Retrieval
+→ 長期保管・取り出しに少し時間がかかってよい
+
+S3 Glacier Deep Archive
+→ 超長期保管・ほぼ取り出さない
