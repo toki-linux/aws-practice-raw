@@ -9,3 +9,19 @@
 がある
 
 JSONとは？
+データを「名前 : 値」の形で書く形式
+例
+{
+  "name": "Taro",
+  "age": 20,
+  "email": "taro@example.com"
+}
+Taroという名前年は２０Emailアドレスはtaro@example.com
+JSON入れこ構造にもできリスト化もできる。
+リスト化の例
+{
+  "name": "Taro",
+  "skills": ["Python", "AWS", "Linux"]
+}
+Taroが扱えるスキルはPython,AWS,Linuxである
+
