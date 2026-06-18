@@ -69,3 +69,11 @@ Global Accelerator
 
 Wavelength
 = アプリの一部をユーザーの近く、5G網の近くに置く
+
+LightsailとElasticBeanstalkの違い
+Lightsail
+= 簡単に仮想サーバーやDBを立てられる初心者・小規模向けサービス
+最小限の労力でできる
+Elastic Beanstalk
+= Webアプリをアップロードして、裏側のEC2/ELB/Auto Scalingなどを自動構築するサービス
+アプリをアップロードするとそれ、に見合った諸々のサービスを用意してくれるサービス
