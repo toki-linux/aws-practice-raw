@@ -8,6 +8,7 @@ Runbook
 = AWS運用向けの既成パーツを使って定型作業を組む
 AWS環境の運用作業を自動化
 AWS Systems Manager AutomationときたらRunbookを使用するものと思っていい
+AWS Systems Manager Automation＝ランブックに従って自動実行
 Step Functions
 = 複数の処理パーツを順番・分岐・再試行つきでつなぐ
 アプリケーションの流れ管理
