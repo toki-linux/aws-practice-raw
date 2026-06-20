@@ -23,3 +23,7 @@ CLB
 = 単純な負荷分散
 
 Lambdaは自動スケーリングできる。複数のAZに分散して配置できる
+
+LightsailとElastic Beanstalkの違いは？
+Lightsailは、サーバー一式を簡単に借りるサービス
+Elastic Beanstalkは、アプリを簡単に公開・運用するサービス
