@@ -148,4 +148,17 @@ Snowball Edge
 Snowmobile
 
 まとめて簡単い使える形にしてくれる系のまとめ
+サーバーを簡単に借りたい
+→ Lightsail
 
+アプリのコードを渡して、実行環境を作りたい
+→ Elastic Beanstalk
+
+コードやコンテナを渡して、Webサービスとしてすぐ公開したい
+→ App Runner
+
+Web・モバイルアプリに認証・API・データ保存などを付けたい
+→ Amplify
+
+AWSインフラ全体を自分の設計図どおりに作りたい
+→ CloudFormation / CDK
