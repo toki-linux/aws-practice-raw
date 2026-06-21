@@ -79,3 +79,8 @@ CloudFormationがAWSリソースを作る
 CDK
 = CloudFormationの設計図を
   プログラミング言語で書きやすくするもの
+
+AWS Cloud Formation とAWS Elastic beanstalkの違い
+利用者がインフラの構成を設計するのか、AWSが一般的なアプリ環境をまとめて用意するのか
+利用者がインフラ構築を設計するのがCloud Formation
+AWSが一般的なアプリ環境をまとめて用意するのがElastic Beanstalk
