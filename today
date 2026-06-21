@@ -30,3 +30,52 @@ ACIDはリレーショナルDBで特に代表的だが、リレーショナルDB
 なのでリードレプリカ自体もDB機能を持っている。しかし読み取り専用になっている。
 災害時リードレプリカからメインDBへ昇格してもデータ消えない
 ただし、非同期なのでまだメインのDBからもらっていないデータは記録されない。ラグが生じる
+
+AWS CDKとは？
+正式名称は、AWS Cloud Development Kit
+PythonやTypeScriptなどのプログラミング言語で、AWSの構成を作るための仕組み
+何をするもの？
+
+通常、AWSリソースはマネジメントコンソールで作ります。
+
+VPCを作る
+↓
+サブネットを作る
+↓
+セキュリティグループを作る
+↓
+EC2を作る
+
+CDKでは、これをプログラムとして書けます。
+
+例えばPythonなら、イメージとしては次のように書きます。
+
+vpc = ec2.Vpc(
+    self,
+    "MyVpc",
+    max_azs=2
+)
+
+instance = ec2.Instance(
+    self,
+    "WebServer",
+    vpc=vpc,
+    instance_type=ec2.InstanceType("t3.micro")
+)
+
+このコードを実行すると、CDKがAWS上にVPCやEC2を作ってくれます。
+CDKが直接EC2を作るの？
+
+正確には、次の流れです。
+
+PythonやTypeScriptでCDKコードを書く
+          ↓
+CDKがCloudFormationテンプレートを作る
+          ↓
+CloudFormationがAWSリソースを作る
+
+つまり、
+
+CDK
+= CloudFormationの設計図を
+  プログラミング言語で書きやすくするもの
