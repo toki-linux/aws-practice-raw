@@ -48,3 +48,6 @@ Compute Savings Plans
 作ったものを実際に使える場所へ置くこと
 です。
 デプロイの方法はいくつかあってその中での選択肢があるのでデプロイオプションという言葉がある
+
+Aurora serverless 
+Aurora Auto Scalingはスケールアウト/スケールイン（リソース数の増減）であるのに対し、Aurora Serverlessはスケールアップ/スケールダウン（性能の増減）
