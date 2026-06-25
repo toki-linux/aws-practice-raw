@@ -67,3 +67,8 @@ AWS Systems Managerの一覧表
 | **Fleet Manager**       | 複数サーバーの状態を画面から一元管理する         | サーバー群の可視化、トラブル対応    |
 
 Amazon EFSのストレージクラスは容量無制限
+
+Lambdaを実行するとき
+外部からのアクセスならAPIゲートウェイ
+AWS内部からならEventbridge
+
