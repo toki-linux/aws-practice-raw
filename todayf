@@ -8,3 +8,13 @@ AWS re:Post
 
 AWS re:Post Private
 ＝会社・組織のメンバーだけで使う非公開のAWS技術コミュニティ
+
+Ops Centerとは？
+AWS Systems Managerの OpsCenter は、
+
+AWS環境で発生した運用上の問題を、1か所に集めて調査・対応するための機能
+
+です。
+
+AWS フォーラム
+re:postの前のサービス現在はre:post推奨
