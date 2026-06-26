@@ -1,3 +1,10 @@
 AWS Countdownとは？
 重要なイベントを失敗しないようにAWSの専門家が計画・準備・当日対応してくれる支援サービス
 ある特定の日などに使える。
+
+re:post とre:post privateの違いは何？
+AWS re:Post
+＝誰でも利用できる公開型のAWS技術Q&Aコミュニティ
+
+AWS re:Post Private
+＝会社・組織のメンバーだけで使う非公開のAWS技術コミュニティ
