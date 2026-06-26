@@ -21,4 +21,20 @@ AWS フォーラム
 re:postの前のサービス。現在はre:post推奨
 
 AWS Migration Hub
-移行を行う際の管理サービスでリアルタイムに移行進歩を把握できる
+移行を行う際の管理サービスでリアルタイムに移行進歩を把握できる。管理
+
+Migration Evaluator
+移行前に「AWSへ移すと、どれくらいの構成・費用になるか」を評価する。見積り
+
+ゲートウェイ系のまとめ
+| 名前                          | 何と何をつなぐか                 | 主な役割                            |
+| --------------------------- | ------------------------ | ------------------------------- |
+| **Internet Gateway**        | VPC ↔ インターネット            | Public Subnetから外へ出入りする          |
+| **NAT Gateway**             | Private Subnet → インターネット | Private EC2から外へ出る。外からの開始通信は受けない |
+| **Virtual Private Gateway** | VPC ↔ オンプレミス             | Site-to-Site VPNのAWS側入口         |
+| **Customer Gateway**        | オンプレミス ↔ AWS             | Site-to-Site VPNのオンプレミス側        |
+| **Transit Gateway**         | 複数VPC・VPN・オンプレミス         | 多数のネットワークを中央で接続                 |
+| **API Gateway**             | アプリ利用者 ↔ Lambdaなど        | HTTP APIの受付窓口                   |
+| **Gateway VPC Endpoint**    | VPC ↔ S3・DynamoDB        | インターネットを通さずAWSサービスへ接続           |
+
+
