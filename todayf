@@ -37,4 +37,5 @@ Migration Evaluator
 | **API Gateway**             | アプリ利用者 ↔ Lambdaなど        | HTTP APIの受付窓口                   |
 | **Gateway VPC Endpoint**    | VPC ↔ S3・DynamoDB        | インターネットを通さずAWSサービスへ接続           |
 
-
+AWSリソースグループ
+同じタグのAWSリソースをまとめて見る機能
