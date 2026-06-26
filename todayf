@@ -39,3 +39,11 @@ Migration Evaluator
 
 AWSリソースグループ
 同じタグのAWSリソースをまとめて見る機能
+
+AWS Trusted Advisorはコスト最適化とセキュリティに基づいて最適化する
+
+コストをプロジェクトごとに分類できるサービス
+AWS Cost Categoriesとコスト配分タグを使う
+
+GuardDutyは今、怪しい活動が起きていないかを見る
+Inspectorは攻撃される原因になる弱点はないかを見る
