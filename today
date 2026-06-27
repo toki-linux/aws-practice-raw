@@ -30,3 +30,5 @@ CloudWatch異常検出
 
 CloudTrail Insights
 ＝AWS API操作の普段との違いを検出する
+
+VPNはオンプレミス環境とAWS環境を暗号化通信で繋いでいる
