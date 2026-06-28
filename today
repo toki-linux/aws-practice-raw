@@ -75,3 +75,14 @@ SNS
 
 EventBridge
 ＝イベントをルールで振り分ける交通整理
+
+AWS RAMとは？
+RAMはメモリのRAMではなく、Resource Access Managerの略です
+自分のAWSアカウントが所有するAWSリソースを、別のAWSアカウントと共有するサービス
+所有権は移らない
+
+重要なのは、
+
+共有
+≠ 所有権の譲渡
+共有サービス
