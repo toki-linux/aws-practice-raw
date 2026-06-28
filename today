@@ -86,3 +86,7 @@ RAMはメモリのRAMではなく、Resource Access Managerの略です
 共有
 ≠ 所有権の譲渡
 共有サービス
+
+
+Amazon Data Firehose≒Kinesis Data Firehose
+ストリーミングデータを設定された宛先に送信できる
