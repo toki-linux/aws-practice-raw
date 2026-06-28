@@ -99,3 +99,8 @@ AWS Transfer AccelerationはS3バケットに対するデータ転送。S3との
 Amazon Timestream
 時系列データの保存に適している
 IoTアプリケーションに使う
+
+S3 Glacier Instant Retrieval
+ミリビョウ単位で取り出せる
+S3 Glacier Flexible Retrieval
+年に１〜２回のアクセス頻度。アーカイブデータ保存に特化
