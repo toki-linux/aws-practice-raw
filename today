@@ -90,3 +90,8 @@ RAMはメモリのRAMではなく、Resource Access Managerの略です
 
 Amazon Data Firehose≒Kinesis Data Firehose
 ストリーミングデータを設定された宛先に送信できる
+
+AWS Storage Gateway
+オンプレミスからAWSサービスへのアクセスを高速かつセキュアに行えるサービス
+
+AWS Transfer AccelerationはS3バケットに対するデータ転送。S3との迅速なデータ転送の機能
