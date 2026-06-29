@@ -1,3 +1,26 @@
 AWS Security Hub
 AWS環境にあるセキュリティ上の問題を、1か所に集めて整理し、優先順位を付けるサービス
+イメージ
 
+AWSには、異なる問題を見つけるセキュリティサービスがあります。
+
+GuardDuty
+→ 不審な操作や脅威を検知
+
+Inspector
+→ EC2やコンテナなどの脆弱性を検査
+
+Macie
+→ S3内の機密データを検出
+
+Security Hub CSPM
+→ 設定がセキュリティ基準に沿っているか確認
+
+それぞれの結果を個別に確認すると大変です。
+
+Security Hubは、それらのセキュリティ情報を集めて、AWS環境全体を見やすくします。現在のSecurity Hubは、GuardDuty、Inspector、Macieなど複数の情報を関連付け、重要な問題を優先して表示する統合的なセキュリティサービスとして提供されています。
+
+GuardDuty ─┐
+Inspector ─┤
+Macie ─────┼→ Security Hub → 管理者がまとめて確認
+その他 ───┘
