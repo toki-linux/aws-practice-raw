@@ -107,3 +107,8 @@ AWS Client VPN
 
 AWS Database Migration Serviceはダウンタイムを最小限に抑えて移行できる
 継続的データレプリケーション機能を持っているということ
+
+Amazon SageMaker
+自分でモデルを開発する。
+自分でAI/MLのサービスを作る。
+たとえば芋の大きさを判定するシステムなど
