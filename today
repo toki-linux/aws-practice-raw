@@ -60,3 +60,7 @@ Quick Sight＝グラフなどで分析するもの
 EC2上のモノリシックアプリを
 LambdaやECSのマイクロサービスへ分割
 → リアーキテクト
+
+AWS Launch Wizard
+SQL ServerやSAP、Active Directoryなどの複雑なシステムを、質問に答えながらAWS上へ自動構築するサービス
+
