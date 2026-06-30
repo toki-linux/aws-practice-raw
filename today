@@ -99,3 +99,8 @@ CloudFormation
 
 Launch Wizard
 ＝要件を入力すると、必要なリソースや構成を判断して構築する
+
+AWS Site-to-Site VPN
+オンプレミスのデータセンターやリモートオフィスなどのネットワークとAWS上のリソースを結ぶ
+AWS Client VPN
+デバイスベースのVPNサービスで個々のリモートワーカーなどのユーザからAWSリソースを結ぶ
