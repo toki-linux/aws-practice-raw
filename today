@@ -80,3 +80,5 @@ DBの中身だけ移す → DMS
 サーバーごとEC2へ移す → MGN
 移行状況を管理 → Migration Hub
 移行前に調査 → Application Discovery Service
+
+本番では「知っているサービスを選ぶ」のではなく、最後の一文で何を実現したいのかを掴んでから選択肢を見ることを意識する
