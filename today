@@ -75,3 +75,8 @@ AWS MGN
 今回の問題文では、移行先が RDS ではなく EC2インスタンス です。
 
 ここが決定的です。
+
+DBの中身だけ移す → DMS
+サーバーごとEC2へ移す → MGN
+移行状況を管理 → Migration Hub
+移行前に調査 → Application Discovery Service
