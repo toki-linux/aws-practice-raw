@@ -11,3 +11,5 @@ Business
 Enterprise
 = Businessより上。TAMなども付く
 
+ELBはリージョンを跨いで負荷分散はできない
+リージョンごとに配置されている
