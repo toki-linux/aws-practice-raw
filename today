@@ -13,3 +13,11 @@ Enterprise
 
 ELBはリージョンを跨いで負荷分散はできない
 リージョンごとに配置されている
+
+リージョンをまたいだ振り分けなら、試験では主に
+
+Route 53
+AWS Global Accelerator
+CloudFront
+
+を疑います。
