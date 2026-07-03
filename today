@@ -1,2 +1,6 @@
 Lambdaはメモリをユーザが決める。それにあうCPUを自動で設定してくれる。
 実行ロールの権限設定もユーザがやる
+
+Amazon Comprehend
+テキストから感情分析、特定のキーワード検出、特定の人物検出ができる。
+TextractとComprehendとKendra
