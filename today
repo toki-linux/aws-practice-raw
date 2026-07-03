@@ -46,3 +46,7 @@ Elastic Beanstalk の本質
 対象は 「開発者」
 EC2・ロードバランサー・Auto Scalingなどを 自動で構成・管理してくれる
 あくまで「アプリ運用の自動化」が主目的
+
+APIを使う
+≠
+API Gatewayを使う
