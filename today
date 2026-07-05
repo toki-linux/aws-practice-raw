@@ -17,3 +17,5 @@ CloudFormationのテンプレートはYAML形式で記述
 GraphQLAPIを構築するサービスはAppSyncを使う
 
 Amazon Open Searchは検索・分析エンジン
+
+Amazon Timestreamは時系列データの処理に特化したエンジン
