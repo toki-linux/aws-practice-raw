@@ -19,3 +19,5 @@ GraphQLAPIを構築するサービスはAppSyncを使う
 Amazon Open Searchは検索・分析エンジン
 
 Amazon Timestreamは時系列データの処理に特化したエンジン
+
+Savings Plansは予約はできないが前払いはできる
