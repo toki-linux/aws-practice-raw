@@ -23,3 +23,6 @@ Amazon Timestreamは時系列データの処理に特化したエンジン
 Savings Plansは予約はできないが前払いはできる
 
 DynamoDBはJSON形式のデータを保存および処理するためのドキュメントデータベース
+
+Amazon DynamoDBグローバルテーブル
+AWSリージョン間でDynamoDBテーブルデータを自動的にレプリケートすることができる機能
