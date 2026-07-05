@@ -12,3 +12,8 @@ IAMポリシーは許可と拒否とどちらも設定できる
 基本的にアウトバウンドには料金発生
 同じAZ間は無料
 
+CloudFormationのテンプレートはYAML形式で記述
+
+GraphQLAPIを構築するサービスはAppSyncを使う
+
+Amazon Open Searchは検索・分析エンジン
