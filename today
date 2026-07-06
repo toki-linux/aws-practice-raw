@@ -37,3 +37,6 @@ Compute Optimized
 必要な結果だけAWSへ転送
 
 これをエッジコンピューティングといいます。
+
+AWS SolutionLibrary
+AWSでよくある課題を解決するための、設計例・実装例・デプロイ用コードを集めたカタログ
