@@ -9,3 +9,11 @@ Amazon S3 Glacierの種類と違い
 Instantなのですぐに読める
 Flexibleなので色々変えられる。標準
 Deepなので深い。つまり、取り出しに時間がかかる。
+
+取り出し時の料金順
+高い
+Instant
+Flexible
+Deep
+安い
+取り出しの料金が高い方が素早く取り出せる
