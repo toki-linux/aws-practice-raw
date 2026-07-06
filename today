@@ -71,3 +71,5 @@ Amazon MQが伝言を一時的に預かるため、アプリAとアプリBが直
 
 Amazon MQ
 ＝アプリ同士の伝言を仲介する郵便局
+
+Amazon Kinesis Data Streamはデータを保存する機能がない
