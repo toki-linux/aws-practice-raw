@@ -17,3 +17,11 @@ Flexible
 Deep
 安い
 取り出しの料金が高い方が素早く取り出せる
+
+AWS SnowballEdgeComputeOptimizedの特徴は？
+ネットワーク接続が弱い・ない場所へ持ち込み、その場でデータ処理を行える高性能な物理デバイス
+Storage Optimized
+＝大量データの保存・AWSへの運搬を重視
+
+Compute Optimized
+＝現地でデータを処理する能力を重視
