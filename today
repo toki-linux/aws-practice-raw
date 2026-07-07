@@ -10,3 +10,6 @@ Amazon Open Search Service
 
 AWS IoT Core
 センサーなどのデバイスからデータを受け取り、awsサービスへと渡すサービス
+
+AWS IoT Greengrass
+IoTデバイス（エッジ側）で処理を行えるようにするサービス
