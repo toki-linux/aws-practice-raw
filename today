@@ -9,3 +9,6 @@ IoTの時系列のデータを保存するならAmazon Timestreamを使うと良
 
 ログをリアルタイムで解析
 Amazon OpenSearch
+
+マイクロ秒単位のレイテンシーを求めるならAmazon Elastic Cashe
+DynamoDBは一桁ミリ秒
