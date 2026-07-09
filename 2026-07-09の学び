@@ -17,3 +17,5 @@ DynamoDBは一桁ミリ秒
 これは運用上の優秀性に当てはまる
 
 移行のデータベースのダウンタイムを極力短くするにはAWS Database MigrationServiceを使う
+
+AWS Storage Gatawayのテープゲートウェイはバックアップを行うことが可能
