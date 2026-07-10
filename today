@@ -41,3 +41,5 @@ AWS WAFで保護できるものはCloudFront ALB APIGatewayの３つ
 Cost Categoriesとコスト配分タグ
 
 Amazon EFSはインターネットから直接アクセスできない
+
+Amazon S3 Glacierは標準取り出しで３〜５時間かかる
