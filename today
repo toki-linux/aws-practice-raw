@@ -36,3 +36,6 @@ IAMロール・権限セット
 ＝各環境でできる操作を分ける
 
 AWS WAFで保護できるものはCloudFront ALB APIGatewayの３つ
+
+コストを分類して追跡できる
+Cost Categoriesとコスト配分タグ
