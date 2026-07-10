@@ -39,3 +39,5 @@ AWS WAFで保護できるものはCloudFront ALB APIGatewayの３つ
 
 コストを分類して追跡できる
 Cost Categoriesとコスト配分タグ
+
+Amazon EFSはインターネットから直接アクセスできない
