@@ -34,3 +34,5 @@ AWSアカウント
 
 IAMロール・権限セット
 ＝各環境でできる操作を分ける
+
+AWS WAFで保護できるものはCloudFront ALB APIGatewayの３つ
