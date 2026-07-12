@@ -70,3 +70,8 @@ ECR・ECS・Fargate・ALB・IAM・CloudWatch Logsなどを構築
 
 AWS CodeStar
 ＝AWS開発プロジェクトとCI/CD環境を、テンプレートからまとめて立ち上げるサービス
+
+IAMユーザとIAMグループ
+複数のIAMユーザとIAMグループの権限が重複されている場合拒否のルールが優先される
+例えばIAMユーザはS3へのアクセス権限持っている。IAMグループはS3へのアクセス権限を拒否している
+この場合IAMユーザはS3へアクセスできない
