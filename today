@@ -67,3 +67,6 @@ ECR・ECS・Fargate・ALB・IAM・CloudWatch Logsなどを構築
 
 つまり、ECS周辺の複雑な設定を代わりに組み立ててくれる補助ツール
 質問に答えたら、それにあった環境を組み立ててくれるツール
+
+AWS CodeStar
+＝AWS開発プロジェクトとCI/CD環境を、テンプレートからまとめて立ち上げるサービス
