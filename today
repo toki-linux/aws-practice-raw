@@ -3,3 +3,7 @@ SDI
 
 隣接リージョン間は広域帯の専用ネットワークで接続されている
 これにより高速かつ低遅延の接続が可能
+
+EC2 Instance Connect
+EC2 Instance Connectは、IAMで認可された利用者が、一時的なSSH公開鍵をEC2へ送り、SSH接続する仕組み
+
