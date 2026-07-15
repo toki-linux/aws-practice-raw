@@ -115,3 +115,27 @@ EC2のOSが起動した後に行う初期設定処理
 
 です。
 変更速度だけならユーザーデータ、起動速度と安定性ならAMI。頻繁に変わる部分だけをユーザーデータにするのが基本
+
+「本体」と「設定ファイル」の違い
+
+nginxには、大きく分けて次の2つがあります。
+
+nginx本体
+＝Webサーバーとして動くプログラム
+
+設定ファイル
+＝nginx本体に、どう動くかを指示するファイル
+
+例えば、
+
+nginx本体
+/usr/sbin/nginx
+
+設定ファイル
+/etc/nginx/nginx.conf
+/etc/nginx/conf.d/default.conf
+
+表示するファイル
+/usr/share/nginx/html/index.html
+
+です。
