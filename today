@@ -368,3 +368,4 @@ Gateway Load Balancerが
 ためのサービスです。
 ELBはEC2へ振り分ける
 GWLBはファイアウォールへ振り分ける
+
