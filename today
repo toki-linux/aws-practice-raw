@@ -153,3 +153,5 @@ Pre-warming
 
 予測して事前に拡張
 Autoscalingのように増えてきたら追加するのではなく、初めから増やしておくという考え方
+
+ターミネーションポリシー（Termination Policy）
