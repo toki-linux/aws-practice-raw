@@ -201,3 +201,6 @@ ClosestToNextInstanceHour
 
 Default
 AWS標準の判断方法に任せる
+
+
+RDSはファイルシステムとの連携はサポートされていない
