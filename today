@@ -93,3 +93,37 @@ Route 53 ARC
 障害時に
 どちらへ切り替えるか
 管理する
+
+プライベートホストゾーンとは、
+
+指定したVPCの中だけで使える、非公開のDNS名前解決表
+
+です。
+
+Route 53に作成しますが、インターネット全体には公開されません
+具体例
+
+VPC内に次のサーバーがあるとします。
+
+Web EC2：10.0.1.10
+DB EC2 ：10.0.2.20
+
+プライベートホストゾーンに、次のレコードを登録できます。
+
+web.internal.example.com → 10.0.1.10
+db.internal.example.com  → 10.0.2.20
+
+すると、VPC内のEC2から、
+
+mysql -h db.internal.example.com
+
+のように接続できます。
+
+EC2
+ ↓ 「db.internal.example.comのIPは？」
+Route 53 VPC Resolver
+ ↓
+プライベートホストゾーン
+ ↓ 「10.0.2.20です」
+DBサーバー
+
