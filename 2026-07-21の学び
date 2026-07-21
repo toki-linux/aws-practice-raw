@@ -53,3 +53,16 @@ AWSクラウド
 
 Simple AD
 ＝小規模・低コストの簡易版
+
+
+
+
+覚え方
+Managed Microsoft AD
+＝AWSが本物を管理
+
+AD Connector
+＝既存ADへつなぐ
+
+Simple AD
+＝簡単・小規模
