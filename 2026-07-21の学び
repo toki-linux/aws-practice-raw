@@ -9,3 +9,13 @@ AWS Directory ServiceからIAMへ認証の実施を行う
 つまり、オンプレミスADとIAMを繋ぐためにAWS Directory Serviceがある
 
 AWS Directory Serviceは、簡単にいうと、社員・ユーザー・PCなどの情報を管理し、ログイン認証を行うディレクトリサービスです。
+1. AWS Managed Microsoft AD
+
+AWS上に、本物のMicrosoft Active DirectoryをAWS管理で構築する
+
+AWSクラウド
+└─ AWS Managed Microsoft AD
+   ├─ ユーザー
+   ├─ グループ
+   ├─ PC
+   └─ グループポリシー
