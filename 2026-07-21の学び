@@ -37,3 +37,17 @@ AD Connector
 
 AD Connector
 ＝既存のオンプレミスADへの中継役
+
+3. Simple AD
+
+AWS上に、安価で簡易的なAD互換ディレクトリを作る
+
+Simple ADはMicrosoft Active Directoryそのものではなく、Samba 4を利用したAD互換サービスです。
+
+AWSクラウド
+└─ Simple AD
+   ├─ ユーザー管理
+   ├─ グループ管理
+   ├─ ドメイン参加
+   └─ 一部のグループポリシー
+
