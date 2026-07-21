@@ -22,3 +22,15 @@ AWSクラウド
 
 AWS Managed Microsoft AD
 ＝AWS上に本格的なMicrosoft ADを作る
+
+2. AD Connector
+
+オンプレミスにある既存のADへ、AWSから問い合わせを転送する
+
+AD Connector自体は、ユーザー情報を保存するActive Directoryではありません。
+
+AWSサービス
+    ↓
+AD Connector
+    ↓ 認証要求を転送
+オンプレミスのActive Directory
