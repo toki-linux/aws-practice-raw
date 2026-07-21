@@ -34,3 +34,6 @@ AWSサービス
 AD Connector
     ↓ 認証要求を転送
 オンプレミスのActive Directory
+
+AD Connector
+＝既存のオンプレミスADへの中継役
