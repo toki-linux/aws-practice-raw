@@ -7,3 +7,5 @@ AWS DirectoryServiceから認証を依頼する
 AWS Directory ServiceからIAMへ認証の実施を行う
 
 つまり、オンプレミスADとIAMを繋ぐためにAWS Directory Serviceがある
+
+AWS Directory Serviceは、簡単にいうと、社員・ユーザー・PCなどの情報を管理し、ログイン認証を行うディレクトリサービスです。
