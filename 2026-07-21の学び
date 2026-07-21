@@ -19,3 +19,6 @@ AWSクラウド
    ├─ グループ
    ├─ PC
    └─ グループポリシー
+
+AWS Managed Microsoft AD
+＝AWS上に本格的なMicrosoft ADを作る
