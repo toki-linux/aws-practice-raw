@@ -169,3 +169,17 @@ REST APIは機能が豊富でHTTP APIは低コストでシンプルなAPI
 します。
 
 失敗したキューを隔離する必要がある。そのときの隔離先をデッドレターキューという
+
+maxReceiveCount
+
+DLQへ移すまでの受信回数を、maxReceiveCountで設定します。
+
+例えば、
+
+maxReceiveCount = 5
+
+なら、
+
+5回受信されても削除されなかったメッセージをDLQへ移す
+
+という意味です。
