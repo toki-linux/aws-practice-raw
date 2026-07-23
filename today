@@ -100,3 +100,19 @@ S3へアクセス
 
 IDプールは何ができるか
 ユーザープールはあなたは誰なのか
+
+
+API Gatewayの「APIタイプ」は、主に次の3種類です。
+REST API
+HTTP API
+WebSocket API
+
+REST API
+＝高機能な通常通信
+
+HTTP API
+＝安くてシンプルな通常通信
+
+WebSocket API
+＝接続し続けるリアルタイム通信
+
