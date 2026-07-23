@@ -116,3 +116,25 @@ HTTP API
 WebSocket API
 ＝接続し続けるリアルタイム通信
 
+
+3種類の判断方法
+
+問題文を見たら、まずこの順番で判断します。
+
+① リアルタイムな双方向通信が必要？
+   ↓ YES
+WebSocket API
+
+② 通常のリクエスト・レスポンス通信？
+   ↓ YES
+
+③ 高度なAPI管理機能が必要？
+   ↓ YES
+REST API
+
+④ 高度な機能は不要で、安くシンプルにしたい？
+   ↓ YES
+HTTP API
+
+REST APIとHTTP APIが区別しにくく、Websocket APIは双方向通信が必要なときに使うAPIのタイプ
+REST APIは機能が豊富でHTTP APIは低コストでシンプルなAPI
