@@ -184,3 +184,16 @@ maxReceiveCount = 5
 
 という意味です。
 
+CodeStar
+＝開発プロジェクト全体をまとめて準備・管理
+
+CodePipeline
+＝ソース取得からデプロイまでの工程を自動で流す
+
+工場で例えると、
+
+CodeStar
+＝工場全体を用意する担当
+
+CodePipeline
+＝工場内のベルトコンベア
