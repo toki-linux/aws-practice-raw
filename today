@@ -1,4 +1,6 @@
 Lambdanの性能をあげるにはメモリを増やす必要がある
 
-API
-システムとシステムをつなぐ連携口
+API（Application programming interface)
+システムとシステムをつなぐ連結器
+システム→API→システム
+
