@@ -65,3 +65,54 @@ Amazon MQ
 **スタック（Stack）**とは、
 CloudFormationで作成・管理するAWSリソースのひとまとまり
 です。
+例えば
+
+あなたがWebシステムを作るとします。
+
+必要なのは、
+
+VPC
+Public Subnet
+EC2
+Security Group
+IAM Role
+
+ですよね。
+
+CloudFormationのテンプレートには、
+
+VPC
+Subnet
+EC2
+SecurityGroup
+IAM Role
+
+と書きます。
+
+これを実行すると、
+
+CloudFormation
+        ↓
+スタック作成
+        ↓
+VPC
+Subnet
+EC2
+Security Group
+IAM Role
+
+この全部まとめたものが1つのスタック
+
+イメージ
+スタックは「箱」だと思ってください
+スタック
+┌────────────────┐
+│ VPC            │
+│ Subnet         │
+│ EC2            │
+│ ALB            │
+│ IAM Role       │
+└────────────────┘
+
+スタックの中身のEC2だけ変更することもできる
+
