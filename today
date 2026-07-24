@@ -61,3 +61,7 @@ SQS
 
 Amazon MQ
 ＝ActiveMQ・RabbitMQ方式でメッセージを仲介する
+
+**スタック（Stack）**とは、
+CloudFormationで作成・管理するAWSリソースのひとまとまり
+です。
