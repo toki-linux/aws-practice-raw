@@ -288,3 +288,29 @@ ALBでは、
 というリスナールールを設定します。
 
 
+OAC
+＝CloudFrontが署名してS3へアクセスする現在の推奨方式
+
+OAI
+＝CloudFront専用IDを使ってS3へアクセスする旧方式
+
+S3バケットポリシー
+＝OAC・OAIからのアクセスをS3側で許可する
+
+カスタムヘッダー
+＝CloudFrontだけが持つ合言葉をALBなどで確認する
+
+マネージドプレフィックスリスト
+＝SGでCloudFrontのIPだけを許可する
+
+VPCオリジン
+＝ALBやEC2をプライベートにしてCloudFrontから接続する
+
+署名付きURL・Cookie
+＝ユーザーがCloudFrontを利用してよいかを制限する
+
+ユーザー → CloudFrontを制限
+＝署名付きURL・Cookie
+
+CloudFront → オリジンを制限
+＝OAC・OAI・カスタムヘッダー・SG
