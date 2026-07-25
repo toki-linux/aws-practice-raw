@@ -53,3 +53,15 @@ EC2
 → パブリックIPまたはElastic IPを持つ
 
 といった設定が必要
+
+                         Internet
+                            │
+                   Internet Gateway
+                            │
+              IGW用ゲートウェイルートテーブル
+                    ┌───────┴───────┐
+                    │               │
+             Firewall EP A    Firewall EP B
+                    │               │
+               EC2-A / AZ-A    EC2-B / AZ-B
+
