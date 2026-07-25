@@ -276,3 +276,11 @@ Amazon Detectiveは、
 
 セキュリティ上の異常が見つかった後に、ログや関連情報をつなげて原因を追跡するサービス
 
+Web Distribution
+＝WebサイトやAPIなどを配信する（現在はこちら）
+
+RTMP Distribution
+＝Flash動画を配信する（現在は非推奨・廃止）
+
+
+
