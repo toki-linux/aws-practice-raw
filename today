@@ -28,3 +28,28 @@ Firewall Subnet
 ターゲット：Firewall Endpoint
 
 のようなルート
+
+Network Firewall Policy
+＝どの通信を許可・拒否・検査するか
+
+Security Group
+＝EC2がどの通信を受け付けるか
+
+Network ACL
+＝サブネット単位で許可・拒否する通信
+
+パブリックIPまたはElastic IP
+＝インターネットからEC2を識別するアドレス
+
+例えばWebサーバーなら、
+
+Network Firewall
+→ HTTP/HTTPSを許可
+
+EC2のSecurity Group
+→ HTTP/HTTPSを許可
+
+EC2
+→ パブリックIPまたはElastic IPを持つ
+
+といった設定が必要
