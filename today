@@ -83,3 +83,25 @@ Activity Worker
 「決済を実行」
 
 Deciderはワークフローの調整ロジックを実装し、Activity Workerなどへ実行する作業を割り当てます。
+
+
+Quicksightとcostexplorer
+何を可視化するのかの違い
+Quicksight＝データの可視化
+Costexplorer＝コストの可視化
+
+
+QuickSightの構成
+
+よく出てくる用語は次の順番です。
+
+データソース
+   ↓
+データセット
+   ↓
+分析
+   ↓
+ダッシュボード
+データソース
+
+元データがある場所です
