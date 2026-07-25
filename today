@@ -42,3 +42,44 @@ SWF
 
 EC2・Lambda・外部サーバーなど
 ＝実際に仕事をする作業員
+
+
+主な登場人物
+
+Amazon SWFでは、次の役割があります。
+
+Workflow Starter
+
+ワークフローを開始します。
+
+ユーザーが注文
+↓
+注文処理ワークフロー開始
+Decider
+
+次に何をするか判断する司令塔です。
+
+在庫確認が成功した
+↓
+次は決済を実行
+Activity Worker
+
+実際の処理を実行する作業員です。
+
+在庫確認をする
+決済をする
+メールを送る
+
+構成は次のイメージです。
+
+Workflow Starter
+       ↓
+      SWF
+       ↓
+    Decider
+「次は決済」
+       ↓
+Activity Worker
+「決済を実行」
+
+Deciderはワークフローの調整ロジックを実装し、Activity Workerなどへ実行する作業を割り当てます。
