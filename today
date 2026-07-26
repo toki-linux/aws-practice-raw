@@ -183,3 +183,33 @@ Partition
 | **I / D / H**         | ストレージ最適化     | **I＝I/O、D＝Dense、H＝HDD** |
 | **P / G / Inf / Trn** | 高速コンピューティング  | **GPU・AI系**             |
 
+T＝Temporary boost（必要なときだけ一時的に頑張る）
+普段はCPU使用率が低いが、短時間だけCPU性能が必要になる用途
+M＝Middle、万能型
+CPU・メモリ・ネットワークのバランスが取れています
+C＝Compute、CPU
+CPU計算が多い処理に向いています
+R＝RAM
+厳密な名称の由来というより、試験用の覚え方として非常に分かりやすい
+X＝eXtra large memory
+R系よりさらに大量のメモリが必要な用途
+I＝I/O
+ローカルNVMe SSDを使い、高速な読み書きが必要な処理向け
+D＝Dense storage
+「密度の高いストレージ」、つまり大量のディスク容量を搭載するイメージ
+H＝HDD / High throughput
+大量のデータを連続して読み書きする用途向け
+P＝Powerful GPU
+P系は特に、AIモデルのトレーニングで使われます
+G＝Graphics / GPU
+グラフィックスや推論
+Inf＝Inference、推論
+学習済みAIモデルを使って答えを出す処理向け
+Trn＝Training、学習
+AIモデルのトレーニング向けです
+
+Trn
+→ AIを学習させる
+
+Inf
+→ 学習済みAIを使う
