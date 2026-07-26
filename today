@@ -395,3 +395,11 @@ Permissions Boundary（アクセス許可境界）とは？
 IAMユーザーやIAMロールが持てる権限の「上限」を決める仕組みです。
 どれだけ強いIAMポリシーを付けても、Permissions Boundaryで許可されていない操作は実行できません。
 Permissions Boundaryは、IAMユーザーやIAMロールに付与できる権限の最大範囲を決めるものです。権限を与えるのではなく、権限の天井を作ります。
+
+
+IAMにおいて、リソース（"Resource"）の記述はARN（Amazon Resource Name）形式で記述する
+書式
+arn:aws:AWSサービス:リージョン:アカウントID:リソース
+例
+aen:aws:dynamodb:us-east-1:123456789012:table/Cats
+階層表示が可能なリソースはスラッシュ（/）で区切って指定します
