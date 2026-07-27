@@ -234,3 +234,87 @@ IAM Roles Anywhere
 
 Roles Anywhere
 ＝ どこにあるサーバーでもIAMロールを使える
+
+ARNとは？
+**ARN（Amazon Resource Name）**は、AWSリソースを一意に指定するための名前です。
+たとえば、
+
+特定のS3バケット
+特定のEC2インスタンス
+特定のIAMロール
+特定のDynamoDBテーブル
+
+をAWS内で正確に指し示すために使います。
+イメージとしては、
+AWSリソースの住所
+ARNの基本形
+
+一般的には次のような形です。
+
+arn:パーティション:サービス:リージョン:アカウントID:リソース
+
+今回のDynamoDBテーブルでは、
+
+arn:aws:dynamodb:us-east-1:123456789012:table/Cats
+
+となります。
+
+分解するとこうです。
+
+arn
+↓
+これはARNです
+
+aws
+↓
+通常のAWSパーティション
+
+dynamodb
+↓
+AWSサービス名
+
+us-east-1
+↓
+リージョン
+
+123456789012
+↓
+AWSアカウントID
+
+table/Cats
+↓
+DynamoDBのCatsテーブル
+
+ARN（Amazon Resource Name）はどう活用される？
+IAMポリシーを作成する際にJSONなどで使える。
+こんな感じ
+{
+  "Effect": "Allow",
+  "Action": "dynamodb:GetItem",
+  "Resource": "arn:aws:dynamodb:us-east-1:123456789012:table/Cats"
+}
+許可
+データを取得
+us-east-1リージョンのID123456789012のdynamodbのCatsという場所から
+↑
+これは△
+
+Effect: Allow
+→ 許可する
+
+Action: dynamodb:GetItem
+→ DynamoDBテーブルから1件の項目を取得する操作
+
+Resource: arn:aws:dynamodb:us-east-1:123456789012:table/Cats
+→ us-east-1リージョン
+→ AWSアカウントID 123456789012
+→ DynamoDB
+→ Catsテーブル
+
+正しい解答
+us-east-1リージョンにある、アカウントID 123456789012 所有のDynamoDBテーブル「Cats」から、1件のデータを取得することを許可する
+
+です。
+
+ポイントは、GetItemは「何でも取得」ではなく、主キーを指定して1件取得する操作という点です。
+また、Resourceは「Catsという場所」より、CatsというDynamoDBテーブルと読む方が正確です。
