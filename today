@@ -139,3 +139,32 @@ VPC-B：10.1.0.0/16
 VPCピアリングは、別々に分離して管理している少数のVPC同士を、AWS内部でプライベートに直接通信させたいときに使う機能です。
 
 VPCをつなげるメリットは、すべてを1つのVPCに押し込まず、分離による安全性や管理性を保ったまま、必要な通信だけできることです。
+
+
+VPCエンドポイントとプライベートリンクの関係性
+一番簡単な覚え方
+VPC Endpoint
+＝ 利用者側の入口
+
+Interface Endpoint
+＝ Private IPを持つ入口
+
+PrivateLink
+＝ Interface Endpointの向こう側をつなぐ技術
+
+Endpoint Service
+＝ 提供側が公開するサービス
+
+全体図はこうです。
+
+【利用側VPC】
+
+EC2
+ ↓
+Interface VPC Endpoint
+ ↓
+====== AWS PrivateLink ======
+ ↓
+Endpoint Service
+ ↓
+【提供側のAWSサービス・NLB・SaaS】
