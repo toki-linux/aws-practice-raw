@@ -168,3 +168,6 @@ Interface VPC Endpoint
 Endpoint Service
  ↓
 【提供側のAWSサービス・NLB・SaaS】
+
+
+VPCとサブネットのCIDRブロックは、/16から/28のプレフィックス長で指定する必要がある
