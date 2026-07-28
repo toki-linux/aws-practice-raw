@@ -65,3 +65,9 @@ VPCエンドポイント
 
 VPCエンドポイントは、
 VPCからAWSサービスへプライベート接続する仕組みの総称
+
+S3・DynamoDB
+→ Gateway Endpoint
+
+その他の多くのAWSサービス
+→ Interface Endpoint
