@@ -176,3 +176,38 @@ https://example.com に再アクセス
 shop.example.com → shop用ターゲット
 api.example.com → API用ターゲット
 ドメインによって飛ぶサイトを変えることができる
+
+
+SNI（Server Name Indication）とは？
+簡単にいうと、
+HTTPS接続の最初に、ブラウザが「どのドメインへ接続したいか」をALBへ伝える仕組み
+です。
+これにより、1つのALB・1つのHTTPSリスナーで、複数ドメインの証明書を使い分けられます。
+ALBでのイメージ
+                 1つのALB
+                    │
+             HTTPSリスナー :443
+                    │
+       ┌────────────┴────────────┐
+       │                         │
+shop.example.com           api.example.com
+shop用証明書               api用証明書
+       │                         │
+shop用ターゲット           API用ターゲット
+
+
+ブラウザからWebサーバーまでの流れ
+ユーザーが https://shop.example.com に接続
+        ↓
+SNIで「shop.example.comへ接続したい」とALBに伝える
+        ↓
+ALBがshop.example.com用の証明書を提示
+        ↓
+ブラウザが証明書を確認
+「接続先のサーバーは正しい」と判断
+        ↓
+HTTPS通信を確立
+        ↓
+ALBがHostヘッダーの shop.example.com を確認
+        ↓
+ホストベースルーティングでshop用ターゲットへ転送
