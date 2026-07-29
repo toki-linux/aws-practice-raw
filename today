@@ -211,3 +211,64 @@ HTTPS通信を確立
 ALBがHostヘッダーの shop.example.com を確認
         ↓
 ホストベースルーティングでshop用ターゲットへ転送
+
+
+パスベースのルーティングとURLクエリ文字列でのルーティングの違い
+違いは、URLのどの部分を見て振り分けるかです。
+
+URLを分解するとこうなります。
+
+https://example.com/products?category=book
+                    └─ パス     └─ クエリ文字列
+パスベースルーティング
+
+URLのパス部分を見ます。
+
+https://example.com/images/cat.jpg
+                    └──── パス ────┘
+例：
+
+/images/*  → 画像サーバー
+/api/*     → APIサーバー
+/admin/*   → 管理画面サーバー
+
+つまり、
+
+どのページ・機能へアクセスしたか
+
+で振り分けます。
+URLクエリ文字列ルーティング
+
+?以降の条件指定部分を見ます。
+
+https://example.com/search?type=book
+                           └─ クエリ文字列
+
+例：
+
+?type=book   → 書籍検索サーバー
+?type=movie  → 動画検索サーバー
+
+つまり、
+
+同じページへのアクセスでも、付いている条件や値によって振り分ける
+イメージとしては、
+
+パスが「グループ・場所」
+クエリ文字列が「その中でどのメンバーや条件を選ぶか」
+
+と考えられます。
+
+たとえば、
+
+https://example.com/products?category=book
+
+を分けると、
+
+/products
+→ 商品グループ・商品一覧という場所
+
+?category=book
+→ その中から「本」という条件で絞り込む
+
+という関係です。
