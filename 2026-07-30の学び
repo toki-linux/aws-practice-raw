@@ -269,3 +269,31 @@ EventBridge Schedulerは、
 ↓
 Lambdaを1回だけ実行
 というスケジュールを作れます。1回限りの実行にも対応しています
+
+
+4サービスを整理
+DynamoDB TTL
+→ 期限が来たデータを自動削除
+
+DynamoDB Streams
+→ DynamoDBで起きた変更を記録して後続処理へ渡す
+
+EventBridge Scheduler
+→ 指定日時にLambdaなどを実行
+
+Step Functions
+→ 複数の処理を順番や分岐付きで実行
+
+例えるなら、
+
+TTL
+＝ 賞味期限を過ぎた商品を自動廃棄
+
+Streams
+＝ 商品の追加・変更・廃棄を記録する監視カメラ
+
+Scheduler
+＝ 指定日時に鳴るタイマー
+
+Step Functions
+＝ 複数の作業手順を書いた業務マニュアル
