@@ -206,3 +206,22 @@ JWT形式のトークンをAPI Gateway自身が検証します。
 ユーザーAはGET /productsを使える
 しかしDELETE /productsは使えない
 → 認可
+
+
+DynamoDBへのアクセスはAPIで行われる
+DynamoDBは従来のRDBMS（MySQLなど）とは異なり、ユーザー名・パスワードという概念が存在しません。
+
+DynamoDBへのアクセスは、すべて AWS APIを通じて行われます。
+
+つまり：
+
+MySQLなど → ユーザー名 + パスワードで接続
+DynamoDB → AWS API呼び出しで操作（GetItem、QueryなどのAPIを使う）
+AWS APIの呼び出しには「認証・認可」が必要
+AWS APIを呼び出すには、「誰が」「何をしていいか」をAWSに証明する必要があります。
+
+この仕組みを担うのが IAM（Identity and Access Management） です。
+
+RDSではIAMロールは必要なく、ユーザー名とパスワードがあればデータを取得できたが、DynamoDBは、その概念がない
+それの代わりを務めているのがAPI 
+APIの呼び出しにはAMIが必要
