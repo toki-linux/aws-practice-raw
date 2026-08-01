@@ -225,3 +225,18 @@ AWS APIを呼び出すには、「誰が」「何をしていいか」をAWSに�
 RDSではIAMロールは必要なく、ユーザー名とパスワードがあればデータを取得できたが、DynamoDBは、その概念がない
 それの代わりを務めているのがAPI 
 APIの呼び出しにはAMIが必要
+
+EKS Auto Modeと他の違い
+通常のEKS
+＝ Kubernetesの基盤の多くをユーザーが設計・管理
+
+EKS Auto Mode
+＝ Kubernetesは使うが、
+   ノード・ネットワーク・ストレージなどをAWSが自動管理
+
+EKS＋Fargate
+＝ EC2ノードを意識せず、PodをFargateで実行
+
+一言で表すと、
+
+EKS Auto Modeは、Kubernetesを使いたいが、ワーカーノードや周辺インフラの運用をできるだけAWSに任せたい場合のEKS
