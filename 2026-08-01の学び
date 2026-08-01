@@ -342,3 +342,36 @@ EKSのPodに、VPC内で使えるIPアドレスを割り当てて、Podの通信
 
 です。
 
+CNI pluginの役割
+
+CNIは、Kubernetesにおけるネットワーク部分のプラグイン規格です。
+
+Kubernetes本体は、
+
+Podを作る
+Podを停止する
+Podをどのノードに配置する
+
+などを管理します。
+
+しかし、
+
+PodにどのIPを割り当てるか
+Pod同士をどう通信させるか
+PodからVPC内へどう通信させるか
+
+といった具体的なネットワーク処理は、CNIプラグインが担当します。
+Amazon VPC CNI plugin for Kubernetes
+＝ EKSのPodにVPCのIPアドレスを割り当て、
+   PodがVPC内で通信できるようにするネットワーク機能
+
+関係を一つの図にすると、
+
+VPC
+└─ サブネット
+   └─ EC2ワーカーノード
+      ├─ Pod A：VPCのIP
+      ├─ Pod B：VPCのIP
+      └─ Pod C：VPCのIP
+             ↑
+       VPC CNIが割り当て
