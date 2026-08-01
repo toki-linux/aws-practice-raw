@@ -307,3 +307,38 @@ ECSクラスター
 ECSサービス
    ↓
 複数のタスクを起動・維持
+
+
+AWS Load Balancer Controllerとは、
+EKS内のKubernetes設定を監視し、必要なALBやNLBをAWS側に自動作成・管理するコントローラー
+です。
+
+なぜ必要なのか
+
+EKSのPodを作っただけでは、外部ユーザーは直接アクセスできません。
+
+インターネット
+   ↓
+？？？
+   ↓
+EKSのPod
+
+そこで、ALBやNLBを入口として用意します。
+
+ユーザー
+   ↓
+ALB / NLB
+   ↓
+EKSのPod
+
+ただし、ユーザーが毎回AWSマネジメントコンソールからロードバランサー、ターゲットグループ、リスナーなどを手作業で作るのは大変です。
+
+AWS Load Balancer ControllerをEKS内で動かしておくと、Kubernetesの設定を見て、これらを自動で作成します。
+
+
+Amazon VPC CNI plugin for Kubernetesとは、
+
+EKSのPodに、VPC内で使えるIPアドレスを割り当てて、Podの通信を成立させるネットワーク機能
+
+です。
+
