@@ -524,3 +524,9 @@ DynamoDBのPITRの特徴
 DynamoDBの「S3へのエクスポート」機能は、内部的に PITRのスナップショット（過去のデータの記録）を利用して エクスポートを行います。
 
 S3へのエクスポートをしたいときはポイントリカバリーが有効になっていないといけない
+
+
+Amazon ElastiCache
+KVS（Key-Value Store:Key-Value型のデータストア）型のデータベースエンジンである
+Memcached＝シンプルで高速
+Redis＝豊富な機能を備えている。永続保持機能あり
