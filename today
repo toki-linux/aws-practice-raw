@@ -213,3 +213,42 @@ Amazon EFSでは、ファイルシステムに対する読み取り・書き込�
 - バーストスループットモード ... ストレージの容量に従ってベースライン性能（基本性能）が設定され、一時的に負荷が高くなった場合はベースラインを超えてスループットを向上できる
 - プロビジョンドスループットモード ... ユーザーが予約した（provisioned）性能をAWSが保証してスループットを提供する
 
+
+Amazon FSx for NetApp ONTAPとは、
+
+NetAppのストレージOSである「ONTAP」を、AWS上でフルマネージドの共有ストレージとして利用できるサービス
+
+です。AWSがファイルサーバーの構築、ハードウェア管理、障害対応などを担当します。
+まず「NetApp ONTAP」とは
+
+NetAppは、企業向けストレージ製品でよく使われるメーカーです。
+
+ONTAPは、そのNetApp製ストレージを管理するためのOS・ストレージ基盤です。
+
+NetApp
+＝ ストレージ製品のメーカー
+
+ONTAP
+＝ NetAppストレージを動かす仕組み・OS
+
+FSx for NetApp ONTAP
+＝ ONTAPストレージをAWSが管理して提供
+
+
+FSxというサービス群
+
+Amazon FSxは、特定の有名なファイルシステムをAWS上でマネージド提供するサービス群です。
+
+FSx for Windows File Server
+＝ Windows向け共有ファイルサーバー
+
+FSx for Lustre
+＝ HPC・機械学習向け高速ファイルシステム
+
+FSx for OpenZFS
+＝ OpenZFSベース
+
+FSx for NetApp ONTAP
+＝ NetApp ONTAPベース
+
+つまり、FSx for NetApp ONTAPは、Amazon FSxシリーズの1つです。
