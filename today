@@ -135,3 +135,32 @@ Stack instance
 ＝ Stack instance 3
 
 CloudFormation StackSetsは、同じCloudFormation構成を組織全体へ一斉配布する機能
+
+
+Secrets ManagerとParameter Storeの違い
+Secrets Manager
+＝ パスワードやAPIキーなど「機密情報」の管理に特化
+
+Parameter Store
+＝ アプリの設定値をまとめて保存する場所
+   必要なら機密情報も保存可能
+ここが大きな違い
+自動ローテーションの違い
+Secrets Manager
+
+DBパスワードなどを、一定期間ごとに自動変更できます。
+
+現在のDBパスワード
+↓
+Secrets Managerが新しいパスワードを生成
+↓
+RDS側のパスワードも変更
+↓
+保存しているシークレットも更新
+
+
+
+AWS Systems Manager インベントリは、EC2インスタンスやオンプレミスのサーバーにインストールされているOSの種類やバージョン、
+インストール済みパッケージなどの構成情報（インベントリ）を自動的に収集・管理する機能
+
+
