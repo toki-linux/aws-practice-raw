@@ -48,3 +48,7 @@ CloudWatch Logsでは、主に次の2つで整理します。
 IAMロールには、CloudWatch Logsへログを送る権限が必要です。
 
 複数のEC2インスタンスのログを一元的に収集・監視するとあれば、まず CloudWatch Agent＋CloudWatch Logsを考えます。
+
+
+CloudWatch Logs Insightsは収集されたログを解析するサービス
+ログを収集するのはcloudwatch logs
