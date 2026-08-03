@@ -75,3 +75,9 @@ Amazon CloudWatch Container Insightsは、コンテナ環境のメトリクス�
 CloudWatch Container Insightsはコンテナのメトリクス、ログの収集となる
 なのでこれらを組み合わせて
 CloudWatch Container Insightsでコンテナ環境のメトリクス、ログを収集して、CloudWatch Logs Insightsでそれらを解析するという流れができる
+
+
+Amazon CloudWatch Network Synthetic Monitorとは、
+AWS上のアプリケーションからオンプレミスまでのネットワーク経路に、定期的なテスト通信を流し、遅延やパケットロスを監視する機能
+
+
