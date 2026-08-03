@@ -52,3 +52,9 @@ IAMロールには、CloudWatch Logsへログを送る権限が必要です。
 
 CloudWatch Logs Insightsは収集されたログを解析するサービス
 ログを収集するのはcloudwatch logs
+cloudwatch　logsはAWSサービスやEC2インスタンスのOSやアプリケーションのログの一元管理もする
+例えば、CloudTrailにおけるAWSサービスの操作ログや、VPCフローログなどを収集することができます。収集したログは、メッセージの内容をフィルタリングして管理者に通知させることができます。
+例：EC2インスタンスのOSログで"Error"の文字列を1時間に5回検出した場合、管理者へメール通知する
+
+
+
