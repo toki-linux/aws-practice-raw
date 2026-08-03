@@ -81,3 +81,57 @@ Amazon CloudWatch Network Synthetic Monitorとは、
 AWS上のアプリケーションからオンプレミスまでのネットワーク経路に、定期的なテスト通信を流し、遅延やパケットロスを監視する機能
 
 
+
+**AWS CloudFormation StackSets（スタックセット）**とは、
+
+1つのCloudFormationテンプレートを使って、複数のAWSアカウント・複数のリージョンへ同じ構成を一括展開・更新・削除する機能
+
+です。
+まず通常のCloudFormationスタック
+
+通常のスタックは、基本的に1つのAWSアカウントの1つのリージョンにリソースを作ります。
+
+CloudFormationテンプレート
+        ↓
+東京リージョンのスタック
+        ↓
+VPC・IAMロール・CloudWatch設定など
+
+例えば、東京リージョンにVPCを1つ作るイメージです。
+
+StackSetsを使う場合
+
+同じテンプレートを複数の場所へまとめて展開できます。
+
+1つのCloudFormationテンプレート
+            ↓
+      CloudFormation StackSet
+            ↓
+├─ アカウントA・東京リージョン
+├─ アカウントA・大阪リージョン
+├─ アカウントB・東京リージョン
+└─ アカウントC・東京リージョン
+
+各アカウント・リージョンには、同じテンプレートを基にした個別のスタックが作成されます。
+
+用語の関係
+StackSet
+全体を管理する親の設計・展開設定
+
+どのテンプレートを使い、どのアカウントとリージョンへ配布するかを管理します。
+
+Stack instance
+対象アカウント × 対象リージョンに作られた個別スタック
+
+例えば、
+
+アカウントA × 東京
+＝ Stack instance 1
+
+アカウントA × 大阪
+＝ Stack instance 2
+
+アカウントB × 東京
+＝ Stack instance 3
+
+CloudFormation StackSetsは、同じCloudFormation構成を組織全体へ一斉配布する機能
