@@ -1,1 +1,50 @@
+複数のEC2インスタンス上にあるログを1か所でまとめて管理したい場合は、CloudWatch Logsを使うのが基本です。
+全体構成
+EC2インスタンスA
+├─ /var/log/nginx/access.log
+└─ /var/log/app.log
+          ↓ CloudWatch Agent
 
+EC2インスタンスB
+├─ /var/log/nginx/access.log
+└─ /var/log/app.log
+          ↓ CloudWatch Agent
+
+       CloudWatch Logs
+       ├─ nginx用ロググループ
+       └─ app用ロググループ
+
+各EC2にCloudWatch Agentをインストールし、収集したいログファイルを指定します。CloudWatch Agentは、EC2内のログやメトリクスをCloudWatchへ送信するソフトウェアです。
+ロググループとログストリーム
+
+CloudWatch Logsでは、主に次の2つで整理します。
+
+ロググループ
+＝ 同じ種類・用途のログをまとめる箱
+
+ログストリーム
+＝ その箱の中にある、個別のログ送信元
+
+例えば、3台のEC2でnginxを動かしているなら、次のようにできます。
+
+ロググループ：/production/nginx/access
+
+├─ ログストリーム：i-11111111111111111
+├─ ログストリーム：i-22222222222222222
+└─ ログストリーム：i-33333333333333333
+今回でいえばロググループはnginxのアクセスログ全体
+ログストリームはかくEC2インスタンスごとのnginxアクセスログ
+
+必要な設定
+
+各EC2には、主に次の設定が必要です。
+
+1. CloudWatch Agentをインストール
+2. どのログファイルを収集するか設定
+3. 送信先ロググループを設定
+4. EC2にIAMロールを付与
+5. CloudWatch Agentを起動
+
+IAMロールには、CloudWatch Logsへログを送る権限が必要です。
+
+複数のEC2インスタンスのログを一元的に収集・監視するとあれば、まず CloudWatch Agent＋CloudWatch Logsを考えます。
