@@ -63,3 +63,15 @@ cloudwatch　logsはAWSサービスやEC2インスタンスのOSやアプリケ�
 なので、複数のアラームを一つのアラーム設定として設定することはできない
 一つのアラーム設定に複数のメトリクスのしきい値を設定することはできないと言うこと
 それをやるにはメトリクス数式を使えば、複数メトリクスから計算した結果を1つのメトリクスアラームで監視することはできる
+
+
+CloudWatch Logs Insights	ログの分析・クエリ
+CloudWatch Container Insights	コンテナのメトリクス・ログ収集
+"Insights" という単語は両方に入っていますが、
+Container Insights はコンテナ環境向けの収集＋可視化が主目的、Logs Insights は収集済みログの分析が主目的という違いで覚えると整理しやすいです！
+Amazon CloudWatch Container Insightsは、コンテナ環境のメトリクスやログデータを収集するサービス
+注意点
+先ほどのCloudWatch Logs Insightsは解析
+CloudWatch Container Insightsはコンテナのメトリクス、ログの収集となる
+なのでこれらを組み合わせて
+CloudWatch Container Insightsでコンテナ環境のメトリクス、ログを収集して、CloudWatch Logs Insightsでそれらを解析するという流れができる
