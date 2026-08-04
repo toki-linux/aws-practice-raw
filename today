@@ -235,3 +235,45 @@ Safety Rules
 
 Region Switch
 ＝ リージョン切り替え手順全体を自動化
+
+
+Route 53のエイリアスレコードとは、
+
+自分のドメイン名を、ALBやCloudFrontなどのAWSリソースへ結び付けるRoute 53独自のDNSレコード
+
+です。
+具体例
+
+ALBを作ると、AWSから次のようなDNS名が発行されます。
+
+my-alb-123456.ap-northeast-1.elb.amazonaws.com
+
+しかし、利用者には次の名前でアクセスしてもらいたいとします。
+
+example.com
+
+そこでRoute 53にエイリアスレコードを設定します。
+
+example.com
+    ↓ エイリアスレコード
+ALB
+my-alb-123456.ap-northeast-1.elb.amazonaws.com
+
+利用者が example.com にアクセスすると、Route 53がALBへ案内します。
+まとめ
+Aレコード
+＝ ドメイン名 → IPアドレス
+
+CNAME
+＝ ドメイン名 → 別のドメイン名
+＝ ルートドメインには使えない
+
+Route 53エイリアスレコード
+＝ ドメイン名 → ALBやCloudFrontなどのAWSリソース
+＝ ルートドメインにも使える
+
+SAAでは、たとえば、
+
+example.comをALBやCloudFrontへ向けたい
+
+と出たら、Route 53のAレコードまたはAAAAレコードを、エイリアスとして設定すると考えます。
