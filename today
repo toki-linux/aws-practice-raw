@@ -51,3 +51,21 @@ IAMポリシー
 
 と覚えるとよいです
 
+
+既存オンプレミスADの認証情報をそのまま使いたい
+→ AD Connector
+
+AWS上にフル機能のマネージドMicrosoft ADが必要
+→ AWS Managed Microsoft AD
+
+オンプレミスADとAWS Managed Microsoft ADを連携
+→ 信頼関係
+
+既存ADそのものをAWSへ移行
+→ 移行作業が必要
+
+したがって
+
+AWS Directory Serviceは、Microsoft ADをAWS上で構築したり、既存のオンプレミスADをAWSサービスと接続したりするためのサービス群
+
+です。
