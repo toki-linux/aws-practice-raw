@@ -1,2 +1,15 @@
 Zone Apexとは？
 Zone Apexとは最上位のドメイン名のことで、例えば「www.example.com」や「sub.example.com」のZone Apexが「example.com」です。
+
+Zone Apexは、サブドメインが付いていないドメインそのものです。
+
+example.com
+
+これがZone Apexです。
+
+一方、
+
+www.example.com
+api.example.com
+
+はサブドメインです
