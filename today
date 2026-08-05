@@ -213,3 +213,170 @@ TTL
 つまり、
 
 変化するIPを利用者が追いかけるのではなく、AWSがDNSの対応表を更新し、利用者は常に同じALBのDNS名を使う
+
+
+
+
+Lambda@Edgeとは、
+CloudFrontのエッジロケーションでLambda関数を実行し、ユーザーのリクエストやレスポンスを加工する機能
+です。
+全体像
+
+通常のCloudFrontは、コンテンツをキャッシュして配信します。
+
+ユーザー
+  ↓
+CloudFront
+  ↓
+S3・ALBなどのオリジン
+
+Lambda@Edgeを使うと、その途中に処理を差し込めます。
+
+ユーザー
+  ↓
+CloudFront
+  ↓
+Lambda@Edgeでリクエストを加工
+  ↓
+S3・ALBなどのオリジン
+
+例えば、
+
+ユーザーの国を確認
+↓
+日本なら日本語ページへ変更
+海外なら英語ページへ変更
+
+のような処理ができます。
+いつ実行するのか
+
+Lambda@Edgeは、CloudFrontの通信の流れにある4つのタイミングで実行できます。
+
+ユーザー
+  ↓
+① Viewer Request
+  ↓
+CloudFrontキャッシュ
+  ↓
+② Origin Request
+  ↓
+オリジン
+  ↓
+③ Origin Response
+  ↓
+CloudFront
+  ↓
+④ Viewer Response
+  ↓
+ユーザー
+① Viewer Request
+
+ユーザーからCloudFrontへリクエストが届いた直後です。
+
+ユーザー
+↓
+Lambda@Edge
+↓
+CloudFrontのキャッシュ確認
+
+キャッシュを確認する前なので、すべての対象リクエストで実行されます。
+
+用途例：
+
+認証チェック
+URLの書き換え
+別ページへのリダイレクト
+HTTPヘッダーの追加
+② Origin Request
+
+CloudFrontのキャッシュにコンテンツがなく、オリジンへ取りに行く直前です。
+
+キャッシュなし
+↓
+Lambda@Edge
+↓
+S3・ALBなどのオリジン
+
+用途例：
+
+アクセスするオリジンを変更
+リクエストパスを書き換える
+オリジン用のヘッダーを追加
+
+例えば、
+
+/images/cat.jpg
+↓
+S3バケットAへ
+
+/videos/movie.mp4
+↓
+S3バケットBへ
+
+のように、リクエストによって接続先を変えられます。
+
+③ Origin Response
+
+オリジンからCloudFrontへレスポンスが戻った直後です。
+
+オリジン
+↓
+Lambda@Edge
+↓
+CloudFrontがキャッシュ
+
+用途例：
+
+レスポンスヘッダーの追加
+キャッシュ設定の変更
+オリジンからの応答を加工
+④ Viewer Response
+
+CloudFrontからユーザーへレスポンスを返す直前です。
+
+CloudFront
+↓
+Lambda@Edge
+↓
+ユーザー
+
+用途例：
+
+セキュリティヘッダーの追加
+レスポンスヘッダーの書き換え
+具体的な用途
+国や端末によって内容を変える
+日本からアクセス
+→ 日本語ページ
+
+アメリカからアクセス
+→ 英語ページ
+スマートフォン
+→ モバイル向けページ
+
+PC
+→ PC向けページ
+認証されていないユーザーをログイン画面へ送る
+ユーザーからリクエスト
+↓
+Cookieやヘッダーを確認
+↓
+認証済み
+→ コンテンツを表示
+
+未認証
+→ ログイン画面へリダイレクト
+A/Bテスト
+ユーザーA
+→ 画面パターンA
+
+ユーザーB
+→ 画面パターンB
+セキュリティヘッダーを追加
+Content-Security-Policy
+Strict-Transport-Security
+
+などをレスポンスへ追加できます。
+
+Lambda@Edge
+＝ CloudFrontの通信途中でLambdaコードを実行する機能
