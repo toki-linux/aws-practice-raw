@@ -413,3 +413,6 @@ OACは入口ではなく「認証・許可の仕組み」
 OAC自体が通信を中継するわけではありません。
 
 CloudFrontがS3へアクセスするときに、AWS Signature Version 4でリクエストへ署名します。
+
+
+TTL（Time To Live:TTL）＝キャッシュを保持する時間
