@@ -733,3 +733,25 @@ Amazon SQSの「遅延キュー（Delay Queue）」または「メッセージ�
 
 AWS Step FunctionsのExpressワークフローは、最大5分の実行時間制限がありますが、大量のリクエストを高速処理できます。
 IoTデバイスからの連続データの取り込みに伴う処理や、ストリーミングデータの変換処理など、高頻度かつ短時間の処理に適しています
+AWS Step Functionsのワークフローには、主に次の2種類があります。
+
+Standard Workflow
+Express Workflow
+
+違いを一言でいうと、
+
+Standard
+＝ 長時間・確実性・履歴重視
+
+Express
+＝ 短時間・大量処理・速度重視
+
+StandardとExpressの比較
+| 項目     | Standard          | Express           |
+| ------ | ----------------- | ----------------- |
+| 最大実行時間 | 1年                | 5分                |
+| 主な用途   | 長時間・重要な業務処理       | 短時間・大量イベント        |
+| 実行保証   | Exactly-once      | At-least-once     |
+| 実行履歴   | Step Functionsで確認 | 主にCloudWatch Logs |
+| 料金     | 状態遷移数             | 実行回数・時間・メモリ       |
+| 向く例    | 決済、承認、長時間ジョブ      | IoT、ログ変換、API処理    |
