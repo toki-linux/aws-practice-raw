@@ -840,3 +840,56 @@ Amazon Managed Streaming for Apache Kafka
 Amazon Managed Streaming for Apache Kafka (Amazon MSK) は、Apache KafkaをAWS上で効率的に運用できるようにするためのフルマネージドサービスです。
 Apache Kafkaは、WebサイトのアクセスログやIoTデバイスのデータをリアルタイムで収集・分析するなどのユースケースがありますが、SQLによる分類機能は持っていない
 
+
+
+AWS Lake Formationとは、
+
+Amazon S3を中心としたデータレイクを構築し、そのデータへのアクセス権限を一元管理するサービス
+
+です。
+
+ただし、Lake Formation自体が大量のデータを保存するストレージではありません。
+
+データを保存する場所
+＝ Amazon S3
+
+データの一覧・構造を管理する
+＝ AWS Glue Data Catalog
+
+誰がどのデータを見られるか管理する
+＝ AWS Lake Formation
+Lake Formationが確認する情報は、概念的には2つです。
+
+① どのサービスから来た要求か
+   → Athena
+
+② 誰の代理として来た要求か
+   → AnalystRole
+
+判断は次のようになります。
+
+Athenaだから一律許可
+
+ではなく、
+
+Athena経由で来た
+AnalystRoleの要求
+↓
+AnalystRoleにこのテーブルの権限があるか確認
+
+です。
+
+一番大事な整理
+利用者
+↓ AWS認証情報
+Athena
+↓ 呼び出し元の身元を引き継ぐ
+Lake Formation
+↓ その身元の権限を確認
+一時認証情報をAthenaへ発行
+↓
+S3データを読み取る
+
+したがって、
+
+Lake FormationはAthenaの裏側にいる人を直接見ているのではなく、Athenaが引き継いだ「元の呼び出し元プリンシパル」を確認している
