@@ -380,3 +380,36 @@ Strict-Transport-Security
 
 Lambda@Edge
 ＝ CloudFrontの通信途中でLambdaコードを実行する機能
+
+
+**OAC（Origin Access Control）**とは、
+
+CloudFrontだけが、S3などのオリジンへアクセスできるように制御する仕組み
+
+です。
+何のために使うのか
+
+CloudFrontのオリジンとしてS3を使う場合、S3バケットを一般公開すると、利用者はCloudFrontを通らずS3へ直接アクセスできてしまいます。
+
+利用者
+├─ CloudFront経由 → S3
+└─ S3へ直接アクセス
+
+これではCloudFrontを通す意味が薄くなります。
+
+OACを使うと、S3を非公開にしたまま、CloudFrontからのアクセスだけを許可できます。
+
+利用者
+↓
+CloudFront
+↓ OACによって認証されたリクエスト
+非公開S3バケット
+利用者
+↓ S3へ直接アクセス
+拒否
+
+OACは入口ではなく「認証・許可の仕組み」
+
+OAC自体が通信を中継するわけではありません。
+
+CloudFrontがS3へアクセスするときに、AWS Signature Version 4でリクエストへ署名します。
