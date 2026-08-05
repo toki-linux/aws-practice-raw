@@ -755,3 +755,78 @@ StandardとExpressの比較
 | 実行履歴   | Step Functionsで確認 | 主にCloudWatch Logs |
 | 料金     | 状態遷移数             | 実行回数・時間・メモリ       |
 | 向く例    | 決済、承認、長時間ジョブ      | IoT、ログ変換、API処理    |
+
+
+**Kinesis Client Library（KCL）**とは、
+
+Amazon Kinesis Data Streamsからデータを読み取るコンシューマーアプリを作りやすくするライブラリ
+
+です
+
+
+データ送信側＝プロデューサー
+データ処理側＝コンシューマー
+
+
+Amazon Managed Service for Apache Flinkとは、
+
+Kinesisなどから流れてくるデータを、リアルタイムで継続的に加工・集計・分析するためのフルマネージドサービス
+
+です。
+全体像
+
+例えば、Webサイトのアクセスログが常に流れてくるとします。
+
+ユーザーのアクセス
+        ↓
+Kinesis Data Streams
+        ↓
+Managed Service for Apache Flink
+        ↓
+リアルタイムに加工・集計
+        ↓
+DynamoDB・S3・OpenSearchなど
+
+Flinkは、データが全部たまるのを待たず、到着するたびに処理します。
+
+アクセスログ1件到着
+→ 処理
+
+次のログ到着
+→ 処理
+
+さらに次のログ到着
+→ 処理
+
+これがストリーム処理です。
+Kinesis Data Streamsとの違い
+
+ここが重要です。
+
+Kinesis Data Streams
+データを受け取り、
+順番にためて流す
+Managed Service for Apache Flink
+流れてきたデータを
+計算・変換・分析する
+
+構成としては、
+
+Producer
+↓
+Kinesis Data Streams
+↓
+Managed Service for Apache Flink
+↓
+分析結果の保存先
+
+となります。
+
+つまり、
+
+Kinesis Data Streams
+＝ データの川
+
+Apache Flink
+＝ 川を流れるデータを見ながら
+   加工・集計する作業員
