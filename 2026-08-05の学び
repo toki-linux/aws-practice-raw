@@ -830,3 +830,13 @@ Kinesis Data Streams
 Apache Flink
 ＝ 川を流れるデータを見ながら
    加工・集計する作業員
+
+Flink
+＝ 加工・分析
+
+
+
+Amazon Managed Streaming for Apache Kafka
+Amazon Managed Streaming for Apache Kafka (Amazon MSK) は、Apache KafkaをAWS上で効率的に運用できるようにするためのフルマネージドサービスです。
+Apache Kafkaは、WebサイトのアクセスログやIoTデバイスのデータをリアルタイムで収集・分析するなどのユースケースがありますが、SQLによる分類機能は持っていない
+
