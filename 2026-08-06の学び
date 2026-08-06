@@ -98,10 +98,49 @@ AWS Resource Access Manager（RAM）は、AWSリソースを複数のAWSアカ�
 Aが設計したvpcのなかにBのリソースを立てるということが可能になる
 
 
-おそらく Amazon AppFlow（アップフロー） のことです。
+Amazon AppFlow（アップフロー） とは
 
 SalesforceなどのSaaSと、S3やRedshiftなどのAWSサービス間で、データをコードなしで転送するフルマネージドサービス
 
 です。
 
+具体例
+
+Salesforceに顧客データが保存されているとします。
+
+Salesforce
+└─ 顧客名・メールアドレス・商談情報
+
+このデータをAWSへ取り込み、分析したい場合、
+
+Salesforce
+    ↓ Amazon AppFlow
+Amazon S3
+    ↓
+Athenaで分析
+
+のように転送できます。
+
+別の例では、
+
+Salesforce
+    ↓ Amazon AppFlow
+Amazon Redshift
+    ↓
+売上・顧客分析
+
+という構成もできます。
+
+AppFlowがなければ、SalesforceのAPIを呼び出すプログラムを自分で作り、認証や定期実行、エラー処理なども実装する必要があります。AppFlowでは、接続元・転送先・項目などを設定して、データ転送を管理・自動化できます。
+
+「Flow」とは
+
+AppFlowでは、データ転送の一連の設定をフローと呼びます。
+
+フロー
+├─ どこから取得するか
+├─ どこへ送るか
+├─ どのデータを送るか
+├─ いつ実行するか
+└─ どのように加工するか
 
