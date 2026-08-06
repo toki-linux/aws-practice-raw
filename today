@@ -91,3 +91,15 @@ S3やRedshiftなどに存在するデータを、検索可能な一覧として�
 誰が利用申請を承認するか
 誰が利用しているか
 を整理できます
+
+
+AWS Resource Access Manager（RAM）は、AWSリソースを複数のAWSアカウントで共有できるサービスです。
+共有可能なAWSリソースには、Amazon EC2、AWS VPC、Amazon Transit Gatewayなどがあります。
+Aが設計したvpcのなかにBのリソースを立てるということが可能になる
+
+
+おそらく Amazon AppFlow（アップフロー） のことです。
+
+SalesforceなどのSaaSと、S3やRedshiftなどのAWSサービス間で、データをコードなしで転送するフルマネージドサービス
+
+です。
