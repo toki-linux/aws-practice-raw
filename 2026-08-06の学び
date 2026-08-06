@@ -168,3 +168,15 @@ AppFlowでは、データ転送の一連の設定をフローと呼びます。
 機密情報をマスキングする
 
 例えばSalesforceでは CustomerName、S3側では customer_name としたい場合に、項目をマッピングできます。
+
+
+まとめ
+Amazon AppFlow
+＝ SaaSとAWSサービスの間で
+   データを安全に転送・自動化するサービス
+
+一言で覚えるなら、
+
+Salesforceなどの外部SaaSから、S3やRedshiftへデータを運ぶサービス
+
+です
