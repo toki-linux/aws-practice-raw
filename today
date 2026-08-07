@@ -79,3 +79,14 @@ VPC ARNとは、
 
 ARNは Amazon Resource Name の略
 VPC ARN = VPCのAWS上のフルネーム
+VPC ARNがあることで、識別することができる
+
+
+
+**カスタムIDブローカー（Custom Identity Broker）**とは、
+
+社内の認証情報とAWSの一時認証情報の間を仲介する、自社で用意する認証システム
+
+です。
+
+特に、既存の社内ユーザー管理システムを使ってAWSへフェデレーションログインさせたいときに出てきます。
