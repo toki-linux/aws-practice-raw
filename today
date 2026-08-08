@@ -83,3 +83,8 @@ aws:ResourceTag/Project
 リソースのProjectタグと、操作している人・ロールのProjectタグが同じなら許可
 
 です。
+
+ABAC
+＝ タグを見て
+   その操作を許可するか決める
+
