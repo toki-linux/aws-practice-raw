@@ -5,3 +5,81 @@ ECSサービスの構造
 タスクの中のコンテナで一塊
 タスクの中のコンテナの設定はタスク定義で行っている
 タスクロール（taskRoleArn）とは、コンテナが他のAWSサービスを利用する際に設定するアクセス権限（IAMロール）
+
+
+ABAC条件キーとは、
+
+IAMポリシーの中で、「タグなどの属性がこの条件に合うときだけ許可する」と判断するために使うキー
+
+です。
+
+ABACは Attribute-Based Access Control の略で、
+「ユーザー名ごとに権限を書く」のではなく、属性（主にタグ）を比較して権限を決める方式です。
+たとえばEC2にこういうタグが付いているとします。
+
+Project = A
+
+そしてIAMロール側にも、
+
+Project = A
+
+というタグを付けます。
+
+このときポリシーで、
+
+「呼び出し元のProjectタグ」と
+「EC2のProjectタグ」が一致したら許可
+
+とできます。
+
+イメージはこうです。
+
+IAMロール
+Project = A
+   ↓
+
+EC2-A
+Project = A
+→ 操作OK
+
+EC2-B
+Project = B
+→ 操作NG
+
+この比較に使うのが条件キーです。
+
+代表的なものは次です。
+
+aws:PrincipalTag/Project
+
+これは、
+
+今操作しているIAMユーザー・ロールの Project タグは何か
+
+を見る条件キーです。
+
+一方、
+
+aws:ResourceTag/Project
+
+は、
+
+操作対象リソースの Project タグは何か
+
+を見る条件キーです。
+
+なのでポリシーでは、概念的に、
+
+"Condition": {
+  "StringEquals": {
+    "aws:ResourceTag/Project": "${aws:PrincipalTag/Project}"
+  }
+}
+
+のように書けます。
+
+意味は、
+
+リソースのProjectタグと、操作している人・ロールのProjectタグが同じなら許可
+
+です。
