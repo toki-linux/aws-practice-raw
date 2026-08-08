@@ -318,3 +318,49 @@ EC2-Bを切り離す
 
 という点です。
 今やっているやつを終わらせてから接続を切る
+
+
+SSL Terminationとは？
+SSL Terminationとは、
+
+HTTPS通信の暗号化を、途中の機器やサービスでいったん復号して終端すること
+
+です。
+
+AWSでは、ALBやCloudFrontでHTTPSを終端するという形がよく出ます。
+
+例えば、
+
+ユーザー
+↓ HTTPS
+ALB
+↓ HTTP
+EC2
+
+という構成なら、SSL/TLS TerminationはALBで行われています。
+
+流れは、
+
+ユーザー
+↓ 暗号化されたHTTPS通信
+ALB
+↓ 証明書を使って復号
+↓
+平文のHTTP
+EC2
+
+です。
+
+このとき証明書は、たとえばACMで用意してALBに設定します。
+
+ACM
+↓ SSL/TLS証明書
+ALB
+
+なので、
+
+ACM = 証明書を用意・管理する
+ALB = その証明書を使ってHTTPSを復号する
+
+という役割分担です。
+HTTPS通信の暗号化の一旦のゴール
