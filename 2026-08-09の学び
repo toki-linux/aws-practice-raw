@@ -29,3 +29,35 @@ IdP側でMFAを維持したい
 既存の企業IdPと連携して、複数AWSアカウントへのユーザーアクセスを一元管理する
 
 ためのサービスだからです。
+今回の構成はこういうイメージです。
+
+既存SAML IdP
+├─ Tokyo-Developer
+├─ Tokyo-Admin
+├─ Singapore-Developer
+└─ Singapore-Admin
+        ↓
+IAM Identity Center
+        ↓
+グループごとにPermission Set / IAMロール相当を割り当て
+        ↓
+複数AWSアカウント
+
+そしてリージョン制限は、そのロール側の権限ポリシーで、
+
+東京チーム
+→ ap-northeast-1 のみ許可
+
+シンガポールチーム
+→ ap-southeast-1 のみ許可
+
+のように設定します。
+
+なので正解は画像の3番です。
+
+今回、サービスが出てこなかった理由は、あなたが
+
+グループごとにロール
+リージョン制限
+
+だけを見ていたからだと思います。
