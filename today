@@ -455,3 +455,47 @@ Control Tower
 
 という意味です。
 
+
+
+ランディングゾーンとは？
+
+これも名前が分かりにくいですが、
+
+複数AWSアカウントを安全に運用するための「最初から整えられた土台」
+
+です。
+
+Control Towerを使うと、例えば、
+
+AWS Organizations
+│
+├─ Security OU
+│   ├─ Log Archive Account
+│   └─ Audit Account
+│
+├─ Production OU
+│   └─ 本番アカウント
+│
+└─ Development OU
+    └─ 開発アカウント
+
+のようなマルチアカウント環境を作り、
+
+さらに、
+
+・Organizations
+・OU
+・セキュリティ用アカウント
+・ログ管理
+・コントロール
+・アカウント作成の仕組み
+
+などをまとめて整備します。
+
+このControl Towerによって整備されたAWSマルチアカウント環境全体をランディングゾーンと考えてください。
+名前のイメージとしては、
+
+新しいAWSアカウントが
+安全に「着陸」できる場所
+      ↓
+Landing Zone
