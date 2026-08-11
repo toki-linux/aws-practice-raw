@@ -77,3 +77,8 @@ Config
 
 特にSAAでは、「設定がルールに準拠しているか」「設定変更を追跡」「非準拠リソースを検出」→ AWS Config と結び付けると判断しやすいです。
 
+
+
+Authorizer = APIの入口だけ守る
+
+Identity Pool = ユーザーにAWS権限そのものを渡す
