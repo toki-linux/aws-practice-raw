@@ -726,3 +726,46 @@ inventory.csv
 Transfer Family
 ↓
 同じS3
+
+
+SAML（Security Assertion Markup Language）は、主にシングルサインオン（SSO）を実現するための認証技術
+
+
+
+かなりざっくり言えば、IAM Roles Anywhereは、オンプレミスなどAWS外のサーバーやアプリから、IAMロールの一時認証情報を使ってAWSへアクセスするための仕組みです。
+
+ただし、
+
+「オンプレミスとAWSをネットワーク接続するサービス」
+
+ではありません。
+
+ここは重要です。
+
+IAM Roles Anywhere
+＝ 認証・権限の仕組み
+
+VPN / Direct Connect
+＝ ネットワーク接続の仕組み
+
+です。
+
+流れはこうです。
+
+オンプレミスのサーバー
+↓
+X.509証明書で自分を証明
+↓
+IAM Roles Anywhere
+↓
+IAMロールを引き受ける
+↓
+一時的なAWS認証情報を取得
+↓
+S3などのAWS APIを呼ぶ
+
+つまり目的は、
+
+AWS外のワークロードに、アクセスキーを長期間保存せずIAMロールを使わせる
+
+ことです。
