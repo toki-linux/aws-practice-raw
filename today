@@ -499,3 +499,44 @@ AWS Organizations
 安全に「着陸」できる場所
       ↓
 Landing Zone
+
+
+
+Lake FormationとData zoneは何が違う？
+利用者
+↓
+Amazon DataZone
+「この顧客データを使いたい」
+↓
+申請・承認
+↓
+Lake Formation
+「では、このユーザーに
+ このテーブルへのアクセスを許可」
+↓
+S3 / Glue Data Catalog
+↓
+Athenaなどで分析
+
+なので役割は、
+
+DataZone
+＝ データを見つける
+   誰が管理しているか知る
+   利用申請する
+   承認・共有する
+
+Lake Formation
+＝ 実際にデータアクセスを制御する
+
+です。
+
+例えるなら、会社の資料室で、
+
+DataZone
+＝ 資料検索システム＋貸出申請窓口
+
+Lake Formation
+＝ 資料室の鍵・入室権限
+
+という感じです。
