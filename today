@@ -82,3 +82,171 @@ Config
 Authorizer = APIの入口だけ守る
 
 Identity Pool = ユーザーにAWS権限そのものを渡す
+
+
+Route 53は「ホストゾーン全体」をShield Advancedの保護対象として登録する。
+EC2は「EC2インスタンスそのもの」ではなく、そのEC2に関連付けたElastic IPを保護対象として登録する。
+
+ここを分けて考えます。
+
+Route 53の場合
+
+たとえば、パブリックホストゾーン example.com があるとします。
+
+Route 53
+└─ example.com  ← ホストゾーン
+   ├─ www.example.com
+   ├─ api.example.com
+   ├─ shop.example.com
+   └─ example.com
+
+この中には複数のDNSレコードがあります。
+
+Shield AdvancedでRoute 53を保護するとき、
+
+www.example.com だけ保護
+api.example.com だけ保護
+
+のように、レコードやサブドメインを1個ずつ指定するわけではありません。
+
+代わりに、
+
+example.com のパブリックホストゾーン全体
+
+を保護対象として登録します。
+
+すると、そのホストゾーンに対するDNSへのDDoS攻撃をShield Advancedで保護する、という考え方です。
+
+なので、
+
+「Route 53はレコードやサブドメイン単位ではなくホストゾーン単位」
+
+とは、
+
+× www.example.comだけShield Advanced登録
+
+○ example.comのHosted ZoneをShield Advanced登録
+
+という意味です。
+
+EC2の場合
+
+こっちは少し特殊です。
+
+たとえば、
+
+EC2
+Private IP：10.0.1.10
+Public IP：54.x.x.x
+
+というEC2があったとしても、Shield Advancedで、
+
+このEC2インスタンス i-012345...
+を保護してください
+
+と直接登録するわけではありません。
+
+EC2へ**Elastic IP（EIP）**を付けます。
+
+インターネット
+     ↓
+Elastic IP
+203.0.113.10
+     ↓
+EC2
+
+そしてShield Advancedでは、
+
+Elastic IP：203.0.113.10
+
+を保護対象として登録します。
+
+つまり、
+
+Shield Advanced
+      ↓ 保護
+Elastic IP
+      ↓
+EC2
+
+という関係です。
+
+だから、
+
+「EC2インスタンスはElastic IPに紐づけた場合に限って保護対象」
+
+という表現になります。
+
+EC2本体をShieldに登録しているというより、EC2へのインターネット上の固定された入口であるEIPを保護しているわけです。
+
+なぜ普通のパブリックIPではダメなの？
+
+EC2の自動割り当てパブリックIPv4アドレスは、停止・起動などによって変わることがあります。
+
+一方EIPは、
+
+固定されたパブリックIP
+
+としてAWSリソースとして管理できます。
+
+Shield Advancedでは、このEIPという明確なリソースを保護対象にします。
+
+ここで「Shieldが何を守っているか」をイメージすると分かりやすいです。
+
+Shield Advancedは、
+
+サーバー内部のアプリを守るというより、インターネットから攻撃を受けるAWSリソースの入口をDDoSから守る
+
+サービスです。
+
+たとえば、
+
+インターネット
+      ↓
+   CloudFront  ← Shield Advanced
+      ↓
+     ALB       ← Shield Advanced
+      ↓
+     EC2
+
+あるいは、
+
+インターネット
+      ↓
+Elastic IP    ← Shield Advanced
+      ↓
+     EC2
+
+です。
+
+Route 53なら、
+
+DNS問い合わせ
+     ↓
+Route 53 Hosted Zone
+     ↑
+Shield Advanced
+
+となります。
+
+なので今回の文章を普通の日本語にすると、
+
+Route 53をShield Advancedで守る場合は、www.example.comなど個々のDNSレコードではなく、そのレコードをまとめているパブリックホストゾーンを指定する。EC2を守りたい場合は、EC2本体を直接指定するのではなく、EC2にElastic IPを付け、そのElastic IPをShield Advancedの保護対象として登録する。
+
+という意味です。
+
+試験向けには、
+
+Route 53
+→ Hosted Zone単位
+
+EC2
+→ Elastic IP単位
+
+ALB/NLB
+→ Load Balancer単位
+
+CloudFront
+→ Distribution単位
+
+くらいの「Shield Advancedで何をリソースとして登録するのか」という視点を持つと分かりやすくなります。
