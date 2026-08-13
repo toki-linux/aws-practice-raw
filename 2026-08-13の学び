@@ -283,3 +283,7 @@ example.com/shop/*
 example.com/admin/*
 → 管理画面用EC2
 example.com/api/
+
+
+
+SNI（Server Name Indication）は、暗号化通信で使用するサーバー証明書をパブリックIPアドレスではなくドメイン名によって判断する技術
