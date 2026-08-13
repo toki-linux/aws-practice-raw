@@ -233,3 +233,5 @@ STS AssumeRole
 「別アカウントのAWSリソースを使いたい」→ まずAssumeRoleを考える
 
 
+FSx for Windowsファイルサーバーは、オンプレミスのActive Directory(AD)サーバーと連携させることができます
+なので、オンプレミスのADをそのままAWSで使える
