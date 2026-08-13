@@ -58,3 +58,11 @@ Cloudfrontを介した接続だと、ネットワークACLは特定のIPをブ�
 
 Amazon SQSでは、キューに対してアクセスポリシー（SQSポリシー）というリソースベースのポリシーを設定できる
 他のアカウントからのアクセスも制御可能
+
+
+Direct Connectエンドポイントから複数のVPCに接続したい場合はDirect Connectゲートウェイを利用する
+
+
+CloudWatch Logs Insightsはリアルタイム分析や短期間のデータ分析に優れている
+
+Managed Service for Apache Flink（旧 Kinesis Data Analytics）はリアルタイム分析に適している
