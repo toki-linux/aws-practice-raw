@@ -200,3 +200,30 @@ AWS Systems Manager Parameter Storeはない
 
 
 ハイブリッド環境では、Route 53 VPC Resolverのインバウンドエンドポイントやアウトバウンドエンドポイントを利用してDNSクエリを転送することで、AWS環境とオンプレミス環境で相互に名前解決できるようになる
+
+
+地理的制限はCloudFrontとAWS WAFのWeb ACLの２パターンで行える
+
+
+ゲートウェイVPCエンドポイントはS3とDynamoDB専用の仕組み
+ゲートウェイVPCエンドポイントは、
+
+VPC内のリソースから、インターネットやNAT Gatewayを通らずに、S3やDynamoDBへプライベートにアクセスするための入口
+
+です。
+
+
+エンドポイントのインターフェース型とゲートウェイ型
+
+Gateway Endpoint
+→ Route Tableに経路を追加
+→ ENIなし
+→ Private IPなし
+→ SGなし
+→ 主にS3 / DynamoDB
+
+Interface Endpoint
+→ ENIを作る
+→ Private IPあり
+→ Security Groupあり
+→ 多くのAWSサービス向け
