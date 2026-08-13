@@ -227,3 +227,9 @@ Interface Endpoint
 → Private IPあり
 → Security Groupあり
 → 多くのAWSサービス向け
+
+
+STS AssumeRole
+「別アカウントのAWSリソースを使いたい」→ まずAssumeRoleを考える
+
+
