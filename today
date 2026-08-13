@@ -128,3 +128,8 @@ APIキー
 
 SFTP、FTPS、FTPなどをサポートし、Amazon S3およびAmazon EFSへセキュアにファイルの転送が可能なのは
 AWS Transfer　Family
+
+
+
+Amazon AppFlowは、様々なSaaSアプリケーションと、AWSサービス間でデータを安全に転送できるフルマネージドサービス
+
