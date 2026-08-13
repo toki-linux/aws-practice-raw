@@ -41,3 +41,7 @@ TCP 443 from 0.0.0.0/0
 
 
 Security HubをControl Tower環境に統合することで、FSBPを含むセキュリティベストプラクティスに基づいて、すべてのアカウントの設定を継続的にモニタリングできます。Security Hubは、Control Towerと連携して利用できるため、構成の一貫性が保たれる
+
+
+新規アカウントへの自動適用には、Control Towerに含まれるAccount Factoryを使用します。Account Factoryでは、標準設定済みのテンプレートに基づいて新しいアカウントを作成できるため、ガバナンス設定やSecurity Hubの有効化などが自動で反映される
+これにより手作業を最低限に抑えられる
