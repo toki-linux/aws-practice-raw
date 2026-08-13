@@ -235,3 +235,51 @@ STS AssumeRole
 
 FSx for Windowsファイルサーバーは、オンプレミスのActive Directory(AD)サーバーと連携させることができます
 なので、オンプレミスのADをそのままAWSで使える
+
+ホストベースルーティングとパスベースルーティング
+
+ホストベース
+＝ 前を見る
+api.example.com
+
+パスベース
+＝ 後ろを見る
+
+
+
+ホストベースルーティングは、URLのドメイン名部分を見ます。
+
+api.example.com
+shop.example.com
+admin.example.com
+
+たとえば、
+
+api.example.com
+→ API用EC2
+
+shop.example.com
+→ ECサイト用EC2
+
+admin.example.com
+→ 管理画面用EC2
+
+という振り分けです。
+
+一方、パスベースルーティングは、ドメインの後ろのURLパスを見ます。
+
+example.com/api/
+example.com/shop/
+example.com/admin/
+
+たとえば、
+
+example.com/api/*
+→ API用EC2
+
+example.com/shop/*
+→ ECサイト用EC2
+
+example.com/admin/*
+→ 管理画面用EC2
+example.com/api/
