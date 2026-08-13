@@ -10,3 +10,31 @@ S3のストレージタイプである「オブジェクトストレージ」と
 
 
 Amazon DataZoneは、AWS、オンプレミス、サードパーティーの環境などに分散されたデータを一元的にカタログ化し、検索・共有・管理を効率化するデータ管理サービスです
+
+
+AWS Firewall Managerは、ファイアウォールそのものではありません。
+複数アカウントにあるSecurity GroupやWAF、Network Firewallなどのルールを、組織全体で一元管理・監査するサービスです。特にSecurity Groupポリシーでは、共通ルールの配布、ルール内容の監査、未使用・重複Security Groupの検出までできます。
+
+例
+数十AWSアカウント
+＋
+複数リージョン
+
+各アカウントのSecurity Groupがバラバラ
+
+やりたいこと：
+① 共通Security Groupルールを統一適用
+② ルールを監査
+③ 未使用・冗長なSecurity Groupを検出
+④ 運用負荷を減らす
+
+AWS Firewall Managerは
+セキュリティグループなどが重複していたり非準拠であった場合に検出、自動修復してくれるサービス
+sg-a
+Inbound:
+TCP 443 from 0.0.0.0/0
+
+sg-b
+Inbound:
+TCP 443 from 0.0.0.0/0
+があった場合自動検出してくれる
