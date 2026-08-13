@@ -66,3 +66,65 @@ Direct Connectエンドポイントから複数のVPCに接続したい場合は
 CloudWatch Logs Insightsはリアルタイム分析や短期間のデータ分析に優れている
 
 Managed Service for Apache Flink（旧 Kinesis Data Analytics）はリアルタイム分析に適している
+
+
+API Gatewayは「オンプレミスからAWSを使うため専用のサービス」ではありません。
+
+役割はもっと広くて、
+
+アプリやユーザーから来るAPIリクエストの入口を作るサービス
+
+です。
+
+たとえば、
+
+スマホアプリ
+↓
+API Gateway
+↓
+Lambda
+
+もありますし、
+
+Webアプリ
+↓
+API Gateway
+↓
+EC2 / ECS / Lambda
+
+もあります。
+
+オンプレミスから使うこともできます。
+
+オンプレミスのシステム
+↓ HTTPSでAPI呼び出し
+API Gateway
+↓
+Lambdaなど
+
+でもこれは「API Gatewayの代表的な1用途」であって、オンプレ専用ではありません。
+
+前に話していた考え方でいうと、
+
+API Gateway
+＝ APIの玄関・受付
+
+Lambda / EC2 / ECS
+＝ 実際に処理するバックエンド
+
+です。
+
+API Gatewayでは入口で、
+
+認証
+認可
+レート制限
+APIキー
+キャッシュ
+リクエスト変換
+
+などもできます。
+
+
+SFTP、FTPS、FTPなどをサポートし、Amazon S3およびAmazon EFSへセキュアにファイルの転送が可能なのは
+AWS Transfer　Family
