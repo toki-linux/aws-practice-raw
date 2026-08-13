@@ -38,3 +38,6 @@ sg-b
 Inbound:
 TCP 443 from 0.0.0.0/0
 があった場合自動検出してくれる
+
+
+Security HubをControl Tower環境に統合することで、FSBPを含むセキュリティベストプラクティスに基づいて、すべてのアカウントの設定を継続的にモニタリングできます。Security Hubは、Control Towerと連携して利用できるため、構成の一貫性が保たれる
