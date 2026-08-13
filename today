@@ -133,3 +133,59 @@ AWS Transfer　Family
 
 Amazon AppFlowは、様々なSaaSアプリケーションと、AWSサービス間でデータを安全に転送できるフルマネージドサービス
 
+
+
+SCPは、
+
+IAMユーザーに直接「権限を付与する」ポリシーではなく、Organizations配下で「ここまでしか許可しません」という上限をかけるもの
+
+です。
+
+例えば、
+
+AWS Organizations
+└─ 開発OU
+   └─ Account A
+      ├─ IAM User：Alice
+      └─ IAM Role：DeveloperRole
+
+この開発OUに、
+
+東京リージョン以外のEC2操作は禁止
+
+というSCPを付けると、
+
+Alice
+→ 東京のEC2操作：可能性あり
+→ 大阪のEC2操作：SCPで拒否
+
+DeveloperRole
+→ 東京のEC2操作：可能性あり
+→ 大阪のEC2操作：SCPで拒否
+
+となります。
+
+つまり、
+
+SCP
+↓
+OU / AWSアカウントに適用
+↓
+その配下にいるIAMユーザー・IAMロールの操作に効く
+
+という関係です。
+
+なので、
+
+「SCPはAWSアカウントを制御する」
+
+という理解は間違いではありません。
+
+より正確には、
+
+SCPをOUやAWSアカウントに適用し、その配下のIAMプリンシパルが実行できる操作の上限を制御する
+
+です。
+
+SCPはアカウントにかける“天井”で、その天井はアカウント内のIAMユーザーやIAMロールにも効く！
+SCPはIAMユーザーにも効く
