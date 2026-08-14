@@ -116,3 +116,37 @@ ECSクラスター
 └── タスク定義
        ↑
    タスクの設計図
+
+Amazon EKSには、実行中のアプリケーションの負荷状況に応じてリソース（ポッドやノード）を自動的にスケーリングする機能がある
+ポッドの数を自動的に増減させたい場合「Horizontal Pod Autoscaler (HPA)」を使用する
+HPAを動作させるには、これらのメトリクスデータを収集するために、別途「Metrics Server」というコンポーネントを導入する必要がある
+HPA = 数を調整する人
+Metrics Server = 状況を測る人
+
+イメージ
+Kubernetes / EKS                AWSで近いもの
+
+HPA
+↓
+Pod数を増やす・減らす
+≒ Auto Scaling
+
+Metrics Server
+↓
+CPU・メモリ使用率などを集める
+≒ CloudWatchのメトリクス収集部分
+
+Service / LoadBalancer
+↓
+Podへ通信を振り分け
+つまり、
+
+Metrics Server
+「CPU使用率が80%になってるよ」
+        ↓
+HPA
+「じゃあPodを2個→4個に増やそう」
+        ↓
+Pod増加
+
+という関係です。
