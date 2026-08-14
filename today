@@ -202,3 +202,66 @@ Kubernetes内にソフトウェアのロードバランサーを自前で用意�
 
 Amazon VPC CNI plugin for Kubernetesは、Amazon EKSでポッドにIPアドレスを割り当てるためのネットワークプラグインです
 プラグインとは、メインとなるソフトウェアやシステムに、後から新しい機能や拡張機能を追加するための小さなプログラムのこと
+
+
+IRSA（IAM Roles for Service Accounts）は、EKSで、
+
+特定のPodだけに、必要なIAM権限を与える仕組み
+
+です。
+
+まず前提として、EKSのPodがS3やDynamoDBなどのAWSサービスへアクセスしたいことがあります。
+
+Pod
+ ↓
+S3
+
+このとき昔ながらのやり方だと、Podが動いているワーカーノードのIAMロールを使う形になりやすいです。
+
+EC2ワーカーノード
+└── IAMロール：S3アクセス可
+      ├── Pod A
+      ├── Pod B
+      └── Pod C
+
+すると、同じノード上のPodに必要以上の権限を持たせてしまう可能性があります。
+
+IRSAを使うと、Podが利用するKubernetesのServiceAccountにIAMロールを関連付けられます。
+
+EKS
+
+
+Pod A
+ ↓
+ServiceAccount A
+ ↓
+IAM Role A
+ ↓
+S3のみ許可
+
+
+Pod B
+ ↓
+ServiceAccount B
+ ↓
+IAM Role B
+ ↓
+DynamoDBのみ許可
+
+つまり、
+
+「ノード単位ではなく、Pod単位に近い粒度でIAM権限を分けられる」
+
+のがポイントです。
+
+ServiceAccountって何？
+
+ここでいうServiceAccountは、人間のユーザーではありません。
+
+Kubernetes内で、
+
+このPodは何者として動くのか
+
+を表すIDのようなもの
+
+逆にIRSAがなければノード単位でIAMロールがつく
