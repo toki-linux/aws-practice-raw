@@ -270,3 +270,32 @@ Kubernetes内で、
 Amazon Data Lifecycle Manager（DLM）は、
 Amazon EBSスナップショットとAMIの作成・保持・削除を自動化するサービス
 あらかじめ定義したライフサイクルポリシーに従って、バックアップのスケジューリングと不要なデータのクリーンアップを自動で行う
+
+
+これらのセットを覚えて！
+何を使っているか
+Windows
+= NTFS + SMB + AD
+
+
+Linux / UNIX
+= NFS + POSIX
+
+FSx系はここからさらに、
+
+FSx for Windows File Server
+→ Windows / SMB / NTFS / AD
+
+
+FSx for Lustre
+→ HPC・高速処理
+
+
+FSx for NetApp ONTAP
+→ NFS / SMB など両方扱える
+
+
+FSx for OpenZFS
+→ NFS / Linux系
+
+と枝分かれします。
