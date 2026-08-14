@@ -458,3 +458,63 @@ Amazon AuroraはMySQL,PostgreSQLと互換性があるAWSが再設計したリレ
 例　1秒→2秒→3秒→4秒…
 リクエストが失敗した際に、クライアントが試行回数に応じて待機時間を指数的に延ばして再試行する仕組み＝エクスポネンシャルバックオフ
 例　1秒→2秒→4秒→8秒…
+
+AWS Lake Formationの**LFタグ（Lake Formation Tag）**は、
+
+データベースやテーブル、列などに「分類ラベル」を付けて、そのラベルを使ってアクセス権限を管理する仕組み
+
+です
+LFタグ = Lake Formationのデータにラベルを付け、そのラベルを条件にアクセス権限を管理する仕組み
+
+Kinesis系は**「何をする場所か」で3つに分ける**と覚えやすいです。
+
+まず軸はこれです。
+
+流す
+↓
+処理する
+↓
+貯める
+
+Kinesis系を当てはめると、
+
+Kinesis Data Streams
+= 流す
+
+
+Managed Service for Apache Flink
+= 処理する
+
+
+Kinesis Data Firehose
+= 貯める先まで運ぶ
+
+Kinesis Data Streams
+
+リアルタイムデータを流し続ける本流
+イメージはベルトコンベア
+
+Managed Service for Apache Flink
+
+流れてきたデータをリアルタイム処理する
+流れている途中で計算・分析する人
+
+Kinesis Data Firehose
+
+データを目的地まで自動で届ける
+イメージは配達トラック
+
+問題文のキーワード
+「リアルタイムで大量データを受け取る」
+→ Data Streams
+
+「リアルタイムで集計・分析」
+→ Flink
+
+「S3やRedshiftへ自動配信」
+→ Firehose
+さらにKCLも出てきますが、これはサービスというより、
+
+Data Streamsからデータを読むアプリを作りやすくするライブラリ
+
+です。
