@@ -427,3 +427,6 @@ Amazon CloudWatch Container Insightsは、コンテナ環境のメトリクス�
 
 
 キーポリシーは、KMSキーに適用するリソースベースのポリシーです。IAMユーザーやIAMロール、他のAWSアカウントがKMSキーに対して操作できる権限を設定
+
+
+AWS Site-to-Site VPNで使用する仮想プライベートゲートウェイ（VGW：Virtual Private Gateway）とVPNトンネルは、機器障害に対する高可用性を保つためにAWS側で冗長化されています。一方、カスタマーゲートウェイはオンプレミス内の機器なので、高可用性を保つにはAWSユーザー側で冗長化する必要があります
