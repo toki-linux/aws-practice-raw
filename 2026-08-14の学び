@@ -444,3 +444,11 @@ Standard Workflow
 
 
 デッドレターキューに配置されたメッセージは元のキューには戻されません
+
+
+
+Amazon Athenaは、Amazon S3上のデータに対して標準SQLを実行できるデータ分析サービス
+データベースサービスではない
+
+Amazon Auroraと間違えやすい
+Amazon AuroraはMySQL,PostgreSQLと互換性があるAWSが再設計したリレーショナルデータベースエンジン
