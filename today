@@ -189,3 +189,7 @@ ACIDは、ざっくり言うと、
 
 
 ALBのターゲットにはオンプレミスのインスタンスも指定できる
+
+
+Amazon ElastiCache for MemcachedにはAuto Scaling機能はありません。
+また、AWS Backupにも対応していない
