@@ -193,3 +193,20 @@ ALBのターゲットにはオンプレミスのインスタンスも指定で�
 
 Amazon ElastiCache for MemcachedにはAuto Scaling機能はありません。
 また、AWS Backupにも対応していない
+
+
+Elastic Beanstalkは、
+
+既存のWebアプリを大きく作り直さずに、EC2・Load Balancer・Auto Scalingなどをまとめて管理できるサービス
+
+です。
+キーワード
+既存Webアプリ
++
+コード変更を少なく
++
+EC2 / ALB / Auto Scalingをまとめて構築
++
+運用負荷を減らす
+
+→ Elastic Beanstalk
