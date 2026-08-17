@@ -101,3 +101,31 @@ APIキャッシュでは、API Gatewayがバックエンドから取得したレ
 これにより、Lambda関数などのバックエンドへの呼び出しを削減可能で、レスポンス速度の向上が期待できる
 API Gatewayでキャッシュしておき、リクエストが同じ場合はそこからリクエストすることができる
 これができるのはRest APIだけ
+
+
+
+EventBridge系をこう分けると覚えやすいです。
+
+EventBridge Event Bus
+→ イベントを受ける場所
+
+
+EventBridge Rule
+→ イベントの内容を見て振り分ける
+
+
+EventBridge Pipes
+→ AからBへのイベント連携を簡単に作る
+
+
+EventBridge Scheduler
+→ 指定した日時・周期で処理を起動する
+
+例
+「高額ならA、失敗ならB、国外ならC」
+
+のような条件によるイベントの振り分けをしたいなら
+
+
+EventBridge Event Bus + Rules
+を使う
