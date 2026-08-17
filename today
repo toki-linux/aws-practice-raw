@@ -1,1 +1,6 @@
+AWS Systems Manager Automationは、AWSリソースへの操作をランブックに従って自動的に実行するサービス
+
+
+Amazon Data Lifecycle Managerは、EC2のEBSボリュームやAMIのスナップショット取得と保持管理に特化したサービス
+RDSやDynamoDBやEFSには対応していない。
 
