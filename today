@@ -94,3 +94,10 @@ Automation
 Amazon Data Lifecycle Managerは、EC2のEBSボリュームやAMIのスナップショット取得と保持管理に特化したサービス
 RDSやDynamoDBやEFSには対応していない。
 
+
+
+API GatewayのREST APIには、クライアントへのレスポンスを一時的に保存するAPIキャッシュ機能がある
+APIキャッシュでは、API Gatewayがバックエンドから取得したレスポンスをキャッシュし、同一条件のリクエストに対してキャッシュからレスポンスを返す
+これにより、Lambda関数などのバックエンドへの呼び出しを削減可能で、レスポンス速度の向上が期待できる
+API Gatewayでキャッシュしておき、リクエストが同じ場合はそこからリクエストすることができる
+これができるのはRest APIだけ
