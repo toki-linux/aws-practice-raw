@@ -129,3 +129,8 @@ EventBridge Scheduler
 
 EventBridge Event Bus + Rules
 を使う
+
+Amazon EventBridge Pipesは、主に1つのソースから1つのターゲットへイベントを連携する用途に適した機能です。
+1つの請求イベントを条件ごとに複数の宛先へ振り分けたりコピーしたりする構成には、EventBridge のイベントバスと複数ルールを使用するほうが適しています
+
+Amazon EventBridge Schedulerは、指定した時刻や一定間隔で処理を実行するための機能
