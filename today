@@ -1,5 +1,95 @@
 AWS Systems Manager Automationは、AWSリソースへの操作をランブックに従って自動的に実行するサービス
 
+AWS Systems Manager Automationは、一言でいうと、
+
+AWS上の運用作業を、あらかじめ決めた手順どおりに自動実行する仕組み
+
+です。
+
+たとえば普段なら人が、
+
+① EC2を停止
+② AMIを作成
+③ 設定を変更
+④ EC2を再起動
+⑤ 動作確認
+
+のように順番に作業するとします。
+
+Systems Manager Automationを使うと、この流れを自動化された手順書として登録して実行できます。
+
+Automation Runbook
+   ↓
+EC2停止
+   ↓
+AMI作成
+   ↓
+設定変更
+   ↓
+EC2起動
+   ↓
+確認
+
+この「自動化された手順書」を Runbook（ランブック） と呼びます。
+
+Run Commandとの違い
+
+ここはかなり重要です。
+
+Run Command は、
+
+「EC2にこのコマンドを実行して」
+
+というものです。
+
+Systems Manager Run Command
+        ↓
+EC2
+        ↓
+yum update
+systemctl restart nginx
+
+一方、Automation は、
+
+「複数のAWS操作を順番に実行して」
+
+というものです。
+
+Systems Manager Automation
+        ↓
+EC2停止
+        ↓
+スナップショット取得
+        ↓
+設定変更
+        ↓
+EC2起動
+
+なので、
+
+Run Command
+= コマンドを実行
+
+
+Automation
+= 運用作業の流れ全体を自動化
+
+と考えると分かりやすいです。
+
+かなり簡単にまとめると、
+
+Session Manager
+→ EC2に入る
+
+
+Run Command
+→ EC2に命令する
+
+
+Automation
+→ 運用手順そのものを自動化する
+
+この3つの切り分けで覚える
 
 Amazon Data Lifecycle Managerは、EC2のEBSボリュームやAMIのスナップショット取得と保持管理に特化したサービス
 RDSやDynamoDBやEFSには対応していない。
