@@ -15,4 +15,6 @@ SAAでは、
 「ALBを固定IPで公開したい」
 → Global Accelerator
 
+Global Acceleratorは門番ではなく「固定された入口＋案内係」
+
 
