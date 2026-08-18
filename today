@@ -1,1 +1,18 @@
+「ALB自体には固定IPを持たせられないけど、Global Acceleratorを前段に置くことで、外部からは固定IPでアクセスできるように見せる」イメージとしては、
+
+ユーザー
+「いつもこの住所に行けばいい」
+        ↓
+Global Accelerator
+「中の配送先はこっちのALB」
+        ↓
+ALB
+
+という感じです。
+
+SAAでは、
+
+「ALBを固定IPで公開したい」
+→ Global Accelerator
+
 
