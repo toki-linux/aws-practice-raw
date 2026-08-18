@@ -85,3 +85,25 @@ Linux + Windowsで同じ共有ファイル
 
 さらに高性能な大量I/O
 → SSD
+
+
+シャード数を増やす
+
+シャードは、Kinesisの中のデータを流すレーンみたいなものです。
+
+通常
+
+
+Kinesis
+├─ Shard 1
+└─ Shard 2
+
+これを、
+
+Kinesis
+├─ Shard 1
+├─ Shard 2
+├─ Shard 3
+└─ Shard 4
+
+と増やせば、ストリーム全体の処理能力は上がります。
