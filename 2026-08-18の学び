@@ -40,3 +40,32 @@ REST APIではデフォルトで29秒だが、リージョンAPIやプライベ�
 FSx for Windowsファイルサーバーでは、SSDとHDDの両方のストレージタイプを提供しており
 SSDストレージは、HDDと比べてI/O処理性能が高く、低レイテンシーで大量の読み書きを行うことができる
 短時間で大量のデータを処理するワークロードに適しており、データ分析やメディア変換などの高パフォーマンスを要求する処理に向いている
+
+ファイル共有という目的は同じ。OSに合ったプロトコルとサービスを選ぶ
+やりたいこと自体はどちらも、
+
+複数のコンピュータから同じファイルを共有する
+
+です。
+
+ただ、OSによって一般的に使うファイル共有プロトコルが違います。
+
+Linux / UNIX
+→ NFS
+→ Amazon EFS
+
+
+Windows
+→ SMB
+→ Amazon FSx for Windows File Server
+
+なのでイメージは、
+
+やりたいこと
+「共有フォルダを使いたい」
+        ↓
+OSは何？
+   ├─ Linux → NFS → EFS
+   └─ Windows → SMB → FSx for Windows
+
+覚えるなら、Linux = NFS = EFS、Windows = SMB = FSx for Windows のセットで十分
