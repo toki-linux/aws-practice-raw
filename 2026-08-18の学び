@@ -69,3 +69,19 @@ OSは何？
    └─ Windows → SMB → FSx for Windows
 
 覚えるなら、Linux = NFS = EFS、Windows = SMB = FSx for Windows のセットで十分
+
+FSx for WindowsはLinux + Windowsも対応可能
+
+問題文での区別
+Linuxだけ
+→ EFS候補
+
+Windowsだけ
+→ FSx for Windows候補
+
+Linux + Windowsで同じ共有ファイル
+→ EFSはWindowsが使えない
+→ FSx for Windows
+
+さらに高性能な大量I/O
+→ SSD
