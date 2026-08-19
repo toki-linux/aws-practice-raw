@@ -38,3 +38,43 @@ FSx for Windows
 FSx for NetApp ONTAP
 → NFSもSMBも使える
 → Linux + Windows混在環境に強い
+
+
+キャッシュ戦略の種類
+キャッシュ戦略は、まず 「いつキャッシュに入れるか」 で分けると混ざりにくいです。
+
+一番おすすめの覚え方はこれです。
+
+Lazy Loading
+= 読まれた時に入れる
+
+
+Write-Through
+= 書かれた時に入れる
+
+つまり、
+
+Lazy
+→ 読む時
+
+
+Write-Through
+→ 書く時
+
+Lazy = 怠け者なので、必要になるまで何もしない
+
+Writeしたら、そのままCacheまでThroughする
+
+
+まとめ
+Lazy Loading
+→ いつ入れる？
+→ 読まれた時
+
+Write-Through
+→ いつ入れる？
+→ 書かれた時
+
+TTL
+→ いつ捨てる？
+→ 時間が来た時
