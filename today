@@ -15,3 +15,26 @@ ElastiCache for Redisを利用することで最新のチャットを見れる
 ElastiCache for Redisはこのような要件を満たすことができる
 
 
+Amazon DynamoDBのグローバルテーブルは、DynamoDBテーブルを複数のリージョンにまたがって運用できるサービスです。
+複数のリージョンにDynamoDBテーブルが自動的にレプリケートされ、ユーザーは地理的に近いリージョンのDynamoDBテーブルへ高速な読み込みと書き込みが可能になります
+
+
+NFS + SMB + 1つに統合
+
+これを見たら、
+
+FSx for NetApp ONTAP
+
+を疑えばかなり強いです。
+
+EFS
+→ NFS中心
+→ Linux系
+
+FSx for Windows
+→ SMB中心
+→ Windows系
+
+FSx for NetApp ONTAP
+→ NFSもSMBも使える
+→ Linux + Windows混在環境に強い
