@@ -1,3 +1,7 @@
 AWS Database Migration Service（DMS）の使用例
 EC2インスタンス上のMySQLデータベースをAmazon Aurora MySQLに移行する
 AWSサービスからAWSサービスへの移行もできる
+
+
+
+AWS Schema Conversion Tool（SCT）は、既存のデータベースのスキーマ（テーブル定義、インデックス、ストアドプロシージャなど）を構成するSQLコードを、異なるデータベースエンジンに変換する無料ツール
