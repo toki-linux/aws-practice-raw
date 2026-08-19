@@ -1,1 +1,3 @@
-
+AWS Database Migration Service（DMS）の使用例
+EC2インスタンス上のMySQLデータベースをAmazon Aurora MySQLに移行する
+AWSサービスからAWSサービスへの移行もできる
