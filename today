@@ -105,3 +105,33 @@ Express Workflow
 
 S3 Storage Lensは、S3バケットのストレージ使用状況やアクティビティに関するメトリクスを可視化する機能
 
+
+
+次の対応を覚えておくと楽です。
+
+タグを使って費用を分類
+→ Cost Allocation Tags
+
+
+費用を分析
+→ Cost Explorer
+
+
+予算超過を監視
+→ AWS Budgets
+
+
+複数アカウントをまとめて見る
+→ Organizationsの管理アカウント
+
+特に今回のキーワードは、
+
+「Projectタグがすでに付いている」
+
+です。
+
+これはほぼ、
+
+「そのタグをコスト配分タグとして有効化してCost Explorerで使ってね」
+
+というヒントです。
