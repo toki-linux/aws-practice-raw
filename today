@@ -101,3 +101,7 @@ Express Workflow
 
 1秒間に何千回・数秒で終了
 → Express
+
+
+S3 Storage Lensは、S3バケットのストレージ使用状況やアクティビティに関するメトリクスを可視化する機能
+
