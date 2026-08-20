@@ -49,3 +49,55 @@ Bursting
 
 
 Provisioned
+
+
+Step Functionsは基本的に、
+
+「処理の手順書・ワークフローを作って、その順番どおりにAWSサービスを動かすもの」
+
+です。
+
+たとえば、
+
+注文受付
+  ↓
+在庫確認
+  ↓
+決済
+  ↓
+発送処理
+
+みたいな流れをGUIや定義ファイルで作れます
+
+手順書」は2種類ある
+
+Step Functions
+├─ Standard Workflow
+└─ Express Workflow
+
+違いは、「何をするか」よりも どんな処理向けか です。
+
+Standard Workflow
+
+これは、
+
+長く続く業務フロー向け
+
+です。
+
+Express Workflow
+
+こちらも同じく「手順書」です。
+
+ただし、
+
+短時間で終わる処理を、大量に何度も実行する
+
+のが得意です
+
+見分け
+1日に数回・数時間かかる
+→ Standard
+
+1秒間に何千回・数秒で終了
+→ Express
