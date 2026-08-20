@@ -213,3 +213,23 @@ CompleteMultipartUpload = 完了シグナル
 
 で覚えて大丈夫
 
+
+「データ量が変動する → Aurora On-Demand」ではありません。
+
+On-DemandかReservedかは主に、
+
+DBインスタンスをどれくらい長期間使うか
+
+で判断します。
+
+今回なら、
+
+1年以上・24時間365日
+        ↓
+利用量を予測しやすい
+        ↓
+Reservedの割引を使える
+        ↓
+Aurora Reserved DB Instance
+
+となります。
