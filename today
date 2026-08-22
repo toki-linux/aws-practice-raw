@@ -70,3 +70,6 @@ engineering-access のポリシー
 → engineering/*だけ許可
 
 と分離できます。
+
+
+Macieの委任管理者として指定できるのは、組織内のAWSアカウントに限られており、IAMユーザーを指定することはできない
