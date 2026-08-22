@@ -21,3 +21,52 @@ HTTPS＝TLSを使ったHTTPプロトコル
 
 
 S3 Storage Lensは、S3バケットのストレージ使用状況やアクティビティに関するメトリクスを可視化する機能
+
+
+
+バケットポリシー方式だと、1つの巨大なポリシーに全部書き足していきます。
+
+S3バケットポリシー
+
+
+finance → finance/ を許可
+hr      → hr/ を許可
+eng     → engineering/ を許可
+sales   → sales/ を許可
+...
+
+部門が10個なら10個分、50個なら50個分を同じバケットポリシーの中で管理します。
+
+1つの巨大な門番
+├─ financeの条件
+├─ hrの条件
+├─ engineeringの条件
+├─ salesの条件
+├─ ...
+
+最初はこれでも大丈夫です。
+でも部門が増えると、1つのポリシーがどんどん長くなります。
+
+S3 Access Pointは部門ごとに別の入口を作る考え方です。
+
+                 S3バケット
+              /      |       \
+             /       |        \
+finance-access   hr-access   eng-access
+     ↓              ↓            ↓
+ finance/          hr/       engineering/
+
+そして、
+
+finance-access のポリシー
+→ finance/*だけ許可
+
+
+hr-access のポリシー
+→ hr/*だけ許可
+
+
+engineering-access のポリシー
+→ engineering/*だけ許可
+
+と分離できます。
