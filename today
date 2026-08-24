@@ -1,2 +1,71 @@
 ファンアウトとは、メッセージを複数の送信先に配信し、それぞれが並列に処理を実行する仕組みのこと
 SNSとSQSを組み合わせることでできる
+
+
+Amazon CloudWatch Network Monitor は、一言でいうと、
+
+AWSとオンプレミスなどの間のネットワーク経路が正常か、遅くなっていないかを監視するサービス
+
+です。
+
+特に Direct Connect や Site-to-Site VPN など、AWSと外部ネットワークをつないでいる環境の監視で使います。
+
+イメージはこうです。
+
+オンプレミス
+    ↓
+Direct Connect / VPN
+    ↓
+AWS VPC
+
+Network Monitorは、この経路について例えば、
+
+パケットロスが増えていないか
+RTT（往復遅延）が大きくなっていないか
+ネットワーク経路に問題が起きていないか
+
+を継続的に監視します。
+
+たとえば、
+
+普段
+オンプレ → AWS
+RTT 20ms
+パケットロス 0%
+
+障害発生
+オンプレ → AWS
+RTT 200ms
+パケットロス 10%
+
+となったら、
+
+「ネットワーク品質がおかしくなっている」
+
+
+Reachability Analyzerとは違う
+
+ここは混ざりやすいです。
+
+Network Monitor
+→ 実際のネットワーク品質を継続監視
+→ 遅延・パケットロスなど
+
+Reachability Analyzer
+→ 設定上、AからBへ通信可能かを分析
+→ SG、NACL、Route Tableなどを確認
+
+たとえば、
+
+「昨日までは普通だったのにDirect Connectが急に遅い」
+
+なら Network Monitor。
+
+「このEC2から別のEC2へ通信できない。設定のどこが悪い？」
+
+なら Reachability Analyzer。
+
+という切り分けです。
+
+CloudWatch Network Monitor = AWSとオンプレなどのネットワーク経路の遅延・パケットロスを継続監視する
+と気づけるわけです。
