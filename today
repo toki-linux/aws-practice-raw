@@ -69,3 +69,8 @@ Reachability Analyzer
 
 CloudWatch Network Monitor = AWSとオンプレなどのネットワーク経路の遅延・パケットロスを継続監視する
 と気づけるわけです。
+
+
+CloudWatch Network Monitorの中の
+Network Synthetic Monitorは、VPCサブネットからオンプレミスや外部システムに向けてテスト通信（ICMPやTCPのプローブ）を行い、その結果から遅延やパケットロスを測定します。
+追加のサーバーやエージェントを設置する必要はなく、AWS側で監視環境が自動的に用意されるので、ハイブリッド環境や外部連携先の監視に適しています
