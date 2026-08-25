@@ -113,3 +113,7 @@ Auto Scaling = 店員を増やす
 Throttling = 一度に入店できる客数を制限する
 
 という違いです。
+
+
+RDS Proxyは、RDSおよびAuroraへの接続を効率的に管理するプロキシサービス
+
