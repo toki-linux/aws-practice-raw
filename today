@@ -57,3 +57,35 @@ EC2に付いているEBSを、あとから大きくしたり性能を変えた�
 です。
 
 ModifyVolume API = 稼働中のEBSの容量・タイプ・IOPSなどを変更するAPI
+
+
+これを支えているEBSの機能が Elastic Volumes です。
+
+EC2
+  ↓
+EBS 100GB
+  ↓ ModifyVolume
+EBS 200GB
+
+重要なのは、基本的にEBSをデタッチして作り直さなくても変更できること
+
+
+Elastic Volumesは、
+
+EBSボリュームを、EC2を止めたり作り直したりせずに後から変更しやすくする機能
+
+です。
+
+さっきの ModifyVolume API は、Elastic Volumesの機能を使って実際に変更を指示するAPI と考えると分かりやすいです。
+
+関係を整理すると、
+
+Elastic Volumes
+= EBSを柔軟に変更できる仕組み・機能
+
+ModifyVolume API
+= その変更を実行するための命令
+という感じ
+
+注意点
+容量は基本的に増やす方向で、縮小はできない
