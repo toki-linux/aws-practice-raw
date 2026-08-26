@@ -128,3 +128,47 @@ KB → MB → GB → TB → PB
 となっており、KBの次に直接PBが来るわけではありません。MB、GB、TBを経てPBに到達します。
 
 
+AWS Direct Connectパートナーに連絡するとは？
+その企業（AWSを使っているユーザー企業） → AWS Direct Connectパートナー
+
+へ連絡する、という意味
+
+Direct Connectパートナーは、AWSそのものではなく、
+
+AWS Direct Connectの接続サービスを提供している通信事業者・ネットワーク事業者
+
+です。
+
+なので「AWSに電話して300Mbpsにしてください」という話ではありません。
+
+今回の問題文を自然な日本語に直すと、
+
+自社のIT担当者がDirect Connectパートナーに申し込みをして、300MbpsのHosted Connectionを契約する
+
+という意味です。
+
+役割を分けると、
+
+自社
+→ 300Mbpsを使いたいと申し込む
+
+Direct Connectパートナー
+→ 300MbpsのHosted Connectionを用意する
+
+AWS
+→ Direct Connectの基盤を提供する
+
+です。
+
+なので「誰から誰へ？」なら、自社 → Direct Connectパートナーです
+
+
+Direct Connectパートナーは
+AWSサービス名ではなく、Direct Connect接続を提供する認定ネットワーク事業者・プロバイダーです。
+
+整理すると、
+
+AWS Direct Connect = AWSのサービス
+Direct Connectパートナー = その接続を提供・仲介する外部の通信事業者
+
+という関係です。
