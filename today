@@ -240,3 +240,8 @@ AWS Budgets自体は「予算を監視する」サービスであり、他のAWS
 
 
 Elastic Fabric Adapter (EFA)は、AWSが提供する高性能なネットワークインターフェイスで、科学研究、工学、機械学習などの高パフォーマンスを要求する計算タスクに最適
+
+
+
+AWS Organizationsは
+AWSアカウントに対して利用料金の上限を設定はできない
