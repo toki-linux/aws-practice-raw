@@ -1,1 +1,8 @@
+Amazon VPC CNI plugin for Kubernetesは、Amazon EKSでポッドにIPアドレスを割り当てるためのネットワークプラグイン
 
+
+Amazon VPC CNI pluginが使用するIPアドレス
+Amazon VPC CNI pluginは、VPCのIPアドレス範囲そのものをPodに直接割り当てています。これがこのプラグインの最大の特徴です。
+
+仕組みの詳細
+通常のKubernetesでは、Pod用に独立した仮想ネットワーク（オーバーレイネットワーク）を作り、そこでPod用のIPアドレスを管理することが多いですが、Amazon VPC CNI pluginは異なります。
