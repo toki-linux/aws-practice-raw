@@ -77,3 +77,89 @@ Podはノードの上で動作します
 クラスター	会社全体	すべてを統括する単位
 ノード	オフィスビル	Podを収容する場所（リソース）
 Pod	オフィスの部屋	実際に作業（処理）が行われる場所
+
+
+VPCリンクは、一言でいうと、
+
+API Gatewayから、VPCの中にある非公開のサービスへプライベートに接続するための橋
+
+です。
+
+たとえば、VPC内にインターネット公開していないALBやNLB、その背後のEC2/ECSがあります。
+
+ユーザー
+  ↓
+API Gateway
+  ↓
+VPC Link
+  ↓
+内部ALB / NLB
+  ↓
+EC2 / ECS
+
+このとき、API Gatewayは外部向けのAPIの入口ですが、バックエンドはVPC内部に隠しておけます。
+
+つまり、
+
+外部ユーザー
+→ API Gatewayまではアクセス可能
+
+バックエンド
+→ インターネットには直接公開しない
+
+という構成ができます。
+
+例えば、
+
+スマホアプリ
+   ↓
+API Gateway
+   ↓
+VPC Link
+   ↓
+内部ALB
+   ↓
+ECS
+
+なら、ユーザーはECSやALBへ直接アクセスせず、必ずAPI Gatewayを経由します。
+
+なぜVPCリンクが必要なの？
+
+API Gatewayと、あなたが作ったVPCはそのままでは別の領域です。
+
+API Gateway
+   ↓
+そのままでは
+VPC内部のPrivateなバックエンドへ接続しにくい
+
+そこでVPC Linkを作って、
+
+API Gateway
+   ↓
+VPC Link
+   ↓
+VPC内部
+
+というプライベート経路を作ります。
+
+VPCエンドポイントとは違う
+
+名前が似ていますが、方向が違います。
+
+VPC Endpoint
+→ VPCの中からAWSサービスへPrivate接続
+例：EC2 → S3 / SSM
+
+VPC Link
+→ API GatewayからVPC内バックエンドへPrivate接続
+例：API Gateway → ALB → ECS
+
+この違いはかなり重要です。
+
+覚え方としては、
+
+VPC Endpoint = VPCから外のAWSサービスへ
+
+VPC Link = API GatewayからVPCの中へ
+
+でOKです。
