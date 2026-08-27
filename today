@@ -163,3 +163,11 @@ VPC Endpoint = VPCから外のAWSサービスへ
 VPC Link = API GatewayからVPCの中へ
 
 でOKです。
+
+
+「API GatewayからVPC内部へ」というAPI Gateway側の視点
+
+一方で、「VPC内からS3へアクセスしたい」という問いであれば、VPCエンドポイントが正解になります。この方向の違いを意識すると混同しにくくなります。
+
+VPCリンクは外から接続できる（VPC外）
+VPCエンドポイントは内から接続できる（VPC内）
