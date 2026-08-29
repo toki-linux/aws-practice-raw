@@ -270,3 +270,7 @@ OAC（Origin Access Control）
 
 VPNトンネルを経由したネットワークトラフィック情報は、Amazon CloudWatchで収集する
 CloudwatchはVPNトンネルのトラフィック情報を見ることができる
+
+
+AWS Direct Connectロケーションとは、オンプレミスとAWSのデータセンターとを相互に接続するポイントのこと
+オンプレミスとAWSの中間に位置している
