@@ -22,3 +22,22 @@ OSへのパッチ適用
 インスタンスの設定変更
 複数リソースにまたがる一連の操作（例：インスタンス停止→バックアップ取得→設定変更→起動）
 
+Runbook（ランブック）と Run Command の違い
+かなり簡単にいうと、
+
+Run Command = 1つの命令を実行する
+Runbook = 複数の運用手順をまとめた手順書
+
+です。
+
+たとえばEC2に対して、
+
+systemctl restart nginx
+
+を実行したいなら Run Command です。
+
+
+Run Commandはある一つの命令
+Run bookは命令を含めた一連の手順書
+
+なので、Run bookの手順書にRun Commandが使われていることもある
