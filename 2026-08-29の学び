@@ -266,3 +266,7 @@ ARC = マルチAZ・マルチリージョン構成で、障害時のフェイル
 OAC（Origin Access Control）
 必ずCloud Front経由でアクセスさせるようにする機能
 直でオリジンに行かせない
+
+
+VPNトンネルを経由したネットワークトラフィック情報は、Amazon CloudWatchで収集する
+CloudwatchはVPNトンネルのトラフィック情報を見ることができる
