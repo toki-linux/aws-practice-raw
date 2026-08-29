@@ -261,3 +261,8 @@ Zonal Shift / Zonal Autoshift
 
 ARC = マルチAZ・マルチリージョン構成で、障害時のフェイルオーバーを安全に制御・確認するサービス
 障害発生時にリージョンの切り替えをしてくれる
+
+
+OAC（Origin Access Control）
+必ずCloud Front経由でアクセスさせるようにする機能
+直でオリジンに行かせない
