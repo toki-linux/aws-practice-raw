@@ -136,3 +136,9 @@ StackSet = そのStackを複数アカウント・リージョンへ配る管理�
 
 Secrets Manager → シークレット（パスワードなど）のローテーション
 KMS → 暗号鍵のローテーション
+
+
+
+Amazon Security Hubは、AWSのセキュリティサービス（GuardDuty、Inspector、Macieなど）やサードパーティ製ツールからアラートなどの検出情報を自動収集し、
+統合的に可視化・管理するサービスです。Security Hubを使用することで、セキュリティリスクの全体像を把握し、脅威やリスクへの迅速な対応が可能になります。
+さらに、AWSが推奨するセキュリティベストプラクティス（AWS Foundational Security Best Practices）に基づき、AWS環境の構成を評価し、準拠状況を継続的に監視する機能も備えています。
