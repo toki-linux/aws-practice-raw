@@ -73,3 +73,62 @@ EventBridgeは、イベント（何かが起きたという通知）を検知し
 
 EventBridgeは基本的に、1つのイベントが発生するたびにルールに合致するかを判定して即座にアクションを実行する仕組みです
 複数回のイベントを集計して「3回以上」という条件を判定する機能は持っていません
+
+
+
+AWS CloudFormation StackSets は、一言でいうと、
+
+同じCloudFormationテンプレートを、複数のAWSアカウント・複数リージョンへ一括展開する仕組み
+
+です。
+
+
+普通のCloudFormationは、基本的に「このアカウント・このリージョンにスタックを作る」です。
+
+CloudFormationテンプレート
+        ↓
+東京リージョン
+        ↓
+VPC / IAM / S3 / Config などを作成
+
+StackSetsを使うと、同じテンプレートをまとめて配れます。
+
+                StackSet
+                   ↓
+        同じCloudFormationテンプレート
+          /          |          \
+         ↓           ↓           ↓
+Account A        Account B    Account C
+東京リージョン    大阪リージョン   東京リージョン
+
+たとえば会社で、
+
+「全AWSアカウントに同じCloudTrail設定を入れたい」
+
+となったとします。
+
+普通に1アカウントずつ作ると、
+
+Account A → CloudFormation実行
+Account B → CloudFormation実行
+Account C → CloudFormation実行
+...
+
+となって大変です。
+
+StackSetsなら、
+
+CloudTrail用テンプレート
+        ↓
+      StackSet
+        ↓
+組織内の複数アカウントへ一括展開
+
+とできます。
+
+ここで用語を整理すると、
+
+Stack = 1つのアカウント・リージョンに実際に作られたCloudFormationリソース群
+StackSet = そのStackを複数アカウント・リージョンへ配る管理役
+
+という関係です。
