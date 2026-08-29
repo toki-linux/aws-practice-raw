@@ -274,3 +274,4 @@ CloudwatchはVPNトンネルのトラフィック情報を見ることができ�
 
 AWS Direct Connectロケーションとは、オンプレミスとAWSのデータセンターとを相互に接続するポイントのこと
 オンプレミスとAWSの中間に位置している
+オンプレミスからDirect Connectロケーションに専用線が引いてあり、Direct ConnectからVGWへアクセスできる
