@@ -64,4 +64,3 @@ KMSのカスタマーマネージドキーを使うとはアプリケーショ�
 
 aws:SourceVpcに指定する値は、VPC ARNではなくVPC IDが正しい
 
-
