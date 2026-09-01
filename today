@@ -1,1 +1,12 @@
+Claude
+IAM Access Analyzerとは
+IAM Access Analyzerは、AWSリソースへの外部アクセスやIAMエンティティ（ユーザー・ロール）の未使用権限を分析するためのAWSサービスです。
+
+主な機能
+IAM Access Analyzerには大きく分けて2つの分析タイプがあります。
+
+1. 外部アクセス分析（External Access Analysis）
+S3バケット、IAMロール、KMSキー、Lambda関数などのリソースが、組織外や信頼していないアカウントからアクセス可能な状態になっていないかを検出
+意図しないパブリック公開や、想定外のクロスアカウントアクセスを発見できる
+
 
