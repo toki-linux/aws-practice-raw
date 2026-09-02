@@ -93,3 +93,12 @@ EventBridgeのルールで「どのような検出結果を通知するか」を
 このように、EventBridgeを使えばサーバーレスな構成でコードを書かずに完結するため、運用オーバーヘッドが最小になります。
 
 この２パターンがあるが運用上のオーバーヘッドを最小限にしたいならばEventbridgeを使う
+
+
+IAM Identity CenterでオンプレミスのADを使いたい場合にAWS Directory Serviceを介する理由
+ネットワーク的な接続性の問題
+IAM Identity CenterはAWSのマネージドサービスであり、AWSのサービス基盤上で動作しています。一方、オンプレミスのActive Directoryは企業のデータセンター内（プライベートネットワーク）に存在します。
+
+IAM Identity Center自体には、オンプレミス環境に直接ネットワーク接続する機能がありません。そのため、AWS側とオンプレミスAD側の「橋渡し」をする仕組みが必要になり、その役割をAWS Directory Serviceが担います。
+
+AWS Directory Serviceが行っている橋渡しの仕組み
