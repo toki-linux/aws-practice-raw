@@ -132,3 +132,6 @@ IAM Identity Centerは「AWSアカウントへのアクセス許可」を管理�
 オンプレミスADとの実際の認証プロトコル通信（Kerberos/LDAPなど）を扱う機能は持っていません。
 そのため、AWS Directory Service（AD ConnectorやAWS Managed Microsoft AD）という専用の中継コンポーネントを介して、
 オンプレミスADとの認証連携を実現する設計になっています。
+
+
+IAM IdentityCenterとオンプレミスのADを使うときは二つのサービスの橋渡し役にAWS DIrectory Serviceを使用する必要がある
