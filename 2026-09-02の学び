@@ -118,3 +118,17 @@ VPNまたはDirect Connectでオンプレミス環境とAWSを接続しておく
 
 AWS側にADのレプリカ的な機能を持たせる
 オンプレミスADとの信頼関係により、ユーザー認証を連携させる
+
+
+なぜIAM Identity Centerが直接ADと通信できないのか
+技術的な理由は以下の通りです。
+
+Active Directoryの認証プロトコル（Kerberos、LDAPなど）は、通常プライベートネットワーク内での通信を前提としており、直接インターネット経由でのアクセスは想定されていない
+IAM Identity Centerは多数のAWSアカウントを管理するグローバルなSaaS型サービスであり、個々の企業のプライベートネットワークに直接入り込む設計にはなっていない
+セキュリティ上の理由から、AWS側とオンプレミス側の境界を明確にし、その境界を安全に越えるための専用コンポーネント（AD Connectorなど）を挟む設計になっている
+
+まとめ
+IAM Identity Centerは「AWSアカウントへのアクセス許可」を管理する役割に特化しており、
+オンプレミスADとの実際の認証プロトコル通信（Kerberos/LDAPなど）を扱う機能は持っていません。
+そのため、AWS Directory Service（AD ConnectorやAWS Managed Microsoft AD）という専用の中継コンポーネントを介して、
+オンプレミスADとの認証連携を実現する設計になっています。
