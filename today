@@ -102,3 +102,19 @@ IAM Identity CenterはAWSのマネージドサービスであり、AWSのサー�
 IAM Identity Center自体には、オンプレミス環境に直接ネットワーク接続する機能がありません。そのため、AWS側とオンプレミスAD側の「橋渡し」をする仕組みが必要になり、その役割をAWS Directory Serviceが担います。
 
 AWS Directory Serviceが行っている橋渡しの仕組み
+
+AWS Directory Serviceの2つの選択肢
+AWS Directory Serviceには、用途に応じて2種類の使い方があります。
+
+1. AD Connector
+
+AD Connectorは、オンプレミスADへの「プロキシ（中継役）」のような存在です。ADのユーザーデータ自体はAWS側にコピーされず、認証リクエストが発生した際にオンプレミスADへリアルタイムで転送されます。
+
+VPNまたはDirect Connectでオンプレミス環境とAWSを接続しておく必要がある
+既存のADをそのまま使い続けられる（データの複製が不要）
+2. AWS Managed Microsoft AD（信頼関係を構成する場合）
+
+こちらは、AWS上にフルマネージドのADを構築し、オンプレミスADとの間で「フォレストの信頼関係（Trust Relationship）」を設定する方法です。
+
+AWS側にADのレプリカ的な機能を持たせる
+オンプレミスADとの信頼関係により、ユーザー認証を連携させる
