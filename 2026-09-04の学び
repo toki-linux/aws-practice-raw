@@ -185,3 +185,28 @@ Amazon MQは、AMQP（Advanced Message Queuing Protocol）に対応しており�
 
 
 インターネットに公開するドメインの移行＝パブリックホストゾーン
+
+
+API GatewayとGlueが直接連携できない理由
+1. サービスとしての「入り口」の設計思想が違う
+API Gatewayは「統合（Integration）」という仕組みで、リクエストを受け取った後にどのバックエンドサービスに転送するかを設定します。API Gatewayが直接連携できるサービスは限定されており、主に以下のようなものです。
+
+Lambda関数
+HTTPエンドポイント（他のWeb API）
+AWSの一部サービス（Kinesis Data Streams、SQS、SNS、DynamoDB、Step Functionsなど）
+Glueはこのリストに含まれていません。つまり、API GatewayのAWSサービス統合機能の選択肢として、Glueは用意されていないのです。
+
+2. Glueはイベント駆動の「受け口」として作られていない
+Glueは以下の2つの使い方が中心です。
+
+Glueジョブ（バッチ型ETL）：S3、RDS、DynamoDBなどに蓄積済みのデータを、スケジュールやトリガーで定期実行して変換する
+Glue Streaming ETL：Kinesis Data StreamsやApache Kafka（MSK）といった、あらかじめ用意された「ストリーミングデータソース」からSparkベースの処理でデータを継続的に取り込む
+つまりGlueが処理を開始するには、必ず「データソース」として何らかのストレージやストリームが必要です。API Gatewayのように、リクエスト単位で1件ずつ届くデータを直接受け取るインターフェースをGlueは持っていません。
+
+3. 無理に構成するとどうなるか
+仮にAPI GatewayとGlueを連携させようとすると、以下のような回避策が必要になります。
+
+API GatewayとLambdaを組み合わせて、受け取ったデータを一旦S3やKinesisに書き込む
+その後、Glueジョブ（バッチ）またはGlue Streaming ETLがそのS3やKinesisのデータを読み取って処理する
+この場合、結局は「API Gateway → 何らかのバッファ（S3やKinesis）→ Glue」という構成になり、GlueはAPI Gatewayの直接の統合先ではなく、あくまで後段の処理としてしか機能しません。しかもGlueジョブの起動には遅延があるため、リアルタイム性の要件も満たしにくくなります。
+
