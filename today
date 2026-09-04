@@ -4,3 +4,14 @@ AWS Organizationsと連携することで複数アカウント・複数リージ
 
 こういう時に使えるサービス
 異なるAWSアカウント、異なるリージョンの関係性や各自の構築を一元的に管理し関係性の可視化もしたい
+
+
+ACM Certificate Approaching Expirationイベント
+Ceertificate＝証明書
+Approaching＝近づいてくる
+Expiration＝有効期限
+ACMでは、証明書の有効期限が近づくとAmazon EventBridgeに送信されます
+
+注意点
+外部認証局から取得してACMにインポートした証明書のみに使う
+理由は外部認証局から取得した証明書は自動更新できないから
