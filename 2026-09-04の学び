@@ -179,3 +179,9 @@ API Gatewayは「ページを表示するためのもの」ではなく、「デ
 
 
 Amazon MQは、AMQP（Advanced Message Queuing Protocol）に対応しており、Apache ActiveMQやRabbitMQといったオープンソースのメッセージブローカーと互換性があります
+
+
+
+
+
+インターネットに公開するドメインの移行＝パブリックホストゾーン
