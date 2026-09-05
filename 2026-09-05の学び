@@ -210,3 +210,10 @@ HTTP/2を使ったプッシュ型の配信（push model）で、ポーリング�
 
 
 Cloud Frontは動的コンテンツも配信できる！
+
+Cloud FrontとGlobalAcceleratorの違い
+最も大きな違い：キャッシュの有無とプロトコルの層
+CLoud Frontはキャッシュできる。GlobalAcceleratorはキャッシュできない
+動作する階層が違う
+Cloud Frontは７層
+GlobalAcceleratorは４層
