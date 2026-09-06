@@ -1,2 +1,8 @@
  EC2インスタンス間の通信を速くする
 拡張ネットワーキング（Enhanced Networking）は、EC2インスタンスのネットワーク性能を向上させる機能
+
+
+AWS Database Migration Service（DMS）
+フルロード＝初期データをまとめて移行
+移行後もソース側の変更を準リアルタイム（Change Data Capture: CDC）で継続的にレプリケーションできます
+つまり、オンプレミスで引き続き運用することができる
