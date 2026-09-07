@@ -36,3 +36,9 @@ DynamoDBは画像ファイルの保存には向いていない
 **SCP（Service Control Policy）**で、特定のタグが付いていないリソース作成リクエストを拒否する
 IAMポリシーの条件キー（aws:RequestTagなど）を使って、タグ付与を必須条件にする
 AWS Config Rulesで非準拠リソースを検出し、自動修復（Auto Remediation）で対応する
+
+
+
+AWS Cost and Usage Reports（コストと使用状況レポート）
+AWS利用に関する詳細な情報（例：リソースの使用状況や関連するコストなど）を提供するサービス
+CSV形式でS3に保存されるのでAmazon Athenaなどの分析ツールを使って詳細な分析をすることができる
