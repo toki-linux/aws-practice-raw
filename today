@@ -1,1 +1,5 @@
+Amazon EKSには、実行中のアプリケーションの負荷状況に応じてリソース（ポッドやノード）を自動的にスケーリングする機能がある
 
+ポッドの数を自動的に増減させる機能はHorizontal Pod Autoscaler
+
+ノード数を自動できに増減させる機能はCluster Autoscaler
