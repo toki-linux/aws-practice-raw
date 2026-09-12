@@ -88,3 +88,9 @@ Administrator = リソースも権限も触れる。
 
 パワーユーザーは「AWSのサービスはかなり自由に触らせたい。でもIAMの権限管理までは任せたくない」 という人向けで
 管理者権限はルートユーザーを使いたくない場合、AWSの全ての動作を行えるようにしたい場合に使う
+
+
+Organizationsを操作する人はIAMユーザーでもよい。
+でもOrganizationsが管理する単位はAWSアカウント。
+
+そして、Organizationsを最初に作成したIAMユーザーが所属しているAWSアカウントは、そのOrganizationsの管理アカウント（Management account）になります。
