@@ -41,3 +41,21 @@ Pre-warming = 特定の場所に設定する1つのAWS機能名というより�
 
 Connection Draining は、ロードバランサー配下のEC2を切り離すときに、処理中の通信をいきなり切らない仕組み
 インスタンスを切り離す際に既存接続を正常終了させたい時に使う
+
+SSL Termination とは、HTTPSの暗号化通信を途中の装置でいったん解除すること
+たとえば、
+
+ユーザー
+   ↓ HTTPS
+  ALB
+   ↓ HTTP
+  EC2
+
+という構成です。
+
+ユーザーとALBの間はHTTPSなので暗号化されています。ALBがSSL/TLS証明書を使って通信を復号し、その後ろのEC2にはHTTPで渡します。
+
+つまり、
+
+SSL/TLS通信の「終点」がALBになる
+→ だから SSL Termination と呼びます。
