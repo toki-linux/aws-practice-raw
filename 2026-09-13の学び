@@ -365,3 +365,20 @@ Kubernetesバージョンとの互換性維持
 EKS Auto Modeが行っていること
 EKS Auto Modeは、レイヤー2（ノードのオートスケーリング）とレイヤー3（ノードの保守運用）の両方を、AWSがKarpenterベースの技術を使って完全に自動化し、ユーザーが何も設定しなくても良い状態にしたものです。
 
+
+
+AWS Organizationsの2つの機能セット
+AWS Organizationsには実は2種類の機能セットがあります。
+
+1. 一括請求のみ（Consolidated Billing only）
+
+請求の一元化のみが目的
+古い形態で、機能が限定的
+2. すべての機能（All features）
+
+請求の一元化に加え、以下が可能になる
+サービスコントロールポリシー（SCP）による統制
+AWS IAM Identity Centerの利用
+AWSリソースの共有（RAM連携強化）
+タグポリシーなど各種ポリシー機能
+IAM Identity Centerは、Organizationsで「すべての機能」が有効になっていることが前提条件として動作するサービスです。一括請求のみの組織では、そもそもIAM Identity Centerを有効化できません。
