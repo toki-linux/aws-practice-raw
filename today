@@ -1,1 +1,4 @@
+CloudWatch Logsには「サブスクリプションフィルター」という機能がある
+CloudWatch Logsに新しいログイベントが書き込まれるたびに、リアルタイムで自動的に指定した送信先（OpenSearch Serviceなど）にデータを転送する仕組み
+
 
