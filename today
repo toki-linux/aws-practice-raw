@@ -42,3 +42,6 @@ AWS Certificate Manager（ACM）のSSL/TLS証明書はS3バケットに適用で
 
 IAM Identity Centerのアクセス許可セット
 「どのAWSリソースに、どこまでアクセスできるか」を定義する権限のひな形
+
+
+処理の中断が許されない場合AutoScalingを使用していもスポットインスタンスを使うのはダメ
