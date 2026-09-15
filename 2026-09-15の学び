@@ -1,1 +1,4 @@
+Amazon Application Recovery Controller、略して ARC は、ざっくり言うと
+
+「大規模障害が起きたときに、アプリを別の場所へ安全に切り替えて復旧しやすくするサービス」
 
