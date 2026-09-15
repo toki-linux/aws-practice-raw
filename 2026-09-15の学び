@@ -4,3 +4,16 @@ Amazon Application Recovery Controller、略して ARC は、ざっくり言う�
 
 「大規模障害が起きたときに、アプリを別の場所へ安全に切り替えて復旧しやすくするサービス」
 
+
+マルチAZ・マルチリージョン構成の復旧 で使わる
+
+ARCには特に重要な機能がいくつかある。３機能ある
+
+１、Routing Control
+Route 53などと連携して、ユーザーの通信をどのリージョン・どの環境へ送るかを切り替える。
+
+２、Readiness Check
+待機側の環境が「本当に切り替え先として使える状態か」を確認する。
+
+３、Zonal Shift / Zonal Autoshift
+問題があるAZへの通信を避けて、正常なAZへ寄せる。
