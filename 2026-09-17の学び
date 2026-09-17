@@ -114,7 +114,7 @@ S3
 
 CloudFrontがS3に再確認する
 
-
+DAXとElastiCacheの比較
 DAX
 = DynamoDB専用
 = アプリ変更が少ない
@@ -122,3 +122,5 @@ DAX
 ElastiCache
 = 汎用キャッシュ
 = アプリ側にキャッシュ処理を実装する必要がある
+
+なのでアプリの変更を最小限にしたい場合はDAXを選ぶ必要がある
