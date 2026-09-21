@@ -78,3 +78,20 @@ Kinesis + シャード単位の細かなコンシューマー制御
 → KCL
 
 という切り分けです。
+
+
+覚え方はこれが一番おすすめです。
+
+OIDC Provider = 身分証を発行・証明する側
+
+Trust Policy = その身分証を持つ誰を信用するか、IAMロール側で決める
+
+Permission Policy = ロールを取得した後、何ができるか
+
+つまり、
+
+Trust Policy
+= 誰がロールを使える？
+
+Permission Policy
+= ロールを使ったら何ができる？
