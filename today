@@ -39,3 +39,19 @@ Route 53がそのドメイン名を見て「このアクセスはCloudFrontに�
 
 VPNトンネルを監視したいならCloudWatchを使う
 ConfigはAWSリソース監視するサービスであり、VPNトンネルの監視はできない
+
+
+CloudWatch Network Monitorとは
+AWSとオンプレミス環境（またはAWS拠点間）のハイブリッドネットワーク接続の健全性を、継続的に監視できるAmazon CloudWatchの機能です。
+
+Site-to-Site VPNやDirect Connectなどで接続されたネットワーク経路上の遅延・パケットロスといった品質劣化を、自動的に検知することを目的としています。
+
+継続的監視ができる。自動検知。ネットワーク接続で使えるサービス。オンプレミスとAWS間でも行ける
+
+Network Synthetic Monitorの仕組み
+この機能の中核となるのが「Network Synthetic Monitor」です。
+
+監視対象の指定：VPC内のサブネットと、監視したい宛先（オンプレミスのIPアドレスなど）を指定します
+合成監視（Synthetic Monitoring）：AWS側が自動的にICMPを用いたテスト通信（Ping相当の疎通確認）を定期的に実行します
+自動収集：遅延（レイテンシー）やパケットロス率を自動的に測定し、CloudWatchメトリクスとして記録します
+アラーム連携：測定値がしきい値を超えた場合、CloudWatchアラームと連携して通知することも可能です
