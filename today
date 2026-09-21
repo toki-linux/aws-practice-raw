@@ -4,3 +4,13 @@ Elastic Volumes
 
 EBSボリュームのRAID構成
 複数のディスクを論理的に統合して一つのボリュームとして扱う機能
+
+
+Route 53の役割を整理する
+Route 53はDNS（Domain Name System）サービスです。DNSの基本的な役割は「ドメイン名」を「実際の接続先」に変換することです。
+
+つまり「Route 53でCloudFrontにトラフィックをルーティングするように設定する」とは、以下のような意味になります。
+
+視聴者が独自ドメイン（例：www.example.com）にアクセスする
+Route 53がそのドメイン名を見て「このアクセスはCloudFrontに転送すればいい」と判断する
+結果として、視聴者の通信がCloudFrontに届く
