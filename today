@@ -55,3 +55,26 @@ Network Synthetic Monitorの仕組み
 合成監視（Synthetic Monitoring）：AWS側が自動的にICMPを用いたテスト通信（Ping相当の疎通確認）を定期的に実行します
 自動収集：遅延（レイテンシー）やパケットロス率を自動的に測定し、CloudWatchメトリクスとして記録します
 アラーム連携：測定値がしきい値を超えた場合、CloudWatchアラームと連携して通知することも可能です
+
+
+
+Kinesis + シャード管理 + チェックポイント
+→ KCL
+
+という結び付きを作っておくとよいです。
+
+逆に、
+
+Kinesis + 複数コンシューマーの読み取り性能
+→ Enhanced Fan-Out
+
+Kinesis + 複雑なリアルタイム集計・状態管理
+→ Managed Service for Apache Flink
+
+Kinesis + Lambdaで簡単にイベント処理
+→ Lambda
+
+Kinesis + シャード単位の細かなコンシューマー制御
+→ KCL
+
+という切り分けです。
