@@ -1,1 +1,8 @@
 Amazon VPC CNI plugin for Kubernetes＝Amazon EKSでポッドにIPアドレスを割り当てるためのネットワークプラグイン
+
+
+EKS Auto Mode＝ノードの管理を自動化できる
+
+EKSではFargateを使用することでもノード管理を不要にできますが、
+Fargateはポッドごとに完全に分離された環境で実行され、各ポッドのリソースを個別に指定する必要があります。
+一方、EKS Auto Modeはノードベースのアーキテクチャを維持しながら管理を自動化するため、従来のKubernetesの動作に近い特徴があります。
