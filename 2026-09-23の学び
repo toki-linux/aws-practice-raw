@@ -38,3 +38,4 @@ IDブローカーは
 具体的には、IDブローカーアプリケーションの中に、AWS SDK（Software Development Kit）を組み込んでおき
 そのSDKを使ってAWS STS（Security Token Service）のAPIエンドポイントに対してHTTPSリクエストを送信します。
 
+AWSが公開しているAPIを組み込むことでAWSサービスを呼び出すことを可能にしている
