@@ -1,1 +1,2 @@
-
+CloudFormationは「インフラをどう作るか」を定義する土台の技術
+Service CatalogはそのCloudFormationテンプレートを土台にしつつ、「誰に、何を、どう使わせるか」というガバナンス・管理の層を追加する機能
