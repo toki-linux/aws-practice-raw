@@ -82,3 +82,15 @@ Kubernetesのリソース定義（IngressやService）をみてELBを構築、�
 
 ELBが働ける状態を作っているのがAWS Load Balancer Controllerで実際に負荷分散しているのはELB
 ELBとKubernetesは直接は関われないので、Load Balancer Controllerを挟む形をとっている
+
+
+ゲートウェイとエンドポイントの違い
+
+主な違いのまとめ
+項目　　　　　　　　　	　　ゲートウェイ	　　　　　　　　　　　　エンドポイント
+役割	　　　　　　　　　ネットワーク間の中継・出入口	　　　特定サービスへの接続窓口・終着点
+対象範囲	　　　　　　広い（複数ネットワークをまとめる）	　　狭い（特定のサービス単位）
+例	　　　　　　　　Direct Connectゲートウェイ、IGW	　　VPCエンドポイント、Interface型エンドポイント
+
+イメージ	　　　　　　「玄関・門」のようなもの	　　　　　　　「特定の部屋への直通ドア」のようなもの
+
