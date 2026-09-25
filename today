@@ -76,3 +76,9 @@ IAMロール = 「入館証」のようなもの
 信頼ポリシー = 「この入館証を、どこの会社の人に貸し出してよいか」を決めるルール
 
 
+AWS  Load Balancer Controller
+Kubernetesのリソース定義（IngressやService）をみてELBを構築、管理してくれる。
+実際に負荷分散をおこなっているのはELBで、ELBが働ける環境を作っているのがLoadBalancer Controller
+
+ELBが働ける状態を作っているのがAWS Load Balancer Controllerで実際に負荷分散しているのはELB
+ELBとKubernetesは直接は関われないので、Load Balancer Controllerを挟む形をとっている
