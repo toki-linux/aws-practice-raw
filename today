@@ -117,3 +117,11 @@ ELBとKubernetesは直接は関われないので、Load Balancer Controllerを�
 ガバナンスモードはユーザー指定ができる
 コンプライアンスモードは誰であっても読み取り専用になる
 
+
+FSx for NetApp ONTAPの大きな特徴は、複数のプロトコルに対応している点です。
+
+NFS（Network File System）：主にLinux/Unix環境で使用されるファイル共有プロトコル
+SMB（Server Message Block）：主にWindows環境で使用されるファイル共有プロトコル
+iSCSI（Internet Small Computer System Interface）：ブロックストレージとしてアクセスするためのプロトコル
+この3つのプロトコルすべてに対応していることで、異なるOS環境やアプリケーションから柔軟にアクセスできる点が、FSx for NetApp ONTAPの大きな強み
+
