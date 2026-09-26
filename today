@@ -10,3 +10,32 @@ LFタグは、Lake Formationにおけるタグベースアクセス制御（TBAC
 
 
 Redshift Spectrumとは、S3上のデータをRedshiftの外部テーブルとして参照できるようにした機能
+
+
+
+
+Zone Apex（ゾーンエイペックス） とは、ドメインの最上位階層、つまり「サブドメインが付いていない裸のドメイン名」のことです。
+
+たとえば以下のような場合です。
+
+example.com → これがZone Apex
+www.example.com → これはZone Apexではない（wwwというサブドメインが付いている）
+
+
+通常のDNSでは、CNAMEレコード（別名を設定するレコード）をZone Apexに対して設定することはできません。これはDNSの標準仕様（RFC）で決められたルールです。
+
+理由は、Zone Apexには必ずSOAレコードやNSレコードといった重要な管理情報が存在する必要があり、CNAMEはこれらと共存できないためです。
+
+つまり、以下のような設定はDNSの仕様上できません。
+
+❌ example.com（Zone Apex）→ CNAME → xxxxx.elb.amazonaws.com
+しかし実務では「ドメインのトップページ（example.com）をELBやCloudFrontに向けたい」というニーズが非常に多くあります。
+
+Route 53のエイリアスレコードが解決する問題
+
+AWSはこの制約を回避するために、Route 53独自の機能として「エイリアスレコード」を用意しました。
+
+エイリアスレコードを使うと、CNAMEと似たような「別名」の仕組みを、Zone Apexに対しても設定できます。
+
+✓ example.com（Zone Apex）→ エイリアス → xxxxx.elb.amazonaws.com
+これはDNSの標準機能ではなく、Route 53だけが提供する拡張機能です。
