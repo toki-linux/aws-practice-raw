@@ -185,3 +185,32 @@ RDS Optimized Writes = 書き込み処理の効率化・高速化
 
 RDSにおけるAutoscalingが使える場合使えない場合
 ストレージの容量に対してはAutoscalingを行えるけど、インスタンス単位では行えない
+
+通常のRDSでは、
+ストレージ容量
+→ Auto Scalingできる
+
+一方で、
+DBインスタンス本体
+→ EC2のAuto Scaling Groupのように
+   台数を自動で増減することはできない
+
+です。
+つまり、
+RDS
+├─ ストレージ容量
+│   └─ Auto Scaling ○
+│
+└─ DBインスタンス本体
+    └─ Auto Scaling ×
+
+と考えると分かりやすいです。
+
+例外的に、AuroraのReaderインスタンス は Aurora Auto Scaling で増減できる
+
+普通のRDS
+- ストレージAuto Scaling → できる
+- DBインスタンス台数のAuto Scaling → できない
+Aurora
+- ReaderのAuto Scaling → できる
+と整理するとかなりスッキリする
