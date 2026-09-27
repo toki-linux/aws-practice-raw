@@ -183,4 +183,5 @@ RDS Optimized Writes = 書き込み処理の効率化・高速化
 これは読み取り処理の高速化
 
 
-
+RDSにおけるAutoscalingが使える場合使えない場合
+ストレージの容量に対してはAutoscalingを行えるけど、インスタンス単位では行えない
