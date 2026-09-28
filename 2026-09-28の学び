@@ -91,3 +91,39 @@ AWS PrivateLink / AWSネットワーク
 という構成です。現在は、Interface Endpointで別リージョンのAWSサービスへクロスリージョン接続することもできます。
 
 同一リージョンならゲートウェイエンドポイントを優先して使う
+
+VPCエンドポイントはVPC単位でつけるものではなく、サブネット単位でつけるものなのか？
+VPCエンドポイントの種類によって違う
+Interface VPC Endpoint は、VPC内の指定したサブネットにENIを作る方式です。なので「VPCに作るサービス」ではあるけれど、実体は選んだサブネット内にできます。
+VPC
+├─ Subnet-A
+│   └─ Interface Endpoint用ENI
+│
+├─ Subnet-B
+│   └─ Interface Endpoint用ENI
+│
+└─ EC2
+
+作成時には通常、
+どのVPCに作るか
+↓
+どのAZ / サブネットにENIを置くか
+
+を選びます。
+一方、Gateway Endpoint は考え方が違います。
+S3 Gateway Endpoint
+↓
+サブネットにENIを置くわけではない
+↓
+Route Tableと関連付ける
+
+つまり、
+Interface Endpoint
+= サブネットにENIを作る
+
+Gateway Endpoint
+= Route Tableに経路を追加する
+
+です。
+
+Interface EndpointはVPC内に作成するものだけど、実際の入口は指定したサブネットにENIとして配置される
