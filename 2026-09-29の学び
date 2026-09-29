@@ -119,4 +119,5 @@ S3 prefix → VPC Endpoint
 とはならない場合があります。
 
 
-RedshiftにはAWS管理のサービス側通信経路がある
+RedshiftにはAWS管理のサービス側通信経路があり
+VPCのルートテーブルを使わないことがある
