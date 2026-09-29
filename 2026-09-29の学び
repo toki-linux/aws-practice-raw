@@ -76,3 +76,8 @@ S3バケット
 S3の機能
 
 Public Access Block = S3を誤って公開しないための上位の安全装置
+
+
+
+Redshiftの**拡張VPCルーティング（Enhanced VPC Routing）**は、RedshiftからS3などへ出ていく通信を、
+VPCのルートテーブル・NAT Gateway・VPC Endpointなど、自分で管理するVPC経路に強制的に通す機能
