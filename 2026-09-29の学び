@@ -117,3 +117,6 @@ S3 prefix → VPC Endpoint
 「RedshiftのS3通信も絶対この経路を通ってね」
 
 とはならない場合があります。
+
+
+RedshiftにはAWS管理のサービス側通信経路がある
