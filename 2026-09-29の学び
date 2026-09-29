@@ -121,3 +121,7 @@ S3 prefix → VPC Endpoint
 
 RedshiftにはAWS管理のサービス側通信経路があり
 VPCのルートテーブルを使わないことがある
+
+
+Enhanced VPC Routing = Redshiftに「VPCのルーティングルールに従って通信して」とさせる機能
+と覚えるといい
