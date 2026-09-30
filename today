@@ -86,3 +86,44 @@ MessageGroupId = customer-001
 注文3
 
 の順番で処理されます。
+
+
+グループごとに分けた時のグループ単位のIDをメッセージグループID
+その中の一通のメッセージIDをメッセージIDという
+
+SQS FIFOでいうと、
+Message Group ID
+= グループ単位のID
+
+Message ID
+= その中の1通ごとのID
+
+という関係です。
+たとえば、
+MessageGroupId = order-001
+
+ ├─ Message ID = msg-A
+ ├─ Message ID = msg-B
+ └─ Message ID = msg-C
+
+この場合、order-001 というグループの中で、
+msg-A
+↓
+msg-B
+↓
+msg-C
+
+の順番が守られます。
+別のグループ、
+MessageGroupId = order-002
+
+ ├─ msg-D
+ └─ msg-E
+
+は、order-001 とは別なので並行して処理できます。
+なので一言で言うと、
+
+Message Group ID = 順番を守るまとまりの名前
+Message ID = 1通1通の識別番号
+
+です。
