@@ -1,1 +1,3 @@
 Amazon RedshiftのゼロETL統合
+
+RDSやAuroraなどのデータソースに保存されているデータを、Redshiftへ自動的にレプリケートするための機能
