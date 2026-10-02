@@ -109,3 +109,6 @@ DynamoDBのTTL（Time To Live）には以下の特徴があります。
 削除される際、DynamoDB Streamsにその削除イベントが記録される
 DynamoDB StreamsとLambdaを連携させることで、TTL削除をトリガーにLambda関数を起動できる
 
+
+権限の付与
+EC2ならインスタンスプロファイルでIAMロールを借りる。AWS外なら証明書 + IAM Roles AnywhereでIAMロールを借りる
