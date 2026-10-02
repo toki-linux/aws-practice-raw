@@ -71,3 +71,14 @@ AWS IoT CoreとACM Private CAを組み合わせて、デバイスごとに証明
 本番相当のHTTPS環境をテストしたいが、外部公開は不要な場合
 
 社内だけで使いたい場合はプライベートで世界中のユーザーに使ってほしいときはパブリック
+
+
+動的スケーリングとは？
+動的スケーリング は上位概念です。
+Dynamic Scaling
+├─ Target Tracking Scaling
+├─ Step Scaling
+└─ Simple Scaling
+
+なので「動的スケーリング」は方式の総称で、その中にターゲット追跡やステップスケーリングがあります。
+
