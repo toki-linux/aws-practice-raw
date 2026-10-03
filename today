@@ -68,3 +68,4 @@ logsで集めてInsightで分析という流れの組み合わせが多い
 
 
 AmazonEKSのHorizontal Pod Autoscaler (HPA)機能を使いたい場合はメトリクスを収集するためにMetrics Serverというコンポーネントを導入する必要がある
+
