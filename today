@@ -83,3 +83,18 @@ VPCアクセス設定こそが「Lambda関数がVPC内のリソースにアク�
 
 aws:PrincipalOrgIDはリクエストを行うPrincipalが特定の組織に属しているかを評価する条件キー
 aws:RequestedRegionはリクエストの送信先リージョンを評価するグローバル条件キー
+
+
+Controltowerのガードレール3種
+Proactive
+= 作る前に検査
+プロアクティブコントロール
+
+Preventive
+= 禁止して通さない
+予防コントロール
+
+Detective
+= 作った後に見つける
+検出コントロール
+
