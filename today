@@ -1,1 +1,6 @@
 ポイントタイムリカバリー（PITR)は同一リージョンのみ可能
+
+
+
+AutoScalingグループを設定したらAutoScalingを使用していると思って良い
+AutoScalingグループ設定＝AutoScalingを使用
