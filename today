@@ -1,2 +1,8 @@
 Invalidationはキャッシュを削除する機能
 Invalidation＝無効化
+
+
+指定したIPアドレスからの通信を拒否できる機能を持っているのは「ネットワークACL」や「AWS WAF」
+CloudFrontの機能ではない
+
+Cloud Frontはアクセスを国別に制限することができる
