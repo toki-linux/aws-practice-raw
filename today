@@ -131,3 +131,6 @@ URLの「?」以降のパラメータ（クエリ文字列）の値によって�
 
 http://www.example.com/web?lang=jp → Webサーバー1
 http://www.example.com/web?lang=en → Webサーバー2
+
+
+パス.comなどのドメインの後ろの部分で、URLクエリ文字列はパスの後ろの部分を指す
