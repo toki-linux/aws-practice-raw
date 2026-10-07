@@ -209,3 +209,11 @@ Googleなどの検索エンジンが、過去にクロールした http:// のUR
 
 一言でまとめると
 サーバー側のプロトコル変更後に古いURLが残っているケースで使える機能
+
+
+AWS Shield Advancedは
+Elastic Load Balancing
+Amazon CloudFront
+Amazon Route 53のホストゾーン
+Elastic IPアドレスに紐づけられたAmazon EC2インスタンスなど
+を標的としたDDoS攻撃に対して、高度な保護サービスが利用可能
