@@ -100,3 +100,14 @@ GlobalAcceleratorは
 SSHは非対称鍵と対称鍵の両方を使って行われている
 
 非対称鍵で対称鍵を暗号化して暗号化した対照鍵を相手に送ることで安全に鍵を送れるようになる
+
+
+ActiveDirectoryとDirectory Service
+
+Microsoft
+└─ Active Directory という製品・仕組みを作っている
+
+AWS
+└─ Directory Service
+    └─ AWS Managed Microsoft AD
+       = Microsoft ADをAWS上で提供
