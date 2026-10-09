@@ -102,7 +102,7 @@ SSHは非対称鍵と対称鍵の両方を使って行われている
 非対称鍵で対称鍵を暗号化して暗号化した対照鍵を相手に送ることで安全に鍵を送れるようになる
 
 
-ActiveDirectoryとDirectory Service
+ActiveDirectoryとDirectory Serviceとは？
 
 Microsoft
 └─ Active Directory という製品・仕組みを作っている
@@ -111,3 +111,26 @@ AWS
 └─ Directory Service
     └─ AWS Managed Microsoft AD
        = Microsoft ADをAWS上で提供
+
+まずは 「Active Directoryとは何か」→「なぜAWSで必要になるのか」→「Directory Serviceとは何か」→「3種類の違い」 の順で整理
+Active Directory、略して AD は、Microsoftが作った 会社内のユーザー・PC・認証・権限をまとめて管理する仕組み
+たとえば会社に100人いて、それぞれが社内PCやファイルサーバーを使うとします。各PCごとに別々のユーザー名とパスワードを作ると管理が大変です。そこでADを使うと、
+Active Directory
+
+├─ ユーザー
+│   ├─ Alice
+│   ├─ Bob
+│   └─ Carol
+│
+├─ グループ
+│   ├─ 営業部
+│   └─ 開発部
+│
+├─ PC
+│   ├─ PC-001
+│   └─ PC-002
+│
+└─ サーバー
+    └─ ファイルサーバー
+
+のように一元管理できます。
