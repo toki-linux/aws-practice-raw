@@ -177,12 +177,55 @@ AD ConnectorはAWS側にADを作らない
 Simple ADは名前の通り簡単なAD
 小規模で高度である必要がない時に使える
 
+まとめの修正版
+こっちを覚えて！
+
+Active Directory（AD）
+= Microsoftが作った認証・ユーザー管理の仕組み
+
+・ユーザー管理
+・グループ管理
+・PCやサーバー管理
+・認証
+・アクセス制御
+などを一元管理できる
 
 
+ドメイン
+= ADで管理する範囲・まとまり
+
+ドメイン参加
+= PCやサーバーなどを
+  ADの管理下に入れること
 
 
+AWS Directory Service
+= AWS上でAD系の
+  ディレクトリ・認証機能を使うためのサービス群
 
 
+主な3種類
+
+① AWS Managed Microsoft AD
+= AWS上に本格的なMicrosoft ADを作る
+
+・AWSで新しいADを作りたい
+・オンプレADと信頼関係を作ることも可能
+
+
+② AD Connector
+= AWS側にADを作らない
+
+AWSからオンプレミスADへ
+認証要求を転送する中継役
+
+
+③ Simple AD
+= 簡易的なAD互換ディレクトリ
+
+・小規模
+・低コスト
+・高度なAD機能が不要
 
 
 
