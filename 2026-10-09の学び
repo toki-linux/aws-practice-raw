@@ -149,6 +149,41 @@ ADが、
 「あなたは誰？」を確認する認証基盤
 です。
 
+まとめると、
+ADはMicrosoft社が作った認証基盤で、グループごとに管理したりユーザーごとに管理したりもできる
+ドメイン＝管理したいものの集合体
+ドメイン参加＝ADの管理下に置くこと
+AWSでADが出てくる理由
+もともとオンプレミスで管理していたものをAWSに丸々移したいとする
+この時、また1からAWS側で認証情報を入れたり、作ったりするのは面倒
+そのまま使いたい時に使えるのがAWS Directory Service
+
+つまり、Directory Serviceというのは、既存のADをAWS上で使えるようにしたサービス
+AWS Directory Serviceの主な３種類
+AWS Directory Service
+
+├─ AWS Managed Microsoft AD
+├─ AD Connector
+└─ Simple AD
+
+Microsoft ADは本格的にADを作る
+これはAWSで1からADを作りたい時に使える
+オンプレミスのADと連携も可能
+
+AD ConnectorはAWS側にADを作らない
+オンプレミスからAWSのリソースを使いたい時に認証情報の確認が必要
+その時の中継役を担う
+
+Simple ADは名前の通り簡単なAD
+小規模で高度である必要がない時に使える
+
+
+
+
+
+
+
+
 
 
 DynamoDBが異なるAZに分散させるのは、可用性や耐久性の向上が目的であり、参照性能を向上させるのが目的ではない
