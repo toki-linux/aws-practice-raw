@@ -121,3 +121,29 @@ AWSが多くのことをやってくれる
 
 
 API Destinations = EventBridgeが受け取ったイベントを、外部のHTTP APIへ送るための機能
+
+
+AWSサービスなど
+   ↓ イベント発生
+EventBridge
+   ↓
+API Destination
+   ↓
+外部API / SaaS
+
+なので、
+外部へAPIを送りたい時に使える。EventBridgeのイベントのみ。
+
+は、少しだけ直すと、
+EventBridgeに入ってきたイベントを、外部HTTP APIへ送るときに使う
+
+が一番正確です。
+大事なのは、API Destination自体が好きなタイミングでAPIを呼ぶ機能ではなく、EventBridgeの「ターゲット」として使う機能だという点です。
+つまり、
+EventBridgeのイベント
+↓
+送り先としてAPI Destinationを指定
+↓
+外部APIへ送信
+
+という使い方
