@@ -115,3 +115,11 @@ ALB：実際にHTTP/HTTPS通信を振り分ける。
 
 
 AWS Load Balancer ControllerがALBのターゲットグループに新しくできたPodを登録することでALBが負荷分散できるようになる
+
+
+
+Connection Draining（コネクションドレイニング）とは、
+ALBなどのロードバランサーからEC2インスタンスを切り離す際に、処理中の通信が突然切断されないようにする仕組みです。
+
+Connection Draining = EC2などを切り離す際、処理中のリクエストをなるべく完了させてから切り離す仕組み。
+なお、現在のALBでは主に Deregistration Delay（登録解除の遅延） という名称が使われます。
