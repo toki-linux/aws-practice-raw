@@ -21,3 +21,81 @@ EC2インスタンスをEMRの構成要素として見たときに「ノード�
 重要なのは、EC2自体に制限があるのではなく、EMRの中で与えられた役割が違うということです。
 
 
+# ALBとコンテナ・AWS Load Balancer Controllerの関係
+
+## ① ALBはコンテナにも利用できる
+
+ALBはEC2だけでなく、ECSやEKSで動くコンテナアプリケーションにも負荷分散できる。
+
+- ALBはHTTP/HTTPS通信を振り分ける。
+- コンテナがHTTP/HTTPSを受け付けるポートに通信を送れる。
+- コンテナ自体にALBのような負荷分散機能があるわけではない。
+
+例：
+
+```text
+ユーザー
+   ↓
+  ALB
+   ↓
+ターゲットグループ
+   ├── コンテナA（8080）
+   ├── コンテナB（8080）
+   └── コンテナC（8080）
+```
+
+※ 実際のターゲットは、構成に応じてIPアドレス＋ポート、またはEC2インスタンス＋ポートとして登録される。
+
+## ② ECS・EKSとALBの役割の違い
+
+| 仕組み | 役割 |
+|---|---|
+| ECS | コンテナの起動・停止・実行数を管理 |
+| EKS（Kubernetes） | Podの管理やスケーリングなど |
+| Kubernetes Service | 主にPodへの通信を振り分ける |
+| ALB | HTTP/HTTPS通信を負荷分散 |
+| AWS Load Balancer Controller | KubernetesとAWSのALB/NLBを連携させる |
+
+**コンテナの管理と通信の負荷分散は別の役割。**
+
+## ③ AWS Load Balancer Controllerとは？
+
+EKSなどのKubernetes環境で、ALBやNLBの作成・設定・更新を自動化する仕組み。
+
+Controller自体が負荷分散するわけではない。
+
+例えば、Podが増えた場合：
+
+```text
+① Kubernetesが新しいPodを作成
+          ↓
+② Controllerが変更を検知
+          ↓
+③ AWS APIを呼び出す
+          ↓
+④ ターゲットグループを更新
+          ↓
+⑤ ALBが新しいPodにも負荷分散
+```
+
+※ ⑤はターゲットが正常と判定された後。Podを直接登録するのは`ip`ターゲットタイプの場合。
+
+Podが削除された場合も、Controllerが不要なターゲットの登録を解除する。
+
+## ④ なぜControllerが必要？
+
+KubernetesではPodが頻繁に増減し、IPアドレスも変わる。
+
+そのたびにALBのターゲットグループを手動更新するのは大変。
+
+そこでControllerが、Kubernetesの状態に合わせてAWS側の設定を自動更新する。
+
+既存のALBを手動管理する構成も可能だが、ControllerはKubernetesとの連携を自動化できる。
+
+## ⑤ SAA試験での覚え方
+
+- **ALB**：実際に通信を振り分ける。
+- **ECS・EKS**：コンテナやPodを管理する。
+- **AWS Load Balancer Controller**：ALB/NLBを自動作成・管理し、Kubernetesの変化に追従させる。
+
+**結論：ControllerはALBの代わりではない。ALBが正しく負荷分散できるように管理する仕組み。**
