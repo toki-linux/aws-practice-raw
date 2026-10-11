@@ -99,3 +99,12 @@ KubernetesではPodが頻繁に増減し、IPアドレスも変わる。
 - **AWS Load Balancer Controller**：ALB/NLBを自動作成・管理し、Kubernetesの変化に追従させる。
 
 **結論：ControllerはALBの代わりではない。ALBが正しく負荷分散できるように管理する仕組み。**
+
+
+ServiceとIngressの違いを整理する
+
+- Service：どのPodに通信を送るかを管理する
+- Ingress：外部から来たHTTP/HTTPS通信を、どのServiceに送るかをルールで決める
+
+この違いを理解すると、ALBやAWS Load Balancer Controllerとの関係も整理できます
+
