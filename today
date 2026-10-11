@@ -108,3 +108,7 @@ ServiceとIngressの違いを整理する
 
 この違いを理解すると、ALBやAWS Load Balancer Controllerとの関係も整理できます
 
+Service：Podが変わっても安定した接続先を提供する。
+Ingress：URLのパスやホスト名によって、どのServiceへ送るかを定義する。
+AWS Load Balancer Controller：Kubernetesの設定をALB/NLBに反映する。
+ALB：実際にHTTP/HTTPS通信を振り分ける。
