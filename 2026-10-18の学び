@@ -5,3 +5,5 @@ Amazon OpenSearch Serviceは、単なる「検索エンジン」ではなく、�
 保存したデータに対して、全文検索・あいまい検索・集計などを高速に実行できる
 内部的には「Elasticsearch」をベースにしたOSSの検索エンジンを使用している
 つまり、他のデータベース（DynamoDBやRDSなど）に保存されたデータを検索するための「検索専用ツール」ではなく、OpenSearch Service自体がデータの保存先になります
+
+OpenSearchServiceは検索する機能もあるが、データを保存することもできる
