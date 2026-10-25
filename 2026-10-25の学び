@@ -16,3 +16,4 @@ CloudFormationやTerraformなどでコードとしてインフラを定義する
 補足：CLIやSDKでの挙動
 AWS CLIやSDKを使う場合も同様です。例えばaws ec2 associate-iam-instance-profileというコマンド名からも分かるように、CLIレベルでは「インスタンスプロファイル」を明示的に指定する必要があります。
 
+
