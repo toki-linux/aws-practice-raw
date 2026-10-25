@@ -17,3 +17,4 @@ CloudFormationやTerraformなどでコードとしてインフラを定義する
 AWS CLIやSDKを使う場合も同様です。例えばaws ec2 associate-iam-instance-profileというコマンド名からも分かるように、CLIレベルでは「インスタンスプロファイル」を明示的に指定する必要があります。
 
 
+Amazon VPCのカスタマーマネージドプレフィックスリストは、複数のCIDR範囲を1つのリストにまとめて管理する機能
