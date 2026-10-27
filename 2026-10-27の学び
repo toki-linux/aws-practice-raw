@@ -4,3 +4,4 @@ S3のライフサイクルポリシーを用いてEBSスナップショットを
 
 ではどのようにしてスナップショットを自動削除すればよいか
 Data Lifecycle Managerを使う
+Data Lifecycle Managerでスナップショットポリシーを作成することで、自動でAmazon EBSスナップショットとAMIの作成・保持・削除を行なってくれる
