@@ -1,1 +1,28 @@
+例えば自分でAWS上でADを使用するとした時、どういう使い方になるの？
+認識としてはDirectory Serviceだけを利用しているという感覚なのか、
+ADとDirectory Serviceを利用しているという感覚？Directory ServiceってAWS版ADとして使うって感じなの？
+オンプレミスのADを使いたいとかではなく、1からAWSのみで認証基盤を作る場合
+
+
+結論：感覚としては「AWS版ADを使っている」が近い
+1からAWSのみで認証基盤を作る場合、AWS Directory Service（AWS Managed Microsoft AD）そのものがADの実体になります。
+
+つまり、「Directory ServiceというAWSのサービスを使って、その中でAD（Active Directory）が動いている」というイメージです。利用者から見ると、ほぼ「AWS版AD」として扱って問題ありません。
+
+もう少し詳しく：何を管理し、何を意識するか
+利用者（あなた）が意識すること
+ドメイン名を決める（例：corp.example.com）
+ユーザーアカウントを作成する
+グループを作成し、権限を割り当てる
+パスワードポリシーを設定する
+どのEC2インスタンスやRDSをこのADに参加させるか決める
+これらは、オンプレミスで自分でADサーバーを構築した場合とまったく同じ操作感です。Active Directoryの管理ツール（Active Directory Users and Computersなど）を使って、普段通りのAD管理を行います。
+
+AWSが裏側で管理してくれること
+ADを動かすサーバー自体の構築
+サーバーの冗長化（複数のアベイラビリティーゾーンに自動配置）
+OSのパッチ適用
+障害発生時の自動復旧
+バックアップ
+
 
