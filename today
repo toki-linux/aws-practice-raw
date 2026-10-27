@@ -46,3 +46,6 @@ FSxのファイルサーバーも同じADに参加させる
 なので、どちらの表現も間違いではありませんが、技術的に正確に言うなら「AWS Directory Serviceという器（マネージドサービス）の中で、本物のActive Directoryが動いている」という感覚が最も正確です。
 
 利用者目線では、普段ADを管理するときと同じツール・同じ操作感で管理できるため、「AWS版のADを使っている」という感覚で問題ありません。
+
+要約
+利用者から見るとAWSDirectory Serviceを使っているように感じる。内部的にはAWS Directory Serviceを器としてActiveDirectoryを使っている
