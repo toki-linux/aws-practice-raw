@@ -49,3 +49,5 @@ FSxのファイルサーバーも同じADに参加させる
 
 要約
 利用者から見るとAWSDirectory Serviceを使っているように感じる。内部的にはAWS Directory Serviceを器としてActiveDirectoryを使っている
+
+
