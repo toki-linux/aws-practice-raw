@@ -67,3 +67,7 @@ AWSのIAMにおける権限評価の仕組み上、Lambda関数自体はPrincipa
 Lambda関数がAWSの他のサービス（SNS、S3、DynamoDBなど）にAPIリクエストを送る際、その動作の主体となるのは「Lambda関数にアタッチされた実行ロール（Execution Role）」です。
 Lambda関数のARNをSNSのリソースポリシーのPrincipalに指定しても、IAMの認証・認可の仕組み上、これは意味を成しません。IAMが認識できるPrincipalは、IAMユーザー、IAMロール、AWSアカウント、特定のAWSサービスなどであり、「Lambda関数のARN」はそのいずれにも該当しないためです。
 つまり、Fは「絞り込みの発想」は正しくても、技術的に機能しない設定なのです。
+
+要約
+Lambda関数自体に許可権限を付与するのではなく、Lambdaにつくロールに許可権限を付与している。
+なのでLambda関数自体は別のものでもロールが同じであれば、SNSを使用できるということも行える
