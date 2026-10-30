@@ -22,3 +22,24 @@ CNIは Container Network Interface の略です。
 Kubernetesでは、Podを作成するだけではネットワークの設定が完成しません。
 
 そこで、CNIプラグインがPodのネットワーク設定を担当します
+
+
+例えば、EC2上にPod AとPod Bを作成したとします。
+EKS
+└── EC2（ワーカーノード）
+     │
+     ├── Pod A
+     │    └── Pythonアプリ
+     │
+     └── Pod B
+          └── nginx
+
+
+このとき、Pod AとPod Bが通信するにはIPアドレスなどのネットワーク設定が必要ですよね。
+
+その設定を担当するのがCNIプラグインです。
+
+Amazon VPC CNIの特徴
+一般的なKubernetesでは、Pod用に独立したネットワークを構築する方式もあります。
+
+一方、Amazon VPC CNIでは、PodにVPCのサブネットからIPアドレスを割り当てることが大きな特徴
