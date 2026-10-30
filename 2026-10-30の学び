@@ -1,1 +1,14 @@
+Amazon VPC CNI = EKSのPodにVPCのIPアドレスを割り当てるネットワークプラグイン
 
+特に次の関係を覚えてください。
+- EKS：Kubernetesを実行するサービス
+- Pod：コンテナをまとめて実行する単位
+- EC2ノード：Podを実行するサーバー
+- Amazon VPC CNI：Podのネットワークを設定する仕組み
+もう一つ重要なのが、Podが増えるとVPC内のIPアドレスも消費するということです。
+
+そのため、EKSではサブネットのIPアドレス不足がPodの起動に影響する場合があります。
+
+ここまでを一言でまとめると、
+
+「KubernetesがPodを配置し、Amazon VPC CNIがそのPodをVPCネットワークにつなぐ」
