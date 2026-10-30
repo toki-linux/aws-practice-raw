@@ -13,3 +13,12 @@ Amazon VPC CNI = EKSのPodにVPCのIPアドレスを割り当てるネットワ�
 
 「KubernetesがPodを配置し、Amazon VPC CNIがそのPodをVPCネットワークにつなぐ」
 と覚える
+
+
+Amazon VPC CNI plugin for Kubernetesとは、EKSで動くPodにVPC内のIPアドレスを割り当て、Podがネットワーク通信できるようにする仕組み
+そもそもCNIとは？
+CNIは Container Network Interface の略です。
+
+Kubernetesでは、Podを作成するだけではネットワークの設定が完成しません。
+
+そこで、CNIプラグインがPodのネットワーク設定を担当します
