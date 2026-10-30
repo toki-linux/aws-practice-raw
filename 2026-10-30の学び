@@ -12,3 +12,4 @@ Amazon VPC CNI = EKSのPodにVPCのIPアドレスを割り当てるネットワ�
 ここまでを一言でまとめると、
 
 「KubernetesがPodを配置し、Amazon VPC CNIがそのPodをVPCネットワークにつなぐ」
+と覚える
