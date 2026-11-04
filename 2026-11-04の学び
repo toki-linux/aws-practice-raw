@@ -69,3 +69,13 @@ AWS Transfer Familyには、入口の公開方法が複数あります。
 内部向けVPCエンドポイント　　　　　　　　	直接はできない	　　　　　できる
 インターネット向けVPCエンドポイント	　　　　できる　　　　　　　　	できる
 
+
+
+ADは、Windowsサーバーを動かすために必要なのではなく、複数のWindowsサーバーを効率よく、安全に管理するために利用するものです。
+
+ここで、これまで学習したIAMとの違いも重要です。
+- AD：WindowsサーバーへのログインやWindows環境の管理
+- IAM：AWSリソースやAWS APIへのアクセス権限の管理
+例えば、Windows EC2にログインできることと、その人がAWSコンソールでEC2を削除できることは別の権限です。
+
+この違いを理解しておくと、SAAでAD・Directory Service・IAM Identity Centerが登場しても整理しやすくなります。
