@@ -113,3 +113,7 @@ ADは機能、AWS Directory Serviceはその機能をAWSで利用するための
 - Microsoft AD：ディレクトリ・認証の仕組み
 - AWS Managed Microsoft AD：Microsoft ADをAWSが管理して提供するサービス
 この対応関係で覚えると、ADとDirectory Serviceを混同しにくくなります。
+
+
+ポッドのアフィニティルールは、Kubernetesの機能で、特定の条件に基づいてポッドを特定のノードに配置するためのものです。ノードの配置先を制御するだけであり、ポッドはノードと同じサブネットからIPアドレスを取得します
+
