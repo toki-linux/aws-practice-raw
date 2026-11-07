@@ -42,3 +42,45 @@ IAM　Identity Centerのパターンは３種類
 ①Identity 　　　　　　　　Center内蔵	既存の認証基盤がない	　　　　　　　　　Identity Centerでユーザーを直接管理できる
 ②外部IdP	　　　　　　　　Entra IDやOktaを利用している	　　　　　　　　　　既存のSSO認証をAWSでも利用したい
 ③Active Directory	　　オンプレミスADなどを利用している	　　　　　　　　　既存ADのユーザー情報・認証をAWSでも利用したい
+
+パターン① 新しくAWSを使い始める会社
+社員
+ ↓
+IAM Identity Center
+ （ユーザー情報を管理・認証）
+ ↓
+AWSアカウント
+
+
+既存の認証基盤がなければ、Identity Center内でユーザーを管理できます。
+パターン② すでにEntra IDやOktaを使っている会社
+社員
+ ↓
+外部IdP（Entra ID / Okta）
+ ↓ SAML 2.0 フェデレーション
+IAM Identity Center
+ ↓
+AWSアカウント
+
+
+会社がすでに外部IdPで社員を管理しているなら、その認証基盤を再利用できます。
+
+ここでSAMLが登場します。
+
+SAMLは、外部IdPが認証した結果をIdentity Centerに伝えるための規格です。
+パターン③ オンプレミスADで社員を管理している会社
+社員
+ ↓
+IAM Identity Center
+ ↓ Directory Service経由
+オンプレミスAD
+ （認証）
+ ↓
+IAM Identity Center
+ ↓
+AWSアカウント
+
+
+この場合は、AWS Directory ServiceのAD Connectorなどを利用して、既存ADと連携できます。
+
+ここではSAMLによる外部IdP連携ではなく、ADを直接IDソースとして利用する方式です。
