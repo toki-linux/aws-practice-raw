@@ -104,3 +104,42 @@ AWSで1から始める場合は直接IAM Identity Centerを使えば良い。
 
 
 CloudWatch Logs Insightsはリアルタイム分析や短期間のデータ分析に優れている
+
+
+AWS Transfer Family = SFTPなどの既存ファイル転送方式を維持しながら、AWSストレージと連携するマネージドサービス。
+
+特に次のキーワードが出たら候補にしてください。
+- SFTP / FTPS / FTP
+- 既存のファイル転送クライアントを維持
+- SSH公開鍵認証
+- S3やEFSへのファイル保存
+- ファイル転送サーバーの管理負荷削減
+SFTPサーバー：外部からAWSに送ってもらう
+SFTPコネクタ：AWSから外部に接続する
+
+【自分でSFTPサーバーを管理】
+
+取引先のPC
+  ↓ SFTP（SSH鍵認証）
+EC2（Linux）
+  ├─ SSH/SFTPの設定
+  ├─ ユーザー管理
+  ├─ OSのパッチ適用
+  └─ ファイル保存
+       ↓
+      S3へ転送
+
+
+一方、Transfer Familyを利用すると、
+【AWS Transfer Family】
+
+取引先のPC
+  ↓ SFTP（SSH鍵認証）
+AWS Transfer Family
+  ↓
+Amazon S3
+
+
+となります。
+
+SFTPサーバーの機能をAWSが提供するため、自分でEC2にSFTPサーバーを構築・運用する必要がありません。
