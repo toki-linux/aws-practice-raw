@@ -101,3 +101,4 @@ AWSで1から始める場合は直接IAM Identity Centerを使えば良い。
 元々外部IdPを使っていてそれをAWS移行後も使いたいのであればフェデレーションのパターンで行う。
 この際SAMLに対応しておかなければ、IdPが認証した結果をIdentity Centerへ伝えられない。
 温プレミスでADを使っていてそれをAWSでも使いたい場合はDirectory Serviceを使って連携してもらう。
+
