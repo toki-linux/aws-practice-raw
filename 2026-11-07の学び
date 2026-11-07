@@ -34,3 +34,11 @@ Configの記録モード
 日次記録
 過去24時間以内に変更があったリソースの状態を一回のみ記録
 インスタンスが頻繁に起動や終了を行う環境でもコストを削減できる
+
+
+IAM　Identity Centerのパターンは３種類
+
+パターン　　　　　　　　　　　どんな会社で使う？	　　　　　　　　　　　　　　　選ぶ理由
+①Identity 　　　　　　　　Center内蔵	既存の認証基盤がない	　　　　　　　　　Identity Centerでユーザーを直接管理できる
+②外部IdP	　　　　　　　　Entra IDやOktaを利用している	　　　　　　　　　　既存のSSO認証をAWSでも利用したい
+③Active Directory	　　オンプレミスADなどを利用している	　　　　　　　　　既存ADのユーザー情報・認証をAWSでも利用したい
