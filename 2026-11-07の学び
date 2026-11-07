@@ -84,3 +84,20 @@ AWSアカウント
 この場合は、AWS Directory ServiceのAD Connectorなどを利用して、既存ADと連携できます。
 
 ここではSAMLによる外部IdP連携ではなく、ADを直接IDソースとして利用する方式です。
+
+まとめ
+AWSで1から始める場合は直接IAM Identity Centerを使えば良い。
+元々外部IdPを使っていてそれをAWS移行後も使いたいのであればフェデレーションのパターンで行う。
+この際SAMLに対応しておかなければ、IdPをIdentity Centerへ送れない。
+温プレミスでADを使っていてそれをAWSでも使いたい場合はDirectory Serviceを使って連携してもらう。
+
+上の理解で良い
+1点だけ修正：SAMLについて
+SAMLに対応しておかなければ、IdPをIdentity Centerへ送れない。
+ここは、**「IdPを送る」のではなく、「IdPが認証した結果をIdentity Centerへ伝える」**という理解が正確
+
+なので正しくは
+AWSで1から始める場合は直接IAM Identity Centerを使えば良い。
+元々外部IdPを使っていてそれをAWS移行後も使いたいのであればフェデレーションのパターンで行う。
+この際SAMLに対応しておかなければ、IdPが認証した結果をIdentity Centerへ伝えられない。
+温プレミスでADを使っていてそれをAWSでも使いたい場合はDirectory Serviceを使って連携してもらう。
