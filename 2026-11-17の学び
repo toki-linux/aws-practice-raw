@@ -1,1 +1,11 @@
 ALBはノードグループ単位で負荷分散するのではなく、ターゲットタイプが ip ならPodへ直接、instance ならEC2のNodePortへ負荷分散する
+
+復習
+ALB＝負荷分散
+ノード＝EC2
+Pod=EC2の中のアプリ（コンテナ）を実行する単位
+HPA＝Podの数を自動調整
+AWS Load Balancer Controller＝Kubernetes設定とALB・ターゲットグループを連携
+マネージドノードグループ＝EKSが管理するノードをグループ化したもの。ノードの集まり
+EKSクラスター＝Kubernetesでアプリケーションを管理する環境
+
