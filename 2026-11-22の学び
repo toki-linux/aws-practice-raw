@@ -1,1 +1,3 @@
+aws:SecureTransportは、リクエストがHTTPS（TLS）で送信されたかどうかを表す条件キー
+aws:SourceAccountは、AWSのサービスが他のリソースにアクセスする際に、そのリクエストの発生元となったアカウントのIDを表す条件キー
 
