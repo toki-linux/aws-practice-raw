@@ -12,3 +12,8 @@ EventBridge
     ├─ 決済完了 → 顧客管理サービス
     │
     └─ イベントを40日間アーカイブ
+
+IIS上の既存.NET Webアプリケーションを、最小限の環境構築・運用負荷でAWSにデプロイしたい場合は、Elastic Beanstalkの.NET on Windows Serverプラットフォームが有力。
+用語	    役割
+.NET	Microsoftのアプリケーション開発・実行基盤
+IIS	    Windows上でWebアプリケーションを動かすWebサーバー
