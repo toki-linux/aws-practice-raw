@@ -1,1 +1,3 @@
+Key-Value検索とは、特定のキー（Key）を指定して、それに対応する値（Value）を取得する検索方法です。
 
+AWSでは、主にDynamoDBやElastiCache（Redis OSSなど）で使われる考え方
